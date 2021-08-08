@@ -23,8 +23,8 @@ body {
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   background-color: var(--white);
-  font-size: 1.3rem;
-  line-height: 1.8rem;
+  font-size: 1.5rem;
+  line-height: 2rem;
   color: var(--dark);
   min-height: 100vh;
 }
