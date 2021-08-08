@@ -1,9 +1,11 @@
+html {
+  font-size: 62.5%;
+}
+
 html,
 body {
   padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
 
 a {
@@ -13,4 +15,39 @@ a {
 
 * {
   box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", "Helvetica",
+    "Arial", sans-serif;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  background-color: var(--white);
+  font-size: 1.3rem;
+  line-height: 1.8rem;
+  color: var(--dark);
+  min-height: 100vh;
+}
+
+/* Colors */
+:root {
+  --dark: rgba(0, 0, 0, 0.85);
+  --grey: rgba(0, 0, 0, 0.55);
+  --white: #fff;
+  --light: rgba(255, 255, 255, 0.85);
+  --opaque: rgba(255, 255, 255, 0.55);
+  --dark-border: rgba(0, 0, 0, 0.15);
+  --light-border: rgba(255, 255, 255, 0.3);
+}
+
+@supports (color: color(display-p3 1 1 1)) {
+  :root {
+    --dark: color(display-p3 0 0 0/0.85);
+    --grey: color(display-p3 0 0 0/0.55);
+    --white: color(display-p3 1.0001 1 0.9999);
+    --light: color(display-p3 1.0001 1 0.9999 / 0.85);
+    --opaque: color(display-p3 1.0001 1 0.9999 / 0.55);
+    --dark-border: color(display-p3 0 0 0/0.15);
+    --light-border: color(display-p3 1.0001 1 0.9999 / 0.3);
+  }
 }
