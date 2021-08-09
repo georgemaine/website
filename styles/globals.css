@@ -31,6 +31,7 @@ body {
 
 /* Colors */
 :root {
+  --black: rgba(0, 0, 0, 0);
   --dark: rgba(0, 0, 0, 0.85);
   --grey: rgba(0, 0, 0, 0.55);
   --white: #fff;
@@ -42,6 +43,7 @@ body {
 
 @supports (color: color(display-p3 1 1 1)) {
   :root {
+    --black: color(display-p3 0 0 0/1);
     --dark: color(display-p3 0 0 0/0.85);
     --grey: color(display-p3 0 0 0/0.55);
     --white: color(display-p3 1.0001 1 0.9999);

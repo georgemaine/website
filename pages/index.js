@@ -1,5 +1,6 @@
 import styles from "../styles/styles.module.css";
 import Link from "next/link";
+import GlobalNav from "../styles/GlobalNav";
 
 export default function Components() {
   return (
@@ -79,7 +80,28 @@ export default function Components() {
         <Link href='/'>
           <a className={styles.textlink}>Text link</a>
         </Link>
+        <figure
+          className={styles.imageTile}
+          style={{
+            marginTop: 12,
+          }}
+        >
+          <img
+            src={"/images/plant.jpeg"}
+            alt='Phyllanthus Mirabilis'
+            style={{
+              width: "auto",
+              height: "80vh",
+              maxHeight: "859px",
+            }}
+          />
+          <figcaption className={styles.largeBody}>
+            Phyllanthus Mirabilis. 2021.
+          </figcaption>
+        </figure>
       </main>
+
+      <GlobalNav />
     </>
   );
 }
