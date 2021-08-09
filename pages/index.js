@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import styles from "../styles/styles.module.css";
 import Link from "next/link";
 import GlobalNav from "../styles/GlobalNav";
