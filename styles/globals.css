@@ -26,7 +26,6 @@ body {
   font-size: 1.5rem;
   line-height: 2rem;
   color: var(--dark);
-  min-height: 100vh;
 }
 
 /* Colors */

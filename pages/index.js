@@ -8,10 +8,12 @@ export default function Components() {
     <>
       <main
         style={{
-          maxWidth: "86vw",
           marginLeft: "auto",
           marginRight: "auto",
           padding: 30,
+          paddingLeft: "7vw",
+          paddingRight: "7vw",
+          paddingTop: "14vw",
         }}
       >
         <p
@@ -51,10 +53,12 @@ export default function Components() {
       </main>
       <main
         style={{
-          maxWidth: "86vw",
           marginLeft: "auto",
           marginRight: "auto",
           padding: 30,
+          paddingLeft: "7vw",
+          paddingRight: "7vw",
+          overflowX: "scroll",
         }}
       >
         <p
