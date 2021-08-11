@@ -1,4 +1,4 @@
-import GlobalNav from "../styles/GlobalNav";
+import GlobalNav from "../components/GlobalNav";
 
 export default function MovieList() {
   return (
