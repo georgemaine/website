@@ -1,6 +1,106 @@
-export default function TextTile({ text }) {
+import { useEffect, useRef, useState } from "react";
+export const TitleTile = ({ title }) => {
+  const titleRef = useRef();
+  const [isVisible, setIsVisible] = useState(false);
+
+  const callbackFunction = (entries) => {
+    const [entry] = entries;
+    setIsVisible(entry.isIntersecting);
+  };
+
+  const options = {
+    threshold: 0.72,
+  };
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(callbackFunction, options);
+    titleRef.current && observer.observe(titleRef.current);
+
+    return () => {
+      titleRef.current && observer.unobserve(titleRef.current);
+    };
+  }, [titleRef]);
   return (
-    <p>
+    <h1
+      ref={titleRef}
+      style={{
+        opacity: isVisible ? 1 : 0,
+      }}
+    >
+      {title}
+      <style jsx>
+        {`
+          h1 {
+            font-size: 4.2rem;
+            line-height: 1.08;
+            letter-spacing: -0.08rem;
+            font-weight: 700;
+            margin-bottom: 18vh;
+            transition: opacity 0.4s ease-out;
+          }
+
+          @media (max-width: 540px) {
+            h1 {
+              font-size: calc(42px + 42 * (100vw - 375px) / 375);
+            }
+          }
+
+          @media (min-width: 737px) {
+            h1 {
+              font-size: calc(80px + 80 * (100vw - 740px) / 740);
+              margin: 0 18vw 0 0;
+              flex-shrink: 0;
+              max-width: 79vw;
+            }
+          }
+
+          @media (min-width: 1260px) {
+            h1 {
+              font-size: 118px;
+              letter-spacing: -0.015em;
+              line-height: 1.05;
+            }
+          }
+          @media screen and (min-width: 1770px) {
+            h1 {
+              font-size: 180px;
+            }
+          }
+        `}
+      </style>
+    </h1>
+  );
+};
+
+export const TextTile = ({ text }) => {
+  const textRef = useRef();
+  const [isVisible, setIsVisible] = useState(false);
+
+  const callbackFunction = (entries) => {
+    const [entry] = entries;
+    setIsVisible(entry.isIntersecting);
+  };
+
+  const options = {
+    threshold: 0.72,
+  };
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(callbackFunction, options);
+    textRef.current && observer.observe(textRef.current);
+
+    return () => {
+      textRef.current && observer.unobserve(textRef.current);
+    };
+  }, [textRef]);
+
+  return (
+    <p
+      ref={textRef}
+      style={{
+        opacity: isVisible ? 1 : 0,
+      }}
+    >
       {text}
       <style jsx>
         {`
@@ -10,6 +110,7 @@ export default function TextTile({ text }) {
             letter-spacing: -0.08rem;
             font-weight: 700;
             margin-bottom: 18vh;
+            transition: opacity 0.4s ease-out;
           }
 
           @media (max-width: 540px) {
@@ -46,4 +147,4 @@ export default function TextTile({ text }) {
       </style>
     </p>
   );
-}
+};

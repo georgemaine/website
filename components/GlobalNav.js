@@ -77,6 +77,8 @@ const GlobalNav = () => (
         height: 4.4rem;
         margin: 0;
         padding: 0;
+        background: var(--bg);
+        z-index: 9999;
       }
 
       li {

@@ -1,6 +1,6 @@
 import GlobalNav from "../components/GlobalNav";
 import ImageTile from "../components/ImageTile";
-import TextTile from "../components/TextTyle";
+import { TextTile, TitleTile } from "../components/TextTyle";
 
 export default function Outlet() {
   return (
@@ -26,6 +26,7 @@ export default function Outlet() {
           "Purchased in a cute antique, gifts, and plants shop called avalanamsterdam →"
         }
       />
+      <TitleTile title={"Summer 2021."} />
       <ImageTile
         src={"always-sunday.jpg"}
         alt={"Always Sunday, Playlist on Apple music."}
@@ -36,6 +37,7 @@ export default function Outlet() {
           "Always Sunday, a playlist from Apple music is my way of starting the weekend. It’s filled with calm background music with blues vibes in there — some vocals, some not."
         }
       />
+
       <ImageTile
         src={"apple-watch-march-challenge.jpeg"}
         alt={"Apple watch march challenge achievement"}
@@ -46,13 +48,13 @@ export default function Outlet() {
         alt={"Hibiki"}
         caption={"Hibiki Japanese harmony by Suntory Tori. 2021."}
       />
-
+      <TitleTile title={"Spring 2021."} />
       <style jsx>{`
         main {
           width: 86vw;
           margin-left: auto;
           margin-right: auto;
-          padding-top: 48px;
+          padding-top: calc(14vh + 48px);
         }
 
         @media only screen and (min-width: 737px) {

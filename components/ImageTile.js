@@ -4,7 +4,6 @@ import { useEffect, useRef, useState } from "react";
 
 const ImageTileContainer = ({ children }) => {
   const figureRef = useRef();
-  const [isVisible, setIsVisible] = useState(false);
   const [ratio, setRatio] = useState(false);
 
   const translateY = (ratio, total) => {
@@ -13,7 +12,6 @@ const ImageTileContainer = ({ children }) => {
 
   const callbackFunction = (entries) => {
     const [entry] = entries;
-    setIsVisible(entry.isIntersecting);
     entry.isIntersecting &&
       setRatio(translateY(entry.intersectionRatio, "6.6vh"));
   };
