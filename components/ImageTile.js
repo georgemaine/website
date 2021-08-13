@@ -1,14 +1,50 @@
+/* eslint-disable react/display-name */
 /* eslint-disable @next/next/no-img-element */
+import { useEffect, useRef, useState } from "react";
+
 const ImageTileContainer = ({ children }) => {
+  const figureRef = useRef();
+  const [isVisible, setIsVisible] = useState(false);
+  const [ratio, setRatio] = useState(false);
+
+  const translateY = (ratio, total) => {
+    return `translateY(calc(-${ratio} * ${total})`;
+  };
+
+  const callbackFunction = (entries) => {
+    const [entry] = entries;
+    setIsVisible(entry.isIntersecting);
+    entry.isIntersecting &&
+      setRatio(translateY(entry.intersectionRatio, "6.6vh"));
+  };
+
+  const options = {
+    threshold: [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1],
+  };
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(callbackFunction, options);
+    figureRef.current && observer.observe(figureRef.current);
+
+    return () => {
+      figureRef.current && observer.unobserve(figureRef.current);
+    };
+  }, [figureRef, options]);
+
   return (
-    <figure>
+    <figure
+      ref={figureRef}
+      style={{
+        transform: ratio,
+      }}
+    >
       {children}
       <style jsx>
         {`
           figure {
             width: 100%;
             padding: 0;
-            margin: 0 0 30px;
+            margin: 0 0 7vh;
             border: 0.5px solid var(--border);
             border-radius: 10px;
             overflow: hidden;
@@ -18,8 +54,8 @@ const ImageTileContainer = ({ children }) => {
           @media only screen and (min-width: 737px) {
             figure {
               width: max-content;
-              height: calc(100vh - 100px);
-              margin: 0 90px 0 0;
+              height: calc(100vh - 14vw);
+              margin: 0 9vh 0 0;
               flex-shrink: 0;
             }
           }

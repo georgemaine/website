@@ -5,7 +5,9 @@
 }
 
 .largeBody {
+  font-size: 28px;
   line-height: 1.08;
+  letter-spacing: -0.08rem;
   font-weight: 700;
 }
 
@@ -41,9 +43,6 @@
 }
 
 .imageTile {
-  width: max-content;
-  height: 80vh;
-  max-height: 839px;
   padding: 0;
   margin: 0;
   border: 0.5px solid var(--border);
@@ -80,12 +79,22 @@
 
 @media (min-width: 740px) {
   .largeBody {
-    font-size: calc(42px + 42 * (100vw - 1100px) / 1100);
+    font-size: calc(42px + 42 * (100vw - 740px) / 740);
   }
 }
 
-@media (min-width: 1680px) {
+@media (min-width: 1260px) {
   .largeBody {
-    font-size: calc(80px + 80 * (100vw - 1680px) / 1680);
+    font-size: calc(80px + 80 * (100vw - 1400px) / 1400);
+    letter-spacing: -0.015em;
+    line-height: 1.05;
+  }
+}
+
+@media screen and (min-width: 1770px) {
+  .largeBody {
+    font-size: 118px;
+    letter-spacing: -0.015em;
+    line-height: 1.05;
   }
 }

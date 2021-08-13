@@ -47,8 +47,8 @@ const GlobalNav = () => (
     </ul>
     <style jsx>{`
       a {
-        font-weight: 700;
-        letter-spacing: -0.08rem;
+        font-weight: 500;
+        letter-spacing: -0.014rem;
         margin: 0 1.2rem;
         transition: opacity 150ms ease-out;
         opacity: 0.8;

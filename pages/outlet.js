@@ -6,6 +6,31 @@ export default function Outlet() {
   return (
     <main>
       <GlobalNav />
+      <ImageTile
+        src={"plant.jpeg"}
+        alt={"Phyllanthus Mirabilis."}
+        caption={"Phyllanthus Mirabilis. 2021."}
+      />
+      <TextTile
+        text={
+          "Meet Phyllanthus Mirabilis — a low maintenance plant with a bulky trunk. "
+        }
+      />
+      <TextTile
+        text={
+          "During dusk, the leaves fold together in pairs like a butterfly — honestly, I can't 😍."
+        }
+      />
+      <TextTile
+        text={
+          "Purchased in a cute antique, gifts, and plants shop called avalanamsterdam →"
+        }
+      />
+      <ImageTile
+        src={"always-sunday.jpg"}
+        alt={"Always Sunday, Playlist on Apple music."}
+        caption={"Always Sunday, Playlist on Apple music. 2021."}
+      />
       <TextTile
         text={
           "Always Sunday, a playlist from Apple music is my way of starting the weekend. It’s filled with calm background music with blues vibes in there — some vocals, some not."
@@ -21,6 +46,7 @@ export default function Outlet() {
         alt={"Hibiki"}
         caption={"Hibiki Japanese harmony by Suntory Tori. 2021."}
       />
+
       <style jsx>{`
         main {
           width: 86vw;
@@ -34,7 +60,8 @@ export default function Outlet() {
             display: flex;
             max-width: initial;
             align-items: flex-end;
-            margin: 0 auto 0 54px;
+            margin: 7vw;
+            padding: 0 7vw 0 0;
           }
         }
       `}</style>
