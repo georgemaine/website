@@ -110,7 +110,7 @@ export const TextTile = ({ text }) => {
             line-height: 1.08;
             letter-spacing: -0.08rem;
             font-weight: 700;
-            margin-bottom: 18vh;
+            margin: 0 0 9vh;
             transition: opacity 0.4s ease-out;
           }
 

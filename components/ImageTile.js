@@ -1,66 +1,51 @@
 /* eslint-disable react/display-name */
 /* eslint-disable @next/next/no-img-element */
-import { useEffect, useRef, useState } from "react";
+import Plx from "react-plx";
+
+const ImageTileTransition = [
+  {
+    start: "self",
+    duration: "100vh",
+    easing: "easeIn",
+    properties: [
+      {
+        startValue: 0,
+        endValue: -54,
+        property: "translateY",
+      },
+    ],
+  },
+];
 
 const ImageTileContainer = ({ children }) => {
-  const figureRef = useRef();
-  const [ratio, setRatio] = useState(false);
-
-  const setTranslateY = (ratio, total) => {
-    return `translateY(calc(-${ratio} * ${total})`;
-  };
-
-  const callbackFunction = (entries) => {
-    const [entry] = entries;
-    entry.isIntersecting &&
-      setRatio(setTranslateY(entry.intersectionRatio, "9vh"));
-  };
-
-  const options = {
-    rootMargin: "-25% 0px 0px 0px",
-    threshold: [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1],
-  };
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(callbackFunction, options);
-    figureRef.current && observer.observe(figureRef.current);
-
-    return () => {
-      figureRef.current && observer.unobserve(figureRef.current);
-    };
-  }, [figureRef, options]);
-
   return (
-    <figure
-      ref={figureRef}
-      style={{
-        transform: ratio,
-      }}
-    >
-      {children}
-      <style jsx>
-        {`
-          figure {
-            width: 100%;
-            padding: 0;
-            margin: 0 0 7vh;
-            border: 0.5px solid var(--border);
-            border-radius: 10px;
-            overflow: hidden;
-            position: relative;
-          }
-
-          @media only screen and (min-width: 737px) {
+    <Plx parallaxData={ImageTileTransition} animateWhenNotInViewport>
+      <figure>
+        {children}
+        <style jsx>
+          {`
             figure {
-              width: max-content;
-              height: calc(100vh - 14vw);
-              margin: 0 9vh 0 0;
-              flex-shrink: 0;
+              width: 100%;
+              padding: 0;
+              margin: 0 0 9vh;
+              border: 0.5px solid var(--border);
+              border-radius: 10px;
+              overflow: hidden;
+              position: relative;
             }
-          }
-        `}
-      </style>
-    </figure>
+
+            @media only screen and (min-width: 737px) {
+              figure {
+                width: max-content;
+                height: calc(100vh - 14vw);
+                margin: 0 9vh 0 0;
+                flex-shrink: 0;
+              }
+            }
+          `}
+        </style>
+      </figure>
+    </Plx>
   );
 };
 
