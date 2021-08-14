@@ -2,39 +2,39 @@
 /* eslint-disable @next/next/no-img-element */
 import { useEffect, useRef, useState } from "react";
 
-const ImageTileContainer = ({ children }) => {
-  const figureRef = useRef();
-  const [ratio, setRatio] = useState(false);
+const ImageTileContainer = ({ children, transform }) => {
+  // const figureRef = useRef();
+  // const [ratio, setRatio] = useState(false);
 
-  const setTranslateY = (ratio, total) => {
-    return `translateY(calc(-${ratio} * ${total})`;
-  };
+  // const setTranslateY = (ratio, total) => {
+  //   return `translateY(calc(-${ratio} * ${total})`;
+  // };
 
-  const callbackFunction = (entries) => {
-    const [entry] = entries;
-    entry.isIntersecting &&
-      setRatio(setTranslateY(entry.intersectionRatio, "9vh"));
-  };
+  // const callbackFunction = (entries) => {
+  //   const [entry] = entries;
+  //   entry.isIntersecting &&
+  //     setRatio(setTranslateY(entry.intersectionRatio, "9vh"));
+  // };
 
-  const options = {
-    rootMargin: "-25% 0px 0px 0px",
-    threshold: [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1],
-  };
+  // const options = {
+  //   rootMargin: "-25% 0px 0px 0px",
+  //   threshold: [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1],
+  // };
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(callbackFunction, options);
-    figureRef.current && observer.observe(figureRef.current);
+  // useEffect(() => {
+  //   const observer = new IntersectionObserver(callbackFunction, options);
+  //   figureRef.current && observer.observe(figureRef.current);
 
-    return () => {
-      figureRef.current && observer.unobserve(figureRef.current);
-    };
-  }, [figureRef, options]);
+  //   return () => {
+  //     figureRef.current && observer.unobserve(figureRef.current);
+  //   };
+  // }, [figureRef, options]);
 
   return (
     <figure
-      ref={figureRef}
+      // ref={figureRef}
       style={{
-        transform: ratio,
+        transform: transform,
       }}
     >
       {children}
@@ -48,6 +48,7 @@ const ImageTileContainer = ({ children }) => {
             border-radius: 10px;
             overflow: hidden;
             position: relative;
+            transition: transform 0.1s ease-out;
           }
 
           @media only screen and (min-width: 737px) {
@@ -118,9 +119,9 @@ const Image = ({ src, alt }) => {
   );
 };
 
-export default function ImageTile({ alt, caption, src }) {
+export default function ImageTile({ alt, caption, src, transform }) {
   return (
-    <ImageTileContainer>
+    <ImageTileContainer transform={transform}>
       <Image src={src} alt={alt} />
       <ImageTileCaption caption={caption} />
     </ImageTileContainer>
