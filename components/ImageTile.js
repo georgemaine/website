@@ -6,17 +6,18 @@ const ImageTileContainer = ({ children }) => {
   const figureRef = useRef();
   const [ratio, setRatio] = useState(false);
 
-  const translateY = (ratio, total) => {
+  const setTranslateY = (ratio, total) => {
     return `translateY(calc(-${ratio} * ${total})`;
   };
 
   const callbackFunction = (entries) => {
     const [entry] = entries;
     entry.isIntersecting &&
-      setRatio(translateY(entry.intersectionRatio, "6.6vh"));
+      setRatio(setTranslateY(entry.intersectionRatio, "9vh"));
   };
 
   const options = {
+    rootMargin: "-25% 0px 0px 0px",
     threshold: [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1],
   };
 

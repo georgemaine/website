@@ -82,6 +82,7 @@ export const TextTile = ({ text }) => {
   };
 
   const options = {
+    rootMargin: "-15% 0px 0px 0px",
     threshold: 0.72,
   };
 

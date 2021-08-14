@@ -13,12 +13,7 @@ export default function Outlet() {
       />
       <TextTile
         text={
-          "Meet Phyllanthus Mirabilis — a low maintenance plant with a bulky trunk. "
-        }
-      />
-      <TextTile
-        text={
-          "During dusk, the leaves fold together in pairs like a butterfly — honestly, I can't 😍."
+          "Meet Phyllanthus Mirabilis. During dusk, the leaves fold together in pairs like a butterfly — honestly, I can't 😍. "
         }
       />
       <TextTile
