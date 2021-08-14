@@ -13,7 +13,7 @@ export default function Components() {
           padding: 30,
           paddingLeft: "7vw",
           paddingRight: "7vw",
-          paddingTop: "14vw",
+          paddingTop: "12vw",
         }}
       >
         <p

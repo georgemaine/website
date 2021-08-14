@@ -10,7 +10,7 @@ const ImageTileTransition = [
     properties: [
       {
         startValue: 0,
-        endValue: -54,
+        endValue: -42,
         property: "translateY",
       },
     ],
@@ -37,7 +37,7 @@ const ImageTileContainer = ({ children }) => {
             @media only screen and (min-width: 737px) {
               figure {
                 width: max-content;
-                height: calc(100vh - 14vw);
+                height: calc(100vh - 12vw);
                 margin: 0 9vh 0 0;
                 flex-shrink: 0;
               }
@@ -95,7 +95,7 @@ const Image = ({ src, alt }) => {
         @media only screen and (min-width: 737px) {
           img {
             width: auto;
-            height: calc(100vh - 100px);
+            height: calc(100vh - 12vw);
           }
         }
       `}</style>

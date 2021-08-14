@@ -21,15 +21,16 @@ export default function Outlet() {
           "Purchased in a cute antique, gifts, and plants shop called avalanamsterdam →"
         }
       />
-      <TitleTile title={"Summer 2021."} />
+      <TitleTile title={"Summer 2021"} />
       <ImageTile
         src={"always-sunday.jpg"}
         alt={"Always Sunday, Playlist on Apple music."}
         caption={"Always Sunday, Playlist on Apple music. 2021."}
       />
       <TextTile
+        margin={"-7vh 0 9vh"}
         text={
-          "Always Sunday, a playlist from Apple music is my way of starting the weekend. It’s filled with calm background music with blues vibes in there — some vocals, some not."
+          "The low-key songs in the Always Sunday playlist are becoming my favorite vibes to start the weekend with."
         }
       />
 
@@ -43,13 +44,13 @@ export default function Outlet() {
         alt={"Hibiki"}
         caption={"Hibiki Japanese harmony by Suntory Tori. 2021."}
       />
-      <TitleTile title={"Spring 2021."} />
+      <TitleTile title={"Spring 2021"} />
       <style jsx>{`
         main {
           width: 86vw;
           margin-left: auto;
           margin-right: auto;
-          padding-top: calc(14vh + 48px);
+          padding: calc(14vh + 48px) 0 14vh;
         }
 
         @media only screen and (min-width: 737px) {
@@ -57,7 +58,7 @@ export default function Outlet() {
             display: flex;
             max-width: initial;
             align-items: flex-end;
-            margin: 7vw;
+            margin: 6vw;
             padding: 0 7vw 0 0;
           }
         }

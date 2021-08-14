@@ -35,7 +35,7 @@ export const TitleTile = ({ title }) => {
             line-height: 1.08;
             letter-spacing: -0.08rem;
             font-weight: 700;
-            margin-bottom: 18vh;
+            margin-bottom: 12vh;
             transition: opacity 0.4s ease-out;
           }
 
@@ -72,7 +72,7 @@ export const TitleTile = ({ title }) => {
   );
 };
 
-export const TextTile = ({ text }) => {
+export const TextTile = ({ margin = "0 0 9vh", text }) => {
   const textRef = useRef();
   const [isVisible, setIsVisible] = useState(false);
 
@@ -82,8 +82,7 @@ export const TextTile = ({ text }) => {
   };
 
   const options = {
-    rootMargin: "-15% 0px 0px 0px",
-    threshold: 0.72,
+    threshold: 0.25,
   };
 
   useEffect(() => {
@@ -110,7 +109,7 @@ export const TextTile = ({ text }) => {
             line-height: 1.08;
             letter-spacing: -0.08rem;
             font-weight: 700;
-            margin: 0 0 9vh;
+            margin: ${margin};
             transition: opacity 0.4s ease-out;
           }
 
