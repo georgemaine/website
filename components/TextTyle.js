@@ -8,18 +8,19 @@ export const TitleTile = ({ title }) => {
     setIsVisible(entry.isIntersecting);
   };
 
-  const options = {
-    threshold: 0.72,
-  };
-
   useEffect(() => {
+    const options = {
+      threshold: 0.72,
+    };
+    const node = titleRef.current;
     const observer = new IntersectionObserver(callbackFunction, options);
-    titleRef.current && observer.observe(titleRef.current);
+    node && observer.observe(node);
 
     return () => {
-      titleRef.current && observer.unobserve(titleRef.current);
+      node && observer.unobserve(node);
     };
   }, [titleRef]);
+
   return (
     <h1
       ref={titleRef}
@@ -81,16 +82,17 @@ export const TextTile = ({ margin = "0 0 9vh", text }) => {
     setIsVisible(entry.isIntersecting);
   };
 
-  const options = {
-    threshold: 0.25,
-  };
-
   useEffect(() => {
+    const node = textRef.current;
+    const options = {
+      threshold: 0.25,
+    };
+
     const observer = new IntersectionObserver(callbackFunction, options);
-    textRef.current && observer.observe(textRef.current);
+    node && observer.observe(node);
 
     return () => {
-      textRef.current && observer.unobserve(textRef.current);
+      node && observer.unobserve(node);
     };
   }, [textRef]);
 
@@ -110,7 +112,7 @@ export const TextTile = ({ margin = "0 0 9vh", text }) => {
             letter-spacing: -0.08rem;
             font-weight: 700;
             margin: ${margin};
-            transition: opacity 0.4s cubic-bezier(0.15, 0, 0, 1.05);
+            transition: opacity 0.4s ease-out;
           }
 
           @media (max-width: 540px) {

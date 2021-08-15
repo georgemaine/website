@@ -21,26 +21,26 @@ export default function Outlet() {
           "Purchased in a cute antique, gifts, and plants shop called avalanamsterdam →"
         }
       />
-      <TitleTile title={"Summer 2021"} />
+
       <ImageTile
         src={"always-sunday.jpg"}
         alt={"Always Sunday, Playlist on Apple music."}
         caption={"Always Sunday, Playlist on Apple music"}
       />
+
       <TextTile
         margin={"-4.5vh 0 9vh"}
         text={
           "The low-key songs in the Always Sunday playlist are becoming my favorite vibes to start the weekend with."
         }
       />
-
+      <TitleTile title={"Summer"} />
       <ImageTile
         src={"apple-watch-march-challenge.jpeg"}
         alt={"Apple watch march challenge achievement"}
         caption={"Apple watch. March challenge achievement"}
       />
 
-      <TitleTile title={"Spring 2021"} />
       <ImageTile
         src={"hibiki.jpg"}
         alt={"Hibiki"}
@@ -61,12 +61,14 @@ export default function Outlet() {
           "Outlet is a real-time feed of my energy and talents — posted chronologically. Hopefully, one day you’ll discover your outlet too."
         }
       />
+      <TitleTile title={"Spring"} />
+      <TitleTile title={"2021"} />
       <style jsx>{`
         main {
           width: 86vw;
           margin-left: auto;
           margin-right: auto;
-          padding: calc(14vh + 48px) 0 14vh;
+          padding: calc(7vh + 48px) 0 14vh;
         }
 
         @media only screen and (min-width: 737px) {
