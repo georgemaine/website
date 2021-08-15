@@ -110,7 +110,7 @@ export const TextTile = ({ margin = "0 0 9vh", text }) => {
             letter-spacing: -0.08rem;
             font-weight: 700;
             margin: ${margin};
-            transition: opacity 0.4s ease-out;
+            transition: opacity 0.4s cubic-bezier(0.15, 0, 0, 1.05);
           }
 
           @media (max-width: 540px) {

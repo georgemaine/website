@@ -1,25 +1,47 @@
 /* eslint-disable react/display-name */
 /* eslint-disable @next/next/no-img-element */
+import { useEffect, useRef, useState } from "react";
 import Plx from "react-plx";
 
-const ImageTileTransition = [
-  {
-    start: "self",
-    duration: "100vh",
-    easing: "easeIn",
-    properties: [
-      {
-        startValue: 0,
-        endValue: -42,
-        property: "translateY",
-      },
-    ],
-  },
-];
+const ImageTileContainer = ({ children, alt }) => {
+  const [scrollPosition, setScrollPosition] = useState(0);
+  // const ref = useRef(null);
+  // const handleScroll = () => {
+  //   const position = window.pageYOffset;
+  //   setScrollPosition(position);
+  // };
 
-const ImageTileContainer = ({ children }) => {
+  // useEffect(() => {
+  //   window.addEventListener("scroll", handleScroll, { passive: true });
+
+  //   return () => {
+  //     window.removeEventListener("scroll", handleScroll);
+  //   };
+  // }, []);
+
+  const ImageTileTransition = [
+    {
+      start: "self",
+      duration: "150vh",
+      easing: "easeIn",
+      properties: [
+        {
+          startValue: 24,
+          endValue: -24,
+          property: "translateY",
+        },
+      ],
+    },
+  ];
   return (
-    <Plx parallaxData={ImageTileTransition} animateWhenNotInViewport>
+    <Plx
+      parallaxData={ImageTileTransition}
+      animateWhenNotInViewport
+      // onPlxStart={() =>
+      //   console.log(`${alt}Plx started at y: ${scrollPosition}`)
+      // }
+      // onPlxEnd={() => console.log(`${alt}Plx ended at y: ${scrollPosition}`)}
+    >
       <figure>
         {children}
         <style jsx>
@@ -105,7 +127,7 @@ const Image = ({ src, alt }) => {
 
 export default function ImageTile({ alt, caption, src }) {
   return (
-    <ImageTileContainer>
+    <ImageTileContainer alt={alt}>
       <Image src={src} alt={alt} />
       <ImageTileCaption caption={caption} />
     </ImageTileContainer>
