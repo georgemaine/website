@@ -1,6 +1,6 @@
 import GlobalNav from "../components/GlobalNav";
-import ImageTile from "../components/ImageTile";
-import { InlineLink, TextTile, TitleTile } from "../components/TextTyle";
+import { ImageTile, VideoTile } from "../components/MediaTile";
+import { InlineLink, TextTile, TitleTile } from "../components/TextTile";
 
 export default function Outlet() {
   return (
@@ -22,14 +22,16 @@ export default function Outlet() {
           text=' Avalonamsterdam'
         />
       </TextTile>
-      <ImageTile
-        src={"always-sunday.jpg"}
-        alt={"Always Sunday, Playlist on Apple music."}
-        caption={"Always Sunday, Playlist on Apple music"}
-      />
+      <VideoTile poster={"always-sunday.jpg"} src={"always-sunday.m3u8"} />
       <TextTile margin={"-4.5vh 0 9vh"}>
-        The low-key songs in the Always Sunday playlist are my favorite vibes to
-        start the weekend with.
+        Liking the low-key vibes I’m getting from playing{" "}
+        <InlineLink
+          href={
+            "https://music.apple.com/nl/playlist/always-sunday/pl.401b996cbcda4861ae8da67b8cd3ff32?l=en"
+          }
+          text={"Always Sunday"}
+        />{" "}
+        in the background.
       </TextTile>
 
       <TitleTile title={"Summer"} />
@@ -62,17 +64,8 @@ export default function Outlet() {
           width: 86vw;
           margin-left: auto;
           margin-right: auto;
-          padding: calc(7vh + 48px) 0 14vh;
-        }
-
-        @media only screen and (min-width: 737px) {
-          main {
-            display: flex;
-            max-width: initial;
-            align-items: flex-end;
-            margin: 6vw;
-            padding: 0 7vw 0 0;
-          }
+          padding: calc(7vh + 48px) 0 0;
+          max-width: 168.8rem;
         }
       `}</style>
     </main>

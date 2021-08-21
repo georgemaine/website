@@ -10,7 +10,8 @@ export const TitleTile = ({ title }) => {
 
   useEffect(() => {
     const options = {
-      threshold: 0.72,
+      rootMargin: "-45% 0 0",
+      threshold: 0.1,
     };
     const node = titleRef.current;
     const observer = new IntersectionObserver(callbackFunction, options);
@@ -36,8 +37,8 @@ export const TitleTile = ({ title }) => {
             line-height: 1.08;
             letter-spacing: -0.08rem;
             font-weight: 700;
-            margin-bottom: 12vh;
-            transition: opacity 0.4s ease-out;
+            margin-bottom: 18vh;
+            transition: opacity 0.2s ease-out;
           }
 
           @media (max-width: 540px) {
@@ -49,9 +50,7 @@ export const TitleTile = ({ title }) => {
           @media (min-width: 737px) {
             h1 {
               font-size: calc(80px + 80 * (100vw - 740px) / 740);
-              margin: 0 18vw 0 0;
               flex-shrink: 0;
-              max-width: 79vw;
             }
           }
 
@@ -73,7 +72,7 @@ export const TitleTile = ({ title }) => {
   );
 };
 
-export const TextTile = ({ margin = "0 0 9vh", children }) => {
+export const TextTile = ({ margin = "0 0 12vh", children }) => {
   const textRef = useRef();
   const [isVisible, setIsVisible] = useState(false);
 
@@ -85,7 +84,8 @@ export const TextTile = ({ margin = "0 0 9vh", children }) => {
   useEffect(() => {
     const node = textRef.current;
     const options = {
-      threshold: 0.25,
+      rootMargin: "-45% 0 0",
+      threshold: 0.1,
     };
 
     const observer = new IntersectionObserver(callbackFunction, options);
@@ -112,7 +112,7 @@ export const TextTile = ({ margin = "0 0 9vh", children }) => {
             letter-spacing: -0.08rem;
             font-weight: 700;
             margin: ${margin};
-            transition: opacity 0.4s ease-out;
+            transition: opacity 0.2s ease-out;
           }
 
           @media (max-width: 540px) {
@@ -124,9 +124,7 @@ export const TextTile = ({ margin = "0 0 9vh", children }) => {
           @media (min-width: 737px) {
             p {
               font-size: calc(42px + 42 * (100vw - 740px) / 740);
-              margin: 0 18vw 0 0;
-              flex-shrink: 0;
-              max-width: 79vw;
+              margin: 0 0 18vh;
             }
           }
 
@@ -157,6 +155,9 @@ export const InlineLink = ({ href, text }) => {
       {text}
       <style jsx>
         {`
+          a {
+            white-space: nowrap;
+          }
           a:hover {
             color: rgba(208, 208, 208);
             transition: 0.2s ease-out;

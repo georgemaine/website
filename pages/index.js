@@ -92,7 +92,7 @@ export default function Components() {
           }}
         >
           <img
-            src={"/images/plant.jpeg"}
+            src={"/media/plant.jpeg"}
             alt='Phyllanthus Mirabilis'
             style={{
               width: "auto",
