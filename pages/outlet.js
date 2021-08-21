@@ -6,6 +6,17 @@ export default function Outlet() {
   return (
     <main>
       <GlobalNav />
+      <VideoTile poster={"nas.jpeg"} src={"nas.m3u8"} />
+      <TextTile margin={"-4.5vh 0 9vh"}>
+        I know I’m a few weeks late - the new
+        <InlineLink
+          href={
+            "https://music.apple.com/nl/album/kings-disease-ii/1578569385?l=en"
+          }
+          text={" Nas album "}
+        />{" "}
+        is 🔥
+      </TextTile>
       <ImageTile
         src={"plant.jpeg"}
         alt={"Phyllanthus Mirabilis."}

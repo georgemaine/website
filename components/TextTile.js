@@ -165,14 +165,14 @@ export const InlineLink = ({ href, text }) => {
 
           a::after {
             display: inline-block;
-            content: " →";
+            content: " ↗";
             position: relative;
             top: 0.03rem;
             transition: opacity 0.2s ease-out, transform 0.2s ease-out;
           }
 
           a:hover::after {
-            transform: translate3d(0.3rem, 0, 0);
+            transform: translate3d(0.3rem, -0.3rem, 0);
           }
         `}
       </style>
