@@ -37,7 +37,9 @@ export const TitleTile = ({ title }) => {
             line-height: 1.08;
             letter-spacing: -0.08rem;
             font-weight: 700;
-            margin-bottom: 18vh;
+            width: 86vw;
+            max-width: 168.8rem;
+            margin: 0 auto 18vh;
             transition: opacity 0.2s ease-out;
           }
 
@@ -72,7 +74,7 @@ export const TitleTile = ({ title }) => {
   );
 };
 
-export const TextTile = ({ margin = "0 0 12vh", children }) => {
+export const TextTile = ({ margin = "0 auto 12vh", children }) => {
   const textRef = useRef();
   const [isVisible, setIsVisible] = useState(false);
 
@@ -111,6 +113,8 @@ export const TextTile = ({ margin = "0 0 12vh", children }) => {
             line-height: 1.08;
             letter-spacing: -0.08rem;
             font-weight: 700;
+            width: 86vw;
+            max-width: 168.8rem;
             margin: ${margin};
             transition: opacity 0.2s ease-out;
           }
@@ -124,7 +128,7 @@ export const TextTile = ({ margin = "0 0 12vh", children }) => {
           @media (min-width: 737px) {
             p {
               font-size: calc(42px + 42 * (100vw - 740px) / 740);
-              margin: 0 0 18vh;
+              margin: 0 auto 18vh;
             }
           }
 

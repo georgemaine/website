@@ -1,13 +1,13 @@
 import GlobalNav from "../components/GlobalNav";
-import { ImageTile, VideoTile } from "../components/MediaTile";
+import { FirstVideoTile, ImageTile, VideoTile } from "../components/MediaTile";
 import { InlineLink, TextTile, TitleTile } from "../components/TextTile";
 
 export default function Outlet() {
   return (
     <main>
       <GlobalNav />
-      <VideoTile poster={"nas.jpeg"} src={"nas.m3u8"} />
-      <TextTile margin={"-4.5vh 0 9vh"}>
+      <FirstVideoTile poster={"nas.jpeg"} src={"nas.m3u8"} />
+      <TextTile margin={"-4.5vh auto 9vh"}>
         I know I’m a few weeks late - the new
         <InlineLink
           href={
@@ -34,7 +34,7 @@ export default function Outlet() {
         />
       </TextTile>
       <VideoTile poster={"always-sunday.jpg"} src={"always-sunday.m3u8"} />
-      <TextTile margin={"-4.5vh 0 9vh"}>
+      <TextTile margin={"-4.5vh auto 9vh"}>
         Liking the low-key vibes I’m getting from playing{" "}
         <InlineLink
           href={
@@ -72,11 +72,13 @@ export default function Outlet() {
       <TitleTile title={"2021"} />
       <style jsx>{`
         main {
-          width: 86vw;
+          width: 100%;
           margin-left: auto;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
           margin-right: auto;
           padding: calc(7vh + 48px) 0 0;
-          max-width: 168.8rem;
         }
       `}</style>
     </main>

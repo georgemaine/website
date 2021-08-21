@@ -3,6 +3,39 @@
 import { createRef, useEffect, useState } from "react";
 import Plx from "react-plx";
 
+export const FirstVideoTile = ({ src }) => {
+  return (
+    <video
+      src={`/media/${src}`}
+      poster={`/media/${src}`}
+      playsInline
+      autoPlay
+      muted
+      loop
+      preload='auto'
+    >
+      <style jsx>{`
+        video {
+          margin: 0 auto 12vh;
+          border-radius: 10px;
+          overflow: hidden;
+          will-change: transform;
+          width: 94vw;
+          display: block;
+          vertical-align: middle;
+        }
+
+        @media (min-width: 737px) {
+          video {
+            width: calc(50% + 3vw);
+            margin: 0 0 12vh 6vw;
+          }
+        }
+      `}</style>
+    </video>
+  );
+};
+
 export const VideoTile = ({ src }) => {
   const ref = createRef();
   const [height, setHeight] = useState();
@@ -41,12 +74,11 @@ export const VideoTile = ({ src }) => {
       </Plx>
       <style jsx>{`
         div {
-          margin: 0 0 12vh;
+          margin: 0 auto 12vh;
           border-radius: 10px;
-          border: 0.5px solid var(--dark-border);
           overflow: hidden;
           will-change: transform;
-          width: 100%;
+          width: 94vw;
         }
 
         video {
@@ -57,7 +89,8 @@ export const VideoTile = ({ src }) => {
 
         @media (min-width: 737px) {
           div {
-            width: 50%;
+            width: calc(50% + 3vw);
+            margin: 0 0 12vh 6vw;
           }
         }
       `}</style>
@@ -128,10 +161,10 @@ const Image = ({ alt, children, src }) => {
       </Plx>
       <style jsx>{`
         figure {
-          width: 100%;
+          width: 94vw;
+          max-width: 168.8rem;
           padding: 0;
-          margin: 0 0 12vh;
-          border: 0.5px solid var(--dark-border);
+          margin: 0 auto 12vh;
           border-radius: 6px;
           overflow: hidden;
           position: relative;
@@ -141,6 +174,12 @@ const Image = ({ alt, children, src }) => {
         img {
           display: block;
           width: 100%;
+        }
+
+        @media (min-width: 737px) {
+          figure {
+            width: 86vw;
+          }
         }
       `}</style>
     </figure>
