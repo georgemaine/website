@@ -45,7 +45,7 @@
 .imageTile {
   padding: 0;
   margin: 0;
-  border: 0.5px solid var(--border);
+  border: 0.5px solid var(--dark-border);
   border-radius: 10px;
   overflow: hidden;
   position: relative;

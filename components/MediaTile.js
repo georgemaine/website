@@ -6,70 +6,75 @@ export const VideoTile = ({ src }) => {
   const ImageTileTransition = [
     {
       start: "self",
-      duration: "150vh",
+      duration: "75vh",
       easing: "easeIn",
-      properties: [{ startValue: 24, endValue: -24, property: "translateY" }],
+      properties: [
+        { startValue: 1.15, endValue: 1, property: "scale" },
+        { startValue: 0, endValue: 1, property: "opacity" },
+      ],
     },
   ];
   return (
-    <Plx parallaxData={ImageTileTransition} animateWhenNotInViewport>
-      <video
-        src={`/media/${src}`}
-        poster={`/media/${src}`}
-        playsInline
-        autoPlay
-        muted
-        loop
-        preload='auto'
-      >
-        <style jsx>{`
-          video {
-            width: 100%;
-            padding: 0;
-            margin: 0 0 12vh;
-            border: 0.5px solid var(--border);
-            border-radius: 6px;
-            overflow: hidden;
-            position: relative;
-          }
+    <div>
+      <Plx parallaxData={ImageTileTransition} animateWhenNotInViewport>
+        <video
+          src={`/media/${src}`}
+          poster={`/media/${src}`}
+          playsInline
+          autoPlay
+          muted
+          loop
+          preload='auto'
+        ></video>
+      </Plx>
+      <style jsx>{`
+        div {
+          margin: 0 0 12vh;
+          border-radius: 10px;
+          border: 0.5px solid var(--dark-border);
+          overflow: hidden;
+          will-change: transform;
+          width: 100%;
+        }
 
-          @media (min-width: 737px) {
-            video {
-              width: 50%;
-            }
+        video {
+          width: 100%;
+          display: block;
+          vertical-align: middle;
+        }
+
+        @media (min-width: 737px) {
+          div {
+            width: 50%;
           }
-        `}</style>
-      </video>
-    </Plx>
+        }
+      `}</style>
+    </div>
   );
 };
 
 const ImageTileContainer = ({ children }) => {
-  const ImageTileTransition = [
-    {
-      start: "self",
-      duration: "150vh",
-      easing: "easeIn",
-      properties: [{ startValue: 24, endValue: -24, property: "translateY" }],
-    },
-  ];
   return (
-    <Plx parallaxData={ImageTileTransition} animateWhenNotInViewport>
-      <figure>
-        {children}
-        <style jsx>{`
-          figure {
-            width: 100%;
-            padding: 0;
-            margin: 0 0 12vh;
-            border: 0.5px solid var(--border);
-            border-radius: 6px;
-            overflow: hidden;
-            position: relative;
-          }
-        `}</style>
-      </figure>
-    </Plx>
+    <figure>
+      {children}
+      <style jsx>{`
+        figure {
+          width: 100%;
+          padding: 0;
+          margin: 0 0 12vh;
+          border: 0.5px solid var(--dark-border);
+          border-radius: 6px;
+          overflow: hidden;
+          position: relative;
+          will-change: transform;
+        }
+
+        img {
+          display: block;
+          width: 100%;
+        }
+      `}</style>
+    </figure>
   );
 };
 
@@ -106,8 +111,19 @@ const ImageTileCaption = ({ caption }) => {
 };
 
 const Image = ({ src, alt }) => {
+  const ImageTileTransition = [
+    {
+      start: "self",
+      duration: "75vh",
+      easing: "easeIn",
+      properties: [
+        { startValue: 1.15, endValue: 1, property: "scale" },
+        { startValue: 0, endValue: 1, property: "opacity" },
+      ],
+    },
+  ];
   return (
-    <>
+    <Plx parallaxData={ImageTileTransition} animateWhenNotInViewport>
       <img src={`/media/${src}`} alt={alt} />
       <style jsx>{`
         img {
@@ -115,7 +131,7 @@ const Image = ({ src, alt }) => {
           width: 100%;
         }
       `}</style>
-    </>
+    </Plx>
   );
 };
 
