@@ -4,37 +4,50 @@ import { useEffect, useRef, useState } from "react";
 
 const ImageTileContainer = ({ children }) => {
   const figureRef = useRef();
-  const [ratio, setRatio] = useState(false);
+  const [translateY, setTranslateY] = useState(false);
 
-  const setTranslateY = (ratio, total) => {
+  const calcTranslateY = (ratio, total) => {
     return `translateY(calc(-${ratio} * ${total})`;
   };
 
-  const callbackFunction = (entries) => {
-    const [entry] = entries;
-    entry.isIntersecting &&
-      setRatio(setTranslateY(entry.intersectionRatio, "9vh"));
-  };
+  const buildThresholdList = () => {
+    let thresholds = [];
+    let numSteps = 20;
 
-  const options = {
-    rootMargin: "-25% 0px 0px 0px",
-    threshold: [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1],
+    for (let i = 1.0; i <= numSteps; i++) {
+      let ratio = i / numSteps;
+      thresholds.push(ratio);
+    }
+
+    thresholds.push(0);
+    return thresholds;
   };
 
   useEffect(() => {
+    console.log("buildThresholdList:", buildThresholdList());
+    const node = figureRef.current;
+    const callbackFunction = (entries) => {
+      const [entry] = entries;
+      entry.isIntersecting &&
+        setTranslateY(calcTranslateY(entry.intersectionRatio, "9vh"));
+    };
+    const options = {
+      // rootMargin: "-25% 0px 0px 0px",
+      threshold: buildThresholdList(),
+    };
     const observer = new IntersectionObserver(callbackFunction, options);
-    figureRef.current && observer.observe(figureRef.current);
+    node && observer.observe(node);
 
     return () => {
-      figureRef.current && observer.unobserve(figureRef.current);
+      node && observer.unobserve(node);
     };
-  }, [figureRef, options]);
+  }, [figureRef]);
 
   return (
     <figure
       ref={figureRef}
       style={{
-        transform: ratio,
+        transform: translateY,
       }}
     >
       {children}
