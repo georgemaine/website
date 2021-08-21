@@ -13,7 +13,7 @@ export default function Outlet() {
       />
       <TextTile>
         Meet Phyllanthus Mirabilis. During dusk, the leaves fold together in
-        pairs like a butterfly — honestly, I can{"'"}t 😍.{" "}
+        pairs like a butterfly — honestly, I can’t 😍.{" "}
       </TextTile>
       <TextTile>
         Purchased in a cute antique, gifts, and plants shop called
