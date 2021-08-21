@@ -10,8 +10,8 @@ const ImageTileContainer = ({ children, alt }) => {
       easing: "easeIn",
       properties: [
         {
-          startValue: 24,
-          endValue: -24,
+          startValue: 15,
+          endValue: -70,
           property: "translateY",
         },
       ],

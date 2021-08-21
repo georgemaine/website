@@ -73,7 +73,7 @@ export const TitleTile = ({ title }) => {
   );
 };
 
-export const TextTile = ({ margin = "0 0 9vh", text }) => {
+export const TextTile = ({ margin = "0 0 9vh", children }) => {
   const textRef = useRef();
   const [isVisible, setIsVisible] = useState(false);
 
@@ -103,7 +103,7 @@ export const TextTile = ({ margin = "0 0 9vh", text }) => {
         opacity: isVisible ? 1 : 0,
       }}
     >
-      {text}
+      {children}
       <style jsx>
         {`
           p {
@@ -148,5 +148,33 @@ export const TextTile = ({ margin = "0 0 9vh", text }) => {
         `}
       </style>
     </p>
+  );
+};
+
+export const InlineLink = ({ href, text }) => {
+  return (
+    <a href={href} target='blank'>
+      {text}
+      <style jsx>
+        {`
+          a:hover {
+            color: rgba(208, 208, 208);
+            transition: 0.2s ease-out;
+          }
+
+          a::after {
+            display: inline-block;
+            content: " →";
+            position: relative;
+            top: 0.03rem;
+            transition: opacity 0.2s ease-out, transform 0.2s ease-out;
+          }
+
+          a:hover::after {
+            transform: translate3d(0.3rem, 0, 0);
+          }
+        `}
+      </style>
+    </a>
   );
 };
