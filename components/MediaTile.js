@@ -1,21 +1,33 @@
 /* eslint-disable react/display-name */
 /* eslint-disable @next/next/no-img-element */
+import { createRef, useEffect, useState } from "react";
 import Plx from "react-plx";
 
 export const VideoTile = ({ src }) => {
+  const ref = createRef();
+  const [height, setHeight] = useState();
+
   const ImageTileTransition = [
     {
       start: "self",
-      duration: "75vh",
+      duration: "72vh",
       easing: "easeIn",
-      properties: [
-        { startValue: 1.15, endValue: 1, property: "scale" },
-        { startValue: 0, endValue: 1, property: "opacity" },
-      ],
+      properties: [{ startValue: 1.15, endValue: 1, property: "scale" }],
+    },
+    {
+      start: "self",
+      duration: height * 0.42,
+      easing: "easeIn",
+      properties: [{ startValue: 0, endValue: 1, property: "opacity" }],
     },
   ];
+
+  useEffect(() => {
+    const videoHeight = ref.current.clientHeight;
+    setHeight(videoHeight);
+  }, [ref]);
   return (
-    <div>
+    <div ref={ref}>
       <Plx parallaxData={ImageTileTransition} animateWhenNotInViewport>
         <video
           src={`/media/${src}`}
@@ -53,31 +65,6 @@ export const VideoTile = ({ src }) => {
   );
 };
 
-const ImageTileContainer = ({ children }) => {
-  return (
-    <figure>
-      {children}
-      <style jsx>{`
-        figure {
-          width: 100%;
-          padding: 0;
-          margin: 0 0 12vh;
-          border: 0.5px solid var(--dark-border);
-          border-radius: 6px;
-          overflow: hidden;
-          position: relative;
-          will-change: transform;
-        }
-
-        img {
-          display: block;
-          width: 100%;
-        }
-      `}</style>
-    </figure>
-  );
-};
-
 const ImageTileCaption = ({ caption }) => {
   return (
     <figcaption>
@@ -110,36 +97,60 @@ const ImageTileCaption = ({ caption }) => {
   );
 };
 
-const Image = ({ src, alt }) => {
+const Image = ({ alt, children, src }) => {
+  const ref = createRef();
+  const [height, setHeight] = useState();
   const ImageTileTransition = [
     {
       start: "self",
-      duration: "75vh",
+      duration: "72vh",
       easing: "easeIn",
-      properties: [
-        { startValue: 1.15, endValue: 1, property: "scale" },
-        { startValue: 0, endValue: 1, property: "opacity" },
-      ],
+      properties: [{ startValue: 1.15, endValue: 1, property: "scale" }],
+    },
+    {
+      start: "self",
+      duration: height * 0.42,
+      easing: "easeIn",
+      properties: [{ startValue: 0, endValue: 1, property: "opacity" }],
     },
   ];
+
+  useEffect(() => {
+    const videoHeight = ref.current.clientHeight;
+    setHeight(videoHeight);
+  }, [ref]);
+
   return (
-    <Plx parallaxData={ImageTileTransition} animateWhenNotInViewport>
-      <img src={`/media/${src}`} alt={alt} />
+    <figure ref={ref}>
+      {children}
+      <Plx parallaxData={ImageTileTransition} animateWhenNotInViewport>
+        <img src={`/media/${src}`} alt={alt} />
+      </Plx>
       <style jsx>{`
+        figure {
+          width: 100%;
+          padding: 0;
+          margin: 0 0 12vh;
+          border: 0.5px solid var(--dark-border);
+          border-radius: 6px;
+          overflow: hidden;
+          position: relative;
+          will-change: transform;
+        }
+
         img {
           display: block;
           width: 100%;
         }
       `}</style>
-    </Plx>
+    </figure>
   );
 };
 
 export const ImageTile = ({ alt, caption, src }) => {
   return (
-    <ImageTileContainer alt={alt}>
-      <Image src={src} alt={alt} />
+    <Image src={src} alt={alt}>
       <ImageTileCaption caption={caption} />
-    </ImageTileContainer>
+    </Image>
   );
 };
