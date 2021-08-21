@@ -47,19 +47,10 @@ export default function Outlet() {
       <style jsx>{`
         main {
           width: 86vw;
+          max-width: 168.8rem;
           margin-left: auto;
           margin-right: auto;
           padding-top: calc(14vh + 48px);
-        }
-
-        @media only screen and (min-width: 737px) {
-          main {
-            display: flex;
-            max-width: initial;
-            align-items: flex-end;
-            margin: 7vw;
-            padding: 0 7vw 0 0;
-          }
         }
       `}</style>
     </main>

@@ -8,16 +8,16 @@ export const TitleTile = ({ title }) => {
     setIsVisible(entry.isIntersecting);
   };
 
-  const options = {
-    threshold: 0.72,
-  };
-
   useEffect(() => {
+    const node = titleRef.current;
+    const options = {
+      threshold: 0.47,
+    };
     const observer = new IntersectionObserver(callbackFunction, options);
-    titleRef.current && observer.observe(titleRef.current);
+    node && observer.observe(node);
 
     return () => {
-      titleRef.current && observer.unobserve(titleRef.current);
+      node && observer.unobserve(node);
     };
   }, [titleRef]);
   return (
@@ -28,46 +28,42 @@ export const TitleTile = ({ title }) => {
       }}
     >
       {title}
-      <style jsx>
-        {`
+      <style jsx>{`
+        h1 {
+          font-size: 4.2rem;
+          line-height: 1.08;
+          letter-spacing: -0.08rem;
+          font-weight: 700;
+          margin-bottom: 18vh;
+          transition: opacity 0.2s ease-out;
+        }
+
+        @media (max-width: 540px) {
           h1 {
-            font-size: 4.2rem;
-            line-height: 1.08;
-            letter-spacing: -0.08rem;
-            font-weight: 700;
-            margin-bottom: 18vh;
-            transition: opacity 0.4s ease-out;
+            font-size: calc(42px + 42 * (100vw - 375px) / 375);
           }
+        }
 
-          @media (max-width: 540px) {
-            h1 {
-              font-size: calc(42px + 42 * (100vw - 375px) / 375);
-            }
+        @media (min-width: 737px) {
+          h1 {
+            font-size: calc(80px + 80 * (100vw - 740px) / 740);
+            flex-shrink: 0;
           }
+        }
 
-          @media (min-width: 737px) {
-            h1 {
-              font-size: calc(80px + 80 * (100vw - 740px) / 740);
-              margin: 0 18vw 0 0;
-              flex-shrink: 0;
-              max-width: 79vw;
-            }
+        @media (min-width: 1260px) {
+          h1 {
+            font-size: 118px;
+            letter-spacing: -0.015em;
+            line-height: 1.05;
           }
-
-          @media (min-width: 1260px) {
-            h1 {
-              font-size: 118px;
-              letter-spacing: -0.015em;
-              line-height: 1.05;
-            }
+        }
+        @media screen and (min-width: 1770px) {
+          h1 {
+            font-size: 180px;
           }
-          @media screen and (min-width: 1770px) {
-            h1 {
-              font-size: 180px;
-            }
-          }
-        `}
-      </style>
+        }
+      `}</style>
     </h1>
   );
 };
@@ -81,17 +77,16 @@ export const TextTile = ({ text }) => {
     setIsVisible(entry.isIntersecting);
   };
 
-  const options = {
-    rootMargin: "-15% 0px 0px 0px",
-    threshold: 0.72,
-  };
-
   useEffect(() => {
+    const node = textRef.current;
+    const options = {
+      threshold: 0.47,
+    };
     const observer = new IntersectionObserver(callbackFunction, options);
-    textRef.current && observer.observe(textRef.current);
+    node && observer.observe(node);
 
     return () => {
-      textRef.current && observer.unobserve(textRef.current);
+      node && observer.unobserve(node);
     };
   }, [textRef]);
 
@@ -103,49 +98,45 @@ export const TextTile = ({ text }) => {
       }}
     >
       {text}
-      <style jsx>
-        {`
+      <style jsx>{`
+        p {
+          font-size: 2.8rem;
+          line-height: 1.08;
+          letter-spacing: -0.08rem;
+          font-weight: 700;
+          margin: 0 0 12vh;
+          transition: opacity 0.2s ease-out;
+        }
+
+        @media (max-width: 540px) {
           p {
-            font-size: 2.8rem;
-            line-height: 1.08;
-            letter-spacing: -0.08rem;
-            font-weight: 700;
-            margin-bottom: 18vh;
-            transition: opacity 0.4s ease-out;
+            font-size: calc(28px + 28 * (100vw - 375px) / 375);
           }
+        }
 
-          @media (max-width: 540px) {
-            p {
-              font-size: calc(28px + 28 * (100vw - 375px) / 375);
-            }
+        @media (min-width: 737px) {
+          p {
+            font-size: calc(42px + 42 * (100vw - 740px) / 740);
+            margin: 0 0 18vh;
           }
+        }
 
-          @media (min-width: 737px) {
-            p {
-              font-size: calc(42px + 42 * (100vw - 740px) / 740);
-              margin: 0 18vw 0 0;
-              flex-shrink: 0;
-              max-width: 79vw;
-            }
+        @media (min-width: 1260px) {
+          p {
+            font-size: calc(80px + 80 * (100vw - 1400px) / 1400);
+            letter-spacing: -0.015em;
+            line-height: 1.05;
           }
+        }
 
-          @media (min-width: 1260px) {
-            p {
-              font-size: calc(80px + 80 * (100vw - 1400px) / 1400);
-              letter-spacing: -0.015em;
-              line-height: 1.05;
-            }
+        @media screen and (min-width: 1770px) {
+          p {
+            font-size: 118px;
+            letter-spacing: -0.015em;
+            line-height: 1.05;
           }
-
-          @media screen and (min-width: 1770px) {
-            p {
-              font-size: 118px;
-              letter-spacing: -0.015em;
-              line-height: 1.05;
-            }
-          }
-        `}
-      </style>
+        }
+      `}</style>
     </p>
   );
 };

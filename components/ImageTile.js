@@ -2,38 +2,43 @@
 /* eslint-disable @next/next/no-img-element */
 import { useEffect, useRef, useState } from "react";
 
-const ImageTileContainer = ({ children }) => {
+const ImageTileContainer = ({ alt, children, src }) => {
   const figureRef = useRef();
-  const [translateY, setTranslateY] = useState(false);
-
-  const calcTranslateY = (ratio, total) => {
-    return `translateY(calc(-${ratio} * ${total})`;
-  };
-
-  const buildThresholdList = () => {
-    let thresholds = [];
-    let numSteps = 20;
-
-    for (let i = 1.0; i <= numSteps; i++) {
-      let ratio = i / numSteps;
-      thresholds.push(ratio);
-    }
-
-    thresholds.push(0);
-    return thresholds;
-  };
+  const [scale, setScale] = useState(1.15);
+  const [opacity, setOpacity] = useState(0);
 
   useEffect(() => {
-    console.log("buildThresholdList:", buildThresholdList());
     const node = figureRef.current;
+    const threshholdList = [...Array(50).keys()].map((x) => x / 100);
+
+    let previousY = 0;
+    let previousRatio = 0;
+
     const callbackFunction = (entries) => {
       const [entry] = entries;
-      entry.isIntersecting &&
-        setTranslateY(calcTranslateY(entry.intersectionRatio, "9vh"));
+      const currentY = entry.boundingClientRect.y;
+      const currentRatio = entry.intersectionRatio;
+      const isIntersecting = entry.isIntersecting;
+
+      // Scrolling down/up
+      if (currentY < previousY) {
+        if (currentRatio > previousRatio && isIntersecting) {
+          setOpacity((1 / 0.5) * entry.intersectionRatio);
+          setScale(1.15 - (0.15 / 0.5) * entry.intersectionRatio);
+        }
+      } else if (currentY > previousY && isIntersecting) {
+        if (currentRatio < previousRatio) {
+          setOpacity((1 / 0.5) * entry.intersectionRatio);
+          setScale(1.15 - (0.15 / 0.5) * entry.intersectionRatio);
+        }
+      }
+
+      previousY = currentY;
+      previousRatio = currentRatio;
     };
+
     const options = {
-      // rootMargin: "-25% 0px 0px 0px",
-      threshold: buildThresholdList(),
+      threshold: threshholdList,
     };
     const observer = new IntersectionObserver(callbackFunction, options);
     node && observer.observe(node);
@@ -41,38 +46,37 @@ const ImageTileContainer = ({ children }) => {
     return () => {
       node && observer.unobserve(node);
     };
-  }, [figureRef]);
+  }, [figureRef, scale]);
 
   return (
-    <figure
-      ref={figureRef}
-      style={{
-        transform: translateY,
-      }}
-    >
+    <figure ref={figureRef}>
       {children}
-      <style jsx>
-        {`
-          figure {
-            width: 100%;
-            padding: 0;
-            margin: 0 0 7vh;
-            border: 0.5px solid var(--border);
-            border-radius: 10px;
-            overflow: hidden;
-            position: relative;
-          }
+      <img
+        src={`/images/${src}`}
+        alt={alt}
+        style={{
+          transform: `scale(${scale})`,
+          opacity: opacity,
+        }}
+      />
 
-          @media only screen and (min-width: 737px) {
-            figure {
-              width: max-content;
-              height: calc(100vh - 14vw);
-              margin: 0 9vh 0 0;
-              flex-shrink: 0;
-            }
-          }
-        `}
-      </style>
+      <style jsx>{`
+        figure {
+          width: 100%;
+          padding: 0;
+          margin: 0 0 7vh;
+          border: 0.5px solid var(--border);
+          border-radius: 10px;
+          overflow: hidden;
+          position: relative;
+          transition: transform ease-in;
+        }
+
+        img {
+          display: block;
+          width: 100%;
+        }
+      `}</style>
     </figure>
   );
 };
@@ -109,32 +113,9 @@ const ImageTileCaption = ({ caption }) => {
   );
 };
 
-const Image = ({ src, alt }) => {
-  return (
-    <>
-      <img src={`/images/${src}`} alt={alt} />
-
-      <style jsx>{`
-        img {
-          display: block;
-          width: 100%;
-        }
-
-        @media only screen and (min-width: 737px) {
-          img {
-            width: auto;
-            height: calc(100vh - 100px);
-          }
-        }
-      `}</style>
-    </>
-  );
-};
-
 export default function ImageTile({ alt, caption, src }) {
   return (
-    <ImageTileContainer>
-      <Image src={src} alt={alt} />
+    <ImageTileContainer alt={alt} src={src}>
       <ImageTileCaption caption={caption} />
     </ImageTileContainer>
   );
