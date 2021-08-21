@@ -49,7 +49,7 @@ export const VideoTile = ({ src }) => {
     },
     {
       start: "self",
-      duration: height * 0.42,
+      duration: "36vh",
       easing: "easeIn",
       properties: [{ startValue: 0, endValue: 1, property: "opacity" }],
     },
@@ -142,7 +142,7 @@ const Image = ({ alt, children, src }) => {
     },
     {
       start: "self",
-      duration: height * 0.42,
+      duration: "36vh",
       easing: "easeIn",
       properties: [{ startValue: 0, endValue: 1, property: "opacity" }],
     },
@@ -165,7 +165,7 @@ const Image = ({ alt, children, src }) => {
           max-width: 168.8rem;
           padding: 0;
           margin: 0 auto 12vh;
-          border-radius: 6px;
+          border-radius: 10px;
           overflow: hidden;
           position: relative;
           will-change: transform;
