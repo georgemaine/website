@@ -74,6 +74,55 @@ export const TitleTile = ({ title }) => {
   );
 };
 
+export const FirstTextTile = ({ children }) => {
+  return (
+    <p>
+      {children}
+      <style jsx>{`
+        p {
+          font-size: 2.8rem;
+          line-height: 1.08;
+          letter-spacing: -0.08rem;
+          font-weight: 700;
+          width: 86vw;
+          max-width: 168.8rem;
+          margin: 12vh auto;
+          transition: opacity 0.2s ease-out;
+        }
+
+        @media (max-width: 540px) {
+          p {
+            font-size: calc(28px + 28 * (100vw - 375px) / 375);
+          }
+        }
+
+        @media (min-width: 737px) {
+          p {
+            font-size: calc(42px + 42 * (100vw - 740px) / 740);
+            margin: 18vh auto;
+          }
+        }
+
+        @media (min-width: 1260px) {
+          p {
+            font-size: calc(80px + 80 * (100vw - 1400px) / 1400);
+            letter-spacing: -0.015em;
+            line-height: 1.05;
+          }
+        }
+
+        @media screen and (min-width: 1770px) {
+          p {
+            font-size: 118px;
+            letter-spacing: -0.015em;
+            line-height: 1.05;
+          }
+        }
+      `}</style>
+    </p>
+  );
+};
+
 export const TextTile = ({ margin = "0 auto 12vh", children }) => {
   const textRef = useRef();
   const [isVisible, setIsVisible] = useState(false);

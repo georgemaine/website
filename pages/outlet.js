@@ -1,11 +1,24 @@
 import GlobalNav from "../components/GlobalNav";
 import { FirstVideoTile, ImageTile, VideoTile } from "../components/MediaTile";
-import { InlineLink, TextTile, TitleTile } from "../components/TextTile";
+import {
+  FirstTextTile,
+  InlineLink,
+  TextTile,
+  TitleTile,
+} from "../components/TextTile";
 
 export default function Outlet() {
   return (
     <main>
       <GlobalNav />
+      <FirstTextTile>
+        “No one succeeds alone”
+        <br /> —{" "}
+        <InlineLink
+          href='https://twitter.com/MissGallo/status/1414947024387166216?s=20'
+          text='Lauren Gallo'
+        />
+      </FirstTextTile>
       <FirstVideoTile poster={"nas.jpeg"} src={"nas.m3u8"} />
       <TextTile margin={"-4.5vh auto 9vh"}>
         I know I’m a few weeks late - the new

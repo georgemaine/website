@@ -26,8 +26,9 @@ export const FirstVideoTile = ({ src }) => {
 
         @media (min-width: 737px) {
           video {
-            width: calc(50% + 3vw);
-            margin: 0 0 12vh 6vw;
+            width: calc(50% - 7vw);
+            margin: 0 auto 12vh 7vw;
+            max-width: calc(168.8rem / 2);
           }
         }
       `}</style>
@@ -81,8 +82,8 @@ export const VideoTile = ({ src }) => {
 
         @media (min-width: 737px) {
           div {
-            width: calc(50% + 3vw);
-            margin: 0 0 12vh 6vw;
+            width: calc(50% - 7vw);
+            margin: 0 0 12vh 7vw;
           }
         }
       `}</style>
