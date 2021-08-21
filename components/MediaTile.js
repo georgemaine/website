@@ -1,6 +1,5 @@
 /* eslint-disable react/display-name */
 /* eslint-disable @next/next/no-img-element */
-import { createRef, useEffect, useState } from "react";
 import Plx from "react-plx";
 
 export const FirstVideoTile = ({ src }) => {
@@ -37,9 +36,6 @@ export const FirstVideoTile = ({ src }) => {
 };
 
 export const VideoTile = ({ src }) => {
-  const ref = createRef();
-  const [height, setHeight] = useState();
-
   const ImageTileTransition = [
     {
       start: "self",
@@ -55,12 +51,8 @@ export const VideoTile = ({ src }) => {
     },
   ];
 
-  useEffect(() => {
-    const videoHeight = ref.current.clientHeight;
-    setHeight(videoHeight);
-  }, [ref]);
   return (
-    <div ref={ref}>
+    <div>
       <Plx parallaxData={ImageTileTransition} animateWhenNotInViewport>
         <video
           src={`/media/${src}`}
@@ -131,8 +123,6 @@ const ImageTileCaption = ({ caption }) => {
 };
 
 const Image = ({ alt, children, src }) => {
-  const ref = createRef();
-  const [height, setHeight] = useState();
   const ImageTileTransition = [
     {
       start: "self",
@@ -148,13 +138,8 @@ const Image = ({ alt, children, src }) => {
     },
   ];
 
-  useEffect(() => {
-    const videoHeight = ref.current.clientHeight;
-    setHeight(videoHeight);
-  }, [ref]);
-
   return (
-    <figure ref={ref}>
+    <figure>
       {children}
       <Plx parallaxData={ImageTileTransition} animateWhenNotInViewport>
         <img src={`/media/${src}`} alt={alt} />
