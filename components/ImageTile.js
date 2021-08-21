@@ -9,7 +9,7 @@ const ImageTileContainer = ({ alt, children, src }) => {
 
   useEffect(() => {
     const node = figureRef.current;
-    const threshholdList = [...Array(50).keys()].map((x) => x / 100);
+    const threshholdList = [...Array(75).keys()].map((x) => x / 100);
 
     let previousY = 0;
     let previousRatio = 0;
@@ -23,13 +23,13 @@ const ImageTileContainer = ({ alt, children, src }) => {
       // Scrolling down/up
       if (currentY < previousY) {
         if (currentRatio > previousRatio && isIntersecting) {
-          setOpacity((1 / 0.5) * entry.intersectionRatio);
-          setScale(1.15 - (0.15 / 0.5) * entry.intersectionRatio);
+          setOpacity((1 / 0.75) * entry.intersectionRatio * 2);
+          setScale(1.15 - (0.15 / 0.75) * entry.intersectionRatio);
         }
       } else if (currentY > previousY && isIntersecting) {
         if (currentRatio < previousRatio) {
-          setOpacity((1 / 0.5) * entry.intersectionRatio);
-          setScale(1.15 - (0.15 / 0.5) * entry.intersectionRatio);
+          setOpacity((1 / 0.75) * entry.intersectionRatio * 2);
+          setScale(1.15 - (0.15 / 0.75) * entry.intersectionRatio);
         }
       }
 
