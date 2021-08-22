@@ -34,21 +34,15 @@ const MediaWrapper = ({ children, width = "100%" }) => {
 };
 
 const Image = ({ src, alt }) => {
-  const ref = createRef();
-  const [mediaHeight, setMediaHeight] = useState();
-
-  useEffect(() => {
-    setMediaHeight(ref.current.clientHeight);
-  }, [mediaHeight, ref]);
-
   const MediaTileTransition = [
     {
       start: "self",
-      duration: "50vh",
+      duration: "47vh",
       easing: "easeOutQuad",
       properties: [
         {
-          startValue: -mediaHeight * 0.3,
+          startValue: -24,
+          unit: "%",
           endValue: 0,
           property: "translateY",
         },
@@ -70,22 +64,16 @@ const Image = ({ src, alt }) => {
     },
   ];
 
-  const PlxWrapper = ({ children }) => (
-    <Plx parallaxData={MediaTileTransition} animateWhenNotInViewport>
-      {children}
-    </Plx>
-  );
-
   return (
-    <PlxWrapper>
-      <img ref={ref} src={`/media/${src}`} alt={alt} />
+    <Plx parallaxData={MediaTileTransition} animateWhenNotInViewport>
+      <img src={`/media/${src}`} alt={alt} />
       <style jsx>{`
         img {
           display: block;
           width: 100%;
         }
       `}</style>
-    </PlxWrapper>
+    </Plx>
   );
 };
 
