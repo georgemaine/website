@@ -1,6 +1,6 @@
 /* eslint-disable react/display-name */
 /* eslint-disable @next/next/no-img-element */
-import { useLayoutEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Plx from "react-plx";
 
 const MediaWrapper = ({ children, width = "100%" }) => {
@@ -37,7 +37,7 @@ const Image = ({ src, alt }) => {
   const ref = useRef();
   const [mediaHeight, setMediaHeight] = useState();
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     const refHeight = ref.current.clientHeight;
     setMediaHeight(refHeight);
   }, [mediaHeight]);
