@@ -1,6 +1,5 @@
 /* eslint-disable react/display-name */
 /* eslint-disable @next/next/no-img-element */
-import { createRef, useEffect, useState } from "react";
 import Plx from "react-plx";
 
 const MediaWrapper = ({ children, width = "100%" }) => {
@@ -9,7 +8,7 @@ const MediaWrapper = ({ children, width = "100%" }) => {
       {children}
       <style jsx>{`
         figure {
-          width: 94vw;
+          width: 96vw;
           padding: 0;
           margin: 0 0 12vh;
           will-change: transform;
@@ -37,11 +36,11 @@ const Image = ({ src, alt }) => {
   const MediaTileTransition = [
     {
       start: "self",
-      duration: "47vh",
+      duration: "49vh",
       easing: "easeOutQuad",
       properties: [
         {
-          startValue: -24,
+          startValue: -30,
           unit: "%",
           endValue: 0,
           property: "translateY",
@@ -84,13 +83,14 @@ const MediaCaption = ({ caption }) => {
       <style jsx>{`
         figcaption {
           position: absolute;
-          padding: 18px;
+          padding: 3vw;
           top: 0;
           left: 0;
           right: 0;
           bottom: 0;
-          font-size: 2.6rem;
-          line-height: 1.23;
+          font-size: calc(28px + 28 * (100vw - 375px) / 375);
+          line-height: 1.08;
+          letter-spacing: -0.08rem;
           font-weight: 700;
           border-radius: 10px;
           background-color: var(--dark-border);

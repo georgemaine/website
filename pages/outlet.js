@@ -44,7 +44,7 @@ export default function Outlet() {
       </TextTile>
       <MediaTile
         src={"always-sunday.jpg"}
-        alt={"Always Sunday playlist on Apple Music"}
+        alt={"Always Sunday by Music"}
         width={"50%"}
       />
       <TextTile>
@@ -63,10 +63,7 @@ export default function Outlet() {
         src={"apple-watch-march-challenge.jpeg"}
         alt={"Apple watch. March challenge achievement"}
       />
-      <MediaTile
-        src={"hibiki.jpg"}
-        alt={"Hibiki Japanese harmony by Suntory Toki"}
-      />
+      <MediaTile src={"hibiki.jpg"} alt={"Hibiki whiskey by Suntory Toki"} />
       <TextTile>
         The lockdown was a perfect excuse for me to tinker with software,
         discover Amsterdam and buy plants — the urban jungle is real.
