@@ -1,6 +1,6 @@
 /* eslint-disable react/display-name */
 /* eslint-disable @next/next/no-img-element */
-import { useEffect, useRef, useState } from "react";
+import { createRef, useEffect, useState } from "react";
 import Plx from "react-plx";
 
 const MediaWrapper = ({ children, width = "100%" }) => {
@@ -34,12 +34,13 @@ const MediaWrapper = ({ children, width = "100%" }) => {
 };
 
 const Image = ({ src, alt }) => {
-  const ref = useRef();
+  const ref = createRef();
   const [mediaHeight, setMediaHeight] = useState();
 
   useEffect(() => {
+    ref.current;
     setMediaHeight(ref.current.clientHeight);
-  }, []);
+  }, [ref]);
 
   const MediaTileTransition = [
     {
