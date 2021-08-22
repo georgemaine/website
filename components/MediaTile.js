@@ -38,9 +38,8 @@ const Image = ({ src, alt }) => {
   const [mediaHeight, setMediaHeight] = useState();
 
   useEffect(() => {
-    const refHeight = ref.current.clientHeight;
-    setMediaHeight(refHeight);
-  }, [mediaHeight]);
+    setMediaHeight(ref.current.clientHeight);
+  }, []);
 
   const MediaTileTransition = [
     {
@@ -71,8 +70,14 @@ const Image = ({ src, alt }) => {
     },
   ];
 
-  return (
+  const PlxWrapper = ({ children }) => (
     <Plx parallaxData={MediaTileTransition} animateWhenNotInViewport>
+      {children}
+    </Plx>
+  );
+
+  return (
+    <PlxWrapper>
       <img ref={ref} src={`/media/${src}`} alt={alt} />
       <style jsx>{`
         img {
@@ -80,7 +85,7 @@ const Image = ({ src, alt }) => {
           width: 100%;
         }
       `}</style>
-    </Plx>
+    </PlxWrapper>
   );
 };
 
