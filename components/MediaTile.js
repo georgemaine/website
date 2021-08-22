@@ -38,9 +38,8 @@ const Image = ({ src, alt }) => {
   const [mediaHeight, setMediaHeight] = useState();
 
   useEffect(() => {
-    ref.current;
     setMediaHeight(ref.current.clientHeight);
-  }, [ref]);
+  }, [mediaHeight, ref]);
 
   const MediaTileTransition = [
     {
