@@ -1,79 +1,90 @@
 /* eslint-disable react/display-name */
 /* eslint-disable @next/next/no-img-element */
+import { useLayoutEffect, useRef, useState } from "react";
 import Plx from "react-plx";
 
-export const VideoTile = ({ src }) => {
-  const ImageTileTransition = [
-    {
-      start: "self",
-      duration: "150vh",
-      easing: "easeIn",
-      properties: [{ startValue: 24, endValue: -24, property: "translateY" }],
-    },
-  ];
+const MediaWrapper = ({ children, width = "100%" }) => {
   return (
-    <Plx parallaxData={ImageTileTransition} animateWhenNotInViewport>
-      <video
-        src={`/media/${src}`}
-        poster={`/media/${src}`}
-        playsInline
-        autoPlay
-        muted
-        loop
-        preload='auto'
-      >
-        <style jsx>{`
-          video {
-            width: 100%;
-            padding: 0;
-            margin: 0 0 12vh;
-            border: 0.5px solid var(--border);
-            border-radius: 6px;
-            overflow: hidden;
-            position: relative;
-          }
+    <figure>
+      {children}
+      <style jsx>{`
+        figure {
+          width: 94vw;
+          padding: 0;
+          margin: 0 0 12vh;
+          will-change: transform;
+          border-radius: 10px;
+          overflow: hidden;
+          position: relative;
+        }
 
-          @media (min-width: 737px) {
-            video {
-              width: 50%;
-            }
-          }
-        `}</style>
-      </video>
-    </Plx>
-  );
-};
+        @media (max-width: 736px) {
+          left: 50%;
+          transform: translateX(-50%);
+        }
 
-const ImageTileContainer = ({ children }) => {
-  const ImageTileTransition = [
-    {
-      start: "self",
-      duration: "150vh",
-      easing: "easeIn",
-      properties: [{ startValue: 24, endValue: -24, property: "translateY" }],
-    },
-  ];
-  return (
-    <Plx parallaxData={ImageTileTransition} animateWhenNotInViewport>
-      <figure>
-        {children}
-        <style jsx>{`
+        @media (min-width: 737px) {
           figure {
-            width: 100%;
-            padding: 0;
-            margin: 0 0 12vh;
-            border: 0.5px solid var(--border);
-            border-radius: 6px;
-            overflow: hidden;
-            position: relative;
+            width: ${width};
           }
-        `}</style>
-      </figure>
+        }
+      `}</style>
+    </figure>
+  );
+};
+
+const Image = ({ src, alt }) => {
+  const ref = useRef();
+  const [mediaHeight, setMediaHeight] = useState();
+
+  useLayoutEffect(() => {
+    const refHeight = ref.current.clientHeight;
+    setMediaHeight(refHeight);
+  }, [mediaHeight]);
+
+  const MediaTileTransition = [
+    {
+      start: "self",
+      duration: mediaHeight,
+      easing: "easeOutQuad",
+      properties: [
+        {
+          startValue: -mediaHeight * 0.3,
+          endValue: 0,
+          property: "translateY",
+        },
+      ],
+    },
+    {
+      start: "self",
+      startOffset: "-5vh",
+      endOffset: "25vh",
+      duration: mediaHeight,
+      easing: "easeOutQuad",
+      properties: [
+        {
+          startValue: 0,
+          endValue: 1,
+          property: "opacity",
+        },
+      ],
+    },
+  ];
+
+  return (
+    <Plx parallaxData={MediaTileTransition} animateWhenNotInViewport>
+      <img ref={ref} src={`/media/${src}`} alt={alt} />
+      <style jsx>{`
+        img {
+          display: block;
+          width: 100%;
+        }
+      `}</style>
     </Plx>
   );
 };
 
-const ImageTileCaption = ({ caption }) => {
+const MediaCaption = ({ caption }) => {
   return (
     <figcaption>
       {caption}
@@ -93,8 +104,7 @@ const ImageTileCaption = ({ caption }) => {
           color: var(--white);
           opacity: 0;
           display: flex;
-          align-items: flex-end;
-          transition: opacity 150ms ease-out;
+          transition: opacity 0.2s ease-out;
         }
 
         figcaption:hover {
@@ -105,25 +115,26 @@ const ImageTileCaption = ({ caption }) => {
   );
 };
 
-const Image = ({ src, alt }) => {
+export const MediaTile = ({ alt, src, width }) => {
   return (
-    <>
+    <MediaWrapper alt={alt} width={width}>
+      <Image src={src} alt={alt} />
+      <MediaCaption caption={alt} />
+    </MediaWrapper>
+  );
+};
+
+export const StaticMediaTile = ({ alt, src, width }) => {
+  return (
+    <MediaWrapper alt={alt} width={width}>
       <img src={`/media/${src}`} alt={alt} />
+      <MediaCaption caption={alt} />
       <style jsx>{`
         img {
           display: block;
           width: 100%;
         }
       `}</style>
-    </>
-  );
-};
-
-export const ImageTile = ({ alt, caption, src }) => {
-  return (
-    <ImageTileContainer alt={alt}>
-      <Image src={src} alt={alt} />
-      <ImageTileCaption caption={caption} />
-    </ImageTileContainer>
+    </MediaWrapper>
   );
 };

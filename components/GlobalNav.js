@@ -50,7 +50,7 @@ const GlobalNav = () => (
         font-weight: 400;
         letter-spacing: -0.014rem;
         margin: 0 1.2rem;
-        transition: opacity 150ms ease-out;
+        transition: opacity 0.2s ease-out;
         opacity: 0.8;
       }
 

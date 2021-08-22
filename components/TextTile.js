@@ -1,4 +1,52 @@
 import { useEffect, useRef, useState } from "react";
+
+export const StaticTextTile = ({ children, margin = "18vh 0 12vh" }) => {
+  return (
+    <p>
+      {children}
+      <style jsx>{`
+        p {
+          font-size: 2.8rem;
+          line-height: 1.08;
+          letter-spacing: -0.08rem;
+          font-weight: 700;
+          margin: ${margin};
+          transition: opacity 0.2s ease-out;
+        }
+
+        @media (max-width: 540px) {
+          p {
+            font-size: calc(28px + 28 * (100vw - 375px) / 375);
+          }
+        }
+
+        @media (min-width: 737px) {
+          p {
+            font-size: calc(42px + 42 * (100vw - 740px) / 740);
+            margin: 24vh 0 18vh;
+          }
+        }
+
+        @media (min-width: 1260px) {
+          p {
+            font-size: calc(80px + 80 * (100vw - 1400px) / 1400);
+            letter-spacing: -0.015em;
+            line-height: 1.05;
+          }
+        }
+
+        @media screen and (min-width: 1770px) {
+          p {
+            font-size: 118px;
+            letter-spacing: -0.015em;
+            line-height: 1.05;
+          }
+        }
+      `}</style>
+    </p>
+  );
+};
+
 export const TitleTile = ({ title }) => {
   const titleRef = useRef();
   const [isVisible, setIsVisible] = useState(false);
@@ -10,7 +58,7 @@ export const TitleTile = ({ title }) => {
 
   useEffect(() => {
     const options = {
-      rootMargin: "-45% 0 0",
+      rootMargin: "-35% 0 0",
       threshold: 0.1,
     };
     const node = titleRef.current;
@@ -84,7 +132,7 @@ export const TextTile = ({ margin = "0 0 12vh", children }) => {
   useEffect(() => {
     const node = textRef.current;
     const options = {
-      rootMargin: "-45% 0 0",
+      rootMargin: "-35% 0 0",
       threshold: 0.1,
     };
 

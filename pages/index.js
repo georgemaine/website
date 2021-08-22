@@ -86,7 +86,7 @@ export default function Components() {
           <a className={styles.textlink}>Text link</a>
         </Link>
         <figure
-          className={styles.imageTile}
+          className={styles.MediaTile}
           style={{
             marginTop: 12,
           }}

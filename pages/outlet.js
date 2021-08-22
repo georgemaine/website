@@ -1,27 +1,36 @@
 import GlobalNav from "../components/GlobalNav";
-import { ImageTile, VideoTile } from "../components/MediaTile";
-import { InlineLink, TextTile, TitleTile } from "../components/TextTile";
+import { MediaTile, StaticMediaTile } from "../components/MediaTile";
+import {
+  InlineLink,
+  StaticTextTile,
+  TextTile,
+  TitleTile,
+} from "../components/TextTile";
 
 export default function Outlet() {
   return (
     <main>
       <GlobalNav />
-      <VideoTile poster={"nas.jpeg"} src={"nas.m3u8"} />
-      <TextTile margin={"-4.5vh 0 9vh"}>
-        I know I’m a few weeks late - the new
+      <StaticTextTile>
+        “Noone succeeds alone”
+        <br /> — Lauren Gallo
+      </StaticTextTile>
+      <StaticMediaTile
+        src={"nas.jpeg"}
+        alt={"King's Disease II by Nas"}
+        width={"50%"}
+      />
+      <TextTile>
+        The more I listen to{" "}
         <InlineLink
           href={
             "https://music.apple.com/nl/album/kings-disease-ii/1578569385?l=en"
           }
-          text={" Nas album "}
+          text={"Nas's new Album"}
         />{" "}
-        is 🔥
+        the more I like it 🔥
       </TextTile>
-      <ImageTile
-        src={"plant.jpeg"}
-        alt={"Phyllanthus Mirabilis."}
-        caption={"Phyllanthus Mirabilis"}
-      />
+      <MediaTile src={"plant.jpeg"} alt={"Phyllanthus Mirabilis."} />
       <TextTile>
         Meet Phyllanthus Mirabilis. During dusk, the leaves fold together in
         pairs like a butterfly — honestly, I can’t 😍.{" "}
@@ -33,8 +42,12 @@ export default function Outlet() {
           text=' Avalonamsterdam'
         />
       </TextTile>
-      <VideoTile poster={"always-sunday.jpg"} src={"always-sunday.m3u8"} />
-      <TextTile margin={"-4.5vh 0 9vh"}>
+      <MediaTile
+        src={"always-sunday.jpg"}
+        alt={"Always Sunday playlist on Apple Music"}
+        width={"50%"}
+      />
+      <TextTile>
         Liking the low-key vibes I’m getting from playing{" "}
         <InlineLink
           href={
@@ -46,15 +59,13 @@ export default function Outlet() {
       </TextTile>
 
       <TitleTile title={"Summer"} />
-      <ImageTile
+      <MediaTile
         src={"apple-watch-march-challenge.jpeg"}
-        alt={"Apple watch march challenge achievement"}
-        caption={"Apple watch. March challenge achievement"}
+        alt={"Apple watch. March challenge achievement"}
       />
-      <ImageTile
+      <MediaTile
         src={"hibiki.jpg"}
-        alt={"Hibiki"}
-        caption={"Hibiki Japanese harmony by Suntory Tori"}
+        alt={"Hibiki Japanese harmony by Suntory Toki"}
       />
       <TextTile>
         The lockdown was a perfect excuse for me to tinker with software,
