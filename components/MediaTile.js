@@ -44,7 +44,7 @@ const Image = ({ src, alt }) => {
   const MediaTileTransition = [
     {
       start: "self",
-      duration: mediaHeight,
+      duration: "50vh",
       easing: "easeOutQuad",
       properties: [
         {
@@ -58,7 +58,7 @@ const Image = ({ src, alt }) => {
       start: "self",
       startOffset: "-5vh",
       endOffset: "25vh",
-      duration: mediaHeight,
+      duration: "50vh",
       easing: "easeOutQuad",
       properties: [
         {
