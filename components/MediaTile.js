@@ -2,9 +2,9 @@
 /* eslint-disable @next/next/no-img-element */
 import Plx from "react-plx";
 
-const MediaWrapper = ({ children, width = "100%" }) => {
+const MediaWrapper = ({ children, width = "100%", props }) => {
   return (
-    <figure>
+    <figure {...props}>
       {children}
       <style jsx>{`
         figure {
@@ -117,9 +117,9 @@ export const MediaTile = ({ alt, src, width }) => {
   );
 };
 
-export const StaticMediaTile = ({ alt, src, width }) => {
+export const StaticMediaTile = ({ alt, src, width, props }) => {
   return (
-    <MediaWrapper alt={alt} width={width}>
+    <MediaWrapper alt={alt} width={width} props={props}>
       <img src={`/media/${src}`} alt={alt} />
       <MediaCaption caption={alt} />
       <style jsx>{`

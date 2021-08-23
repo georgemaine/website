@@ -61,9 +61,9 @@ export default function Outlet() {
       <TitleTile title={"Summer"} />
       <MediaTile
         src={"apple-watch-march-challenge.jpeg"}
-        alt={"Apple watch. March challenge achievement"}
+        alt={"Completed Apple's March Challenge"}
       />
-      <MediaTile src={"hibiki.jpg"} alt={"Hibiki whiskey by Suntory Toki"} />
+      <MediaTile src={"hibiki.jpg"} alt={"Hibiki by Suntory Toki"} />
       <TextTile>
         The lockdown was a perfect excuse for me to tinker with software,
         discover Amsterdam and buy plants — the urban jungle is real.

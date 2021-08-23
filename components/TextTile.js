@@ -132,7 +132,6 @@ export const TextTile = ({ margin = "0 0 12vh", children }) => {
   useEffect(() => {
     const node = textRef.current;
     const options = {
-      rootMargin: "-35% 0 0",
       threshold: 0.1,
     };
 
@@ -150,17 +149,23 @@ export const TextTile = ({ margin = "0 0 12vh", children }) => {
       style={{
         opacity: isVisible ? 1 : 0,
       }}
+      className={isVisible && "is-animated"}
     >
       {children}
       <style jsx>
         {`
+          p.is-animated {
+            transform: translateY(0);
+          }
           p {
             font-size: 2.8rem;
             line-height: 1.08;
             letter-spacing: -0.08rem;
             font-weight: 700;
             margin: ${margin};
-            transition: opacity 0.2s ease-out;
+            transform: translateY(120px);
+            transition: opacity 0.6s linear,
+              transform 0.6s cubic-bezier(0.26, 0.67, 0.48, 0.91);
           }
 
           @media (max-width: 540px) {
@@ -172,7 +177,7 @@ export const TextTile = ({ margin = "0 0 12vh", children }) => {
           @media (min-width: 737px) {
             p {
               font-size: calc(42px + 42 * (100vw - 740px) / 740);
-              margin: 0 0 18vh;
+              margin: 0 0 15vh;
             }
           }
 
