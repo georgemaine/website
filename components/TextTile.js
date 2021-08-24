@@ -97,18 +97,18 @@ export const TitleTile = ({ title }) => {
 
           @media (min-width: 737px) {
             h1 {
-              font-size: calc(80px + 80 * (100vw - 740px) / 740);
+              font-size: calc(56px + 56 * (100vw - 740px) / 740);
               flex-shrink: 0;
             }
           }
 
-          @media (min-width: 1260px) {
-            h1 {
-              font-size: 118px;
-              letter-spacing: -0.015em;
-              line-height: 1.05;
-            }
-          }
+          // @media (min-width: 1260px) {
+          //   h1 {
+          //     font-size: 118px;
+          //     letter-spacing: -0.015em;
+          //     line-height: 1.05;
+          //   }
+          // }
           @media screen and (min-width: 1770px) {
             h1 {
               font-size: 180px;
@@ -120,22 +120,52 @@ export const TitleTile = ({ title }) => {
   );
 };
 
-export const TextTile = ({ margin = "0 0 12vh", children }) => {
+export const TextTile = ({ margin = "0 0 6vh", children }) => {
   const textRef = useRef();
   const [isVisible, setIsVisible] = useState(false);
 
-  const callbackFunction = (entries) => {
-    const [entry] = entries;
-    setIsVisible(entry.isIntersecting);
-  };
-
   useEffect(() => {
     const node = textRef.current;
-    const options = {
-      threshold: 0.1,
+
+    const thresholdArray = (steps) =>
+      Array(steps + 1)
+        .fill(0)
+        .map((_, index) => index / steps || 0);
+
+    let previousY = 0;
+    let previousRatio = 0;
+
+    const callbackFunction = (entries) => {
+      const [entry] = entries;
+      const currentY = entry.boundingClientRect.y;
+      const currentRatio = entry.intersectionRatio;
+      const isIntersecting = entry.isIntersecting;
+
+      isIntersecting && setIsVisible(true);
+
+      // Scrolling down/up
+      if (currentY < previousY) {
+        if (currentRatio > previousRatio && isIntersecting) {
+          setIsVisible(true);
+        } else {
+          console.log("Scrolling down leave");
+        }
+      } else if (currentY > previousY && isIntersecting) {
+        if (currentRatio < previousRatio) {
+          setIsVisible(false);
+          console.log("Scrolling up leave");
+        } else {
+          console.log("Scrolling up enter");
+        }
+      }
+
+      previousY = currentY;
+      previousRatio = currentRatio;
     };
 
-    const observer = new IntersectionObserver(callbackFunction, options);
+    const observer = new IntersectionObserver(callbackFunction, {
+      threshold: thresholdArray(2),
+    });
     node && observer.observe(node);
 
     return () => {
@@ -148,56 +178,51 @@ export const TextTile = ({ margin = "0 0 12vh", children }) => {
       ref={textRef}
       style={{
         opacity: isVisible ? 1 : 0,
+        transform: isVisible ? "translateY(0px)" : "translateY(120px)",
       }}
-      className={isVisible && "is-animated"}
     >
       {children}
-      <style jsx>
-        {`
-          p.is-animated {
-            transform: translateY(0);
-          }
+      <style jsx>{`
+        p {
+          font-size: 2.8rem;
+          line-height: 1.08;
+          letter-spacing: -0.08rem;
+          font-weight: 700;
+          margin: ${margin};
+
+          transition: opacity 0.6s linear,
+            transform 0.6s cubic-bezier(0.26, 0.67, 0.48, 0.91);
+        }
+
+        @media (max-width: 540px) {
           p {
-            font-size: 2.8rem;
-            line-height: 1.08;
-            letter-spacing: -0.08rem;
-            font-weight: 700;
-            margin: ${margin};
-            transform: translateY(120px);
-            transition: opacity 0.6s linear,
-              transform 0.6s cubic-bezier(0.26, 0.67, 0.48, 0.91);
+            font-size: calc(28px + 28 * (100vw - 375px) / 375);
           }
+        }
 
-          @media (max-width: 540px) {
-            p {
-              font-size: calc(28px + 28 * (100vw - 375px) / 375);
-            }
+        @media (min-width: 737px) {
+          p {
+            font-size: calc(42px + 42 * (100vw - 740px) / 740);
+            margin: 0 0 10vh;
           }
+        }
 
-          @media (min-width: 737px) {
-            p {
-              font-size: calc(42px + 42 * (100vw - 740px) / 740);
-              margin: 0 0 15vh;
-            }
+        @media (min-width: 1260px) {
+          p {
+            font-size: calc(56px + 56 * (100vw - 1400px) / 1400);
+            letter-spacing: -0.015em;
+            line-height: 1.05;
           }
+        }
 
-          @media (min-width: 1260px) {
-            p {
-              font-size: calc(80px + 80 * (100vw - 1400px) / 1400);
-              letter-spacing: -0.015em;
-              line-height: 1.05;
-            }
-          }
-
-          @media screen and (min-width: 1770px) {
-            p {
-              font-size: 118px;
-              letter-spacing: -0.015em;
-              line-height: 1.05;
-            }
-          }
-        `}
-      </style>
+        // @media screen and (min-width: 1770px) {
+        //   p {
+        //     font-size: 118px;
+        //     letter-spacing: -0.015em;
+        //     line-height: 1.05;
+        //   }
+        // }
+      `}</style>
     </p>
   );
 };

@@ -13,21 +13,23 @@ export default function GetInTouch() {
           border: ".5px solid var(--dark-border)",
         }}
       />
-      <TextTile margin={"-9vh 0 12vh"}>
-        Hello, world — I love tinkering with software. Ever since I was a young
-        kid, I was fascinated with how things worked.
+      <TextTile>Hello, world — I love tinkering with software.</TextTile>
+      <TextTile>
+        Ever since I was a young kid, I was fascinated with how things worked.
       </TextTile>
       <TextTile>
-        Can I remake it differently? Would people prefer that better? The part I
-        hated was showing my version to people — Go figure.
+        Can I remake it differently? Would people prefer that better?
       </TextTile>
       <TextTile>
-        Currently, I’m a product designer at Pitch. I love work together with
-        incredible people. It made me a better person and taught me so much.
+        The part I hated was showing my version to people — Go figure.
       </TextTile>
       <TextTile>
-        And, I still love learning from people and hearing their stories. So if
-        you love that too, reach out via{" "}
+        Currently, I’m a product designer at Pitch. I work together with
+        incredible people who made me a better person and taught me so much.
+      </TextTile>
+      <TextTile>
+        And, I still love learning from people their stories. So if you love
+        that too, reach out via{" "}
         <InlineLink
           href={
             "mailto:georgemaine.lourens@gmail.com?subject=Hello%20%F0%9F%91%8B"
