@@ -1,15 +1,13 @@
 import GlobalNav from "../components/GlobalNav";
 import {
-  MediaTile,
-  StaticMediaTile,
-  StickyAlbumMediaTile,
   StickyMediaTile,
-} from "../components/MediaTile";
+  StickyMediaTileText,
+} from "../components/StickyMediaTile";
 import {
   InlineLink,
   StaticTextTile,
-  TextTile,
   TitleTile,
+  TextTile,
 } from "../components/TextTile";
 
 export default function Outlet() {
@@ -20,48 +18,57 @@ export default function Outlet() {
         “Noone succeeds alone”
         <br /> — Lauren Gallo
       </StaticTextTile>
-      {/* <MediaTile src={"plant.jpeg"} alt={"Phyllanthus Mirabilis."} /> */}
-      <StickyMediaTile src={"plant.jpeg"} alt={"Phyllanthus Mirabilis."} />
-      <StickyAlbumMediaTile />
-      {/* <StaticMediaTile
+      <StickyMediaTile
         src={"nas.jpeg"}
         alt={"King's Disease II by Nas"}
         width={"50%"}
-      />
-      <TextTile>
-        The more I listen to{" "}
-        <InlineLink
-          href={
-            "https://music.apple.com/nl/album/kings-disease-ii/1578569385?l=en"
-          }
-          text={"Nas's new Album"}
-        />{" "}
-        the more I like it 🔥
-      </TextTile>
- 
- 
-      <MediaTile
+      >
+        <StickyMediaTileText>
+          The more I listen to Nas’s{" "}
+          <InlineLink
+            href={
+              "https://music.apple.com/nl/album/kings-disease-ii/1578569385?l=en"
+            }
+            text={"new Album"}
+          />
+          , the more I like it 🔥
+        </StickyMediaTileText>
+      </StickyMediaTile>
+      <StickyMediaTile src={"plant.jpeg"} alt={"Phyllanthus Mirabilis."}>
+        <StickyMediaTileText>
+          Meet Phyllanthus Mirabilis. During dusk, the leaves fold together in
+          pairs like a butterfly — honestly, I can’t 😍.
+        </StickyMediaTileText>
+        <StickyMediaTileText>
+          It’s from a cute antique and plants shop called&nbsp;
+          <InlineLink
+            href='https://www.instagram.com/avalonamsterdam/'
+            text=' Avalonamsterdam'
+          />
+        </StickyMediaTileText>
+      </StickyMediaTile>
+      <StickyMediaTile
         src={"always-sunday.jpg"}
         alt={"Always Sunday by Music"}
         width={"50%"}
-      />
-      <TextTile>
-        Liking the low-key vibes I’m getting from playing{" "}
-        <InlineLink
-          href={
-            "https://music.apple.com/nl/playlist/always-sunday/pl.401b996cbcda4861ae8da67b8cd3ff32?l=en"
-          }
-          text={"Always Sunday"}
-        />{" "}
-        in the background.
-      </TextTile>
-
+      >
+        <StickyMediaTileText>
+          Liking the low-key vibes I’m getting from playing{" "}
+          <InlineLink
+            href={
+              "https://music.apple.com/nl/playlist/always-sunday/pl.401b996cbcda4861ae8da67b8cd3ff32?l=en"
+            }
+            text={"Always Sunday"}
+          />{" "}
+          in the background.
+        </StickyMediaTileText>
+      </StickyMediaTile>
       <TitleTile title={"Summer"} />
-      <MediaTile
+      <StickyMediaTile
         src={"apple-watch-march-challenge.jpeg"}
         alt={"Completed Apple's March Challenge"}
       />
-      <MediaTile src={"hibiki.jpg"} alt={"Hibiki by Suntory Toki"} />
+      <StickyMediaTile src={"hibiki.jpg"} alt={"Hibiki by Suntory Toki"} />
       <TextTile>
         The lockdown was a perfect excuse for me to tinker with software,
         discover Amsterdam and buy plants — the urban jungle is real.
@@ -73,7 +80,9 @@ export default function Outlet() {
       <TextTile>
         Outlet is a real-time feed of my energy and talents — posted
         chronologically. Hopefully, one day you’ll discover your outlet too.
-      </TextTile> */}
+      </TextTile>
+      {/*
+       */}
       <TitleTile title={"Spring"} />
       <TitleTile title={"2021"} />
       <style jsx>{`
