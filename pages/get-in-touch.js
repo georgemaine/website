@@ -6,13 +6,7 @@ export default function GetInTouch() {
   return (
     <main>
       <GlobalNav />
-      <StaticMediaTile
-        src={"georgemaine.jpg"}
-        alt={"Georgemaine"}
-        style={{
-          border: ".5px solid var(--dark-border)",
-        }}
-      />
+      <StaticMediaTile src={"georgemaine.jpeg"} alt={"Georgemaine"} />
       <TextTile>Hello, world — I love tinkering with software.</TextTile>
       <TextTile>
         Ever since I was a young kid, I was fascinated with how things worked.

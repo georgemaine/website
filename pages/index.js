@@ -1,7 +1,6 @@
-/* eslint-disable @next/next/no-img-element */
-import styles from "../components/styles.module.css";
-import Link from "next/link";
 import GlobalNav from "../components/GlobalNav";
+import { StickyMediaTile } from "../components/StickyMediaTile";
+import { InlineLink, TextTile, TitleTile } from "../components/TextTile";
 
 export default function Components() {
   return (
@@ -26,30 +25,16 @@ export default function Components() {
         >
           Text styles
         </p>
-        <h1
-          className={styles.largeTitle}
-          style={{
-            margin: "0 0 12px",
-          }}
-        >
-          Large title
-        </h1>
-        <p
-          className={styles.largeBody}
-          style={{
-            margin: "0 0 12px",
-          }}
-        >
-          Large body
-        </p>
-        <h3
-          className={styles.headline}
-          style={{
-            margin: "0 0 12px",
-          }}
-        >
-          Headline
-        </h3>
+        <TitleTile title={"Title"} />
+        <TextTile>Text</TextTile>
+        <TextTile>
+          <InlineLink
+            href={
+              "https://music.apple.com/nl/playlist/always-sunday/pl.401b996cbcda4861ae8da67b8cd3ff32?l=en"
+            }
+            text={"Inline Link"}
+          />
+        </TextTile>
       </main>
       <main
         style={{
@@ -71,39 +56,11 @@ export default function Components() {
         >
           Interactive elements
         </p>
-        <p
-          className={styles.largeBody}
-          style={{
-            margin: "0 0 12px",
-          }}
-        >
-          <Link href='/'>
-            <a className={styles.largeTextLink}>Large text link</a>
-          </Link>
-        </p>
 
-        <Link href='/'>
-          <a className={styles.textlink}>Text link</a>
-        </Link>
-        <figure
-          className={styles.MediaTile}
-          style={{
-            marginTop: 12,
-          }}
-        >
-          <img
-            src={"/media/plant.jpeg"}
-            alt='Phyllanthus Mirabilis'
-            style={{
-              width: "auto",
-              height: "80vh",
-              maxHeight: "859px",
-            }}
-          />
-          <figcaption className={styles.largeBody}>
-            Phyllanthus Mirabilis. 2021.
-          </figcaption>
-        </figure>
+        <StickyMediaTile
+          src={"apple-watch-march-challenge.jpeg"}
+          alt={"Completed Apple's March Challenge"}
+        />
       </main>
 
       <GlobalNav />

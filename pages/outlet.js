@@ -74,8 +74,8 @@ export default function Outlet() {
         discover Amsterdam and buy plants — the urban jungle is real.
       </TextTile>
       <TextTile>
-        Inward discussions helped me see that these habits are expressions of my
-        energy and talent — an outlet. So I claimed this space and name.
+        Inward discussions helped me see that these habits are just expressions
+        of my energy and talent — an outlet.
       </TextTile>
       <TextTile>
         Outlet is a real-time feed of my energy and talents — posted
