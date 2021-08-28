@@ -77,7 +77,7 @@ const GlobalNav = () => (
         height: 4.4rem;
         margin: 0;
         padding: 0;
-        background: rgba(250, 250, 250, 0.9);
+        background: rgba(242, 242, 242, 0.9);
         backdrop-filter: saturate(180%) blur(20px);
         z-index: 9999;
       }

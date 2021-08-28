@@ -1,5 +1,10 @@
 import GlobalNav from "../components/GlobalNav";
-import { MediaTile, StaticMediaTile } from "../components/MediaTile";
+import {
+  MediaTile,
+  StaticMediaTile,
+  StickyAlbumMediaTile,
+  StickyMediaTile,
+} from "../components/MediaTile";
 import {
   InlineLink,
   StaticTextTile,
@@ -15,7 +20,10 @@ export default function Outlet() {
         “Noone succeeds alone”
         <br /> — Lauren Gallo
       </StaticTextTile>
-      <StaticMediaTile
+      {/* <MediaTile src={"plant.jpeg"} alt={"Phyllanthus Mirabilis."} /> */}
+      <StickyMediaTile src={"plant.jpeg"} alt={"Phyllanthus Mirabilis."} />
+      <StickyAlbumMediaTile />
+      {/* <StaticMediaTile
         src={"nas.jpeg"}
         alt={"King's Disease II by Nas"}
         width={"50%"}
@@ -30,18 +38,8 @@ export default function Outlet() {
         />{" "}
         the more I like it 🔥
       </TextTile>
-      <MediaTile src={"plant.jpeg"} alt={"Phyllanthus Mirabilis."} />
-      <TextTile>
-        Meet Phyllanthus Mirabilis. During dusk, the leaves fold together in
-        pairs like a butterfly — honestly, I can’t 😍.{" "}
-      </TextTile>
-      <TextTile>
-        Purchased in a cute antique, gifts, and plants shop called
-        <InlineLink
-          href='https://www.instagram.com/avalonamsterdam/'
-          text=' Avalonamsterdam'
-        />
-      </TextTile>
+ 
+ 
       <MediaTile
         src={"always-sunday.jpg"}
         alt={"Always Sunday by Music"}
@@ -75,7 +73,7 @@ export default function Outlet() {
       <TextTile>
         Outlet is a real-time feed of my energy and talents — posted
         chronologically. Hopefully, one day you’ll discover your outlet too.
-      </TextTile>
+      </TextTile> */}
       <TitleTile title={"Spring"} />
       <TitleTile title={"2021"} />
       <style jsx>{`

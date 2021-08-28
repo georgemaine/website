@@ -203,7 +203,7 @@ export const TextTile = ({ margin = "0 0 6vh", children }) => {
         @media (min-width: 737px) {
           p {
             font-size: calc(42px + 42 * (100vw - 740px) / 740);
-            margin: 0 0 10vh;
+            margin: calc(56px + 56 * (100vw - 1400px) / 1400) 0 10vh;
           }
         }
 
