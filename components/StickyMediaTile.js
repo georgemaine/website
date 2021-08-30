@@ -2,18 +2,18 @@
 
 import Plx from "react-plx";
 
-const StickyMediaTileWrapper = ({ children }) => {
+const StickyMediaTileWrapper = ({ children, margin = "0 0 200px" }) => {
   return (
     <div>
       {children}
       <style jsx>{`
         div {
-          margin: 0 0 18vh;
+          margin: 0 0 40px;
         }
 
         @media (min-width: 737px) {
           div {
-            margin: 0 0 27vh;
+            margin: ${margin};
           }
         }
       `}</style>
@@ -118,27 +118,32 @@ const StickyMediaImage = ({ src, alt }) => {
   );
 };
 
+const anim = [
+  {
+    start: "t - 100vh - 130px",
+    end: "t - 100vh + 270px",
+    easeFunction: "easeOutSin",
+    opacity: [0, 1],
+    y: ["-200px", 0],
+    ease: "1",
+    disabledWhen: ["static-layout"],
+  },
+];
+
 export const StickyMediaTileText = ({ children }) => {
   const StickyMediaTileTransition = [
     {
       start: "self",
       duration: ".sticky-media-tile-text",
-      easing: "easeOutQuad",
+      easing: "easeOutSin",
+      // startOffset: -130,
+      endOffset: 270,
       properties: [
         {
-          startValue: -72,
-          unit: "%",
+          startValue: -200,
           endValue: 0,
           property: "translateY",
         },
-      ],
-    },
-    {
-      start: "self",
-      startOffset: "35px",
-      duration: ".sticky-media-tile-text",
-      easing: "easeOutQuad",
-      properties: [
         {
           startValue: 0,
           endValue: 1,
@@ -172,14 +177,14 @@ export const StickyMediaTileText = ({ children }) => {
           @media (max-width: 540px) {
             p {
               font-size: calc(28px + 28 * (100vw - 375px) / 375);
-              padding: calc(28px + 28 * (100vw - 375px) / 375) 0 0;
+              padding: 6vh 0 0;
             }
           }
 
           @media (min-width: 737px) {
             p {
               font-size: calc(42px + 42 * (100vw - 740px) / 740);
-              padding: calc(42px + 42 * (100vw - 740px) / 740) 0 0;
+              padding: 95px 0 0;
             }
           }
 
@@ -188,7 +193,6 @@ export const StickyMediaTileText = ({ children }) => {
               font-size: calc(56px + 56 * (100vw - 1400px) / 1400);
               letter-spacing: -0.015rem;
               line-height: 1.05;
-              padding: calc(56px + 56 * (100vw - 1400px) / 1400) 0 0;
             }
           }
         `}</style>
@@ -197,9 +201,9 @@ export const StickyMediaTileText = ({ children }) => {
   );
 };
 
-export const StickyMediaTile = ({ alt, children, src, width }) => {
+export const StickyMediaTile = ({ alt, children, margin, src, width }) => {
   return (
-    <StickyMediaTileWrapper>
+    <StickyMediaTileWrapper margin={margin}>
       <StickyMediaWrapper width={width}>
         <StickyMediaImage src={src} alt={alt} />
         <StickyMediaCaption caption={alt} />

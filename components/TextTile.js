@@ -124,7 +124,7 @@ export const TitleTile = ({ title }) => {
           h1 {
             font-size: calc(56px + 56 * (100vw - 740px) / 740);
             flex-shrink: 0;
-            margin: 27vh 0;
+            margin: 200px 0;
           }
         }
 

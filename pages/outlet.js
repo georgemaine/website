@@ -14,10 +14,19 @@ export default function Outlet() {
   return (
     <main>
       <GlobalNav />
-      <StaticTextTile>
-        “Noone succeeds alone”
-        <br /> — Lauren Gallo
-      </StaticTextTile>
+      <StickyMediaTile
+        src={"hortus-1.jpeg"}
+        alt={"Hibiki by Suntory Toki"}
+        margin={"0 0 95px"}
+      />
+      <StickyMediaTile
+        src={"hortus-3.jpeg"}
+        alt={"Hibiki by Suntory Toki"}
+        width={"50%"}
+        margin={"0 0 95px"}
+      />
+      <StickyMediaTile src={"hortus-2.jpeg"} alt={"Hibiki by Suntory Toki"} />
+
       <StickyMediaTile
         src={"nas.jpeg"}
         alt={"King's Disease II by Nas"}

@@ -12,13 +12,12 @@ const MediaWrapper = ({ children, width = "100%", props }) => {
         figure {
           width: 96vw;
           padding: 0;
-          /* margin: 0 0 12vh; */
           will-change: transform;
           border-radius: 10px;
           overflow: hidden;
           position: relative;
           z-index: 1000;
-          margin: 0;
+          margin: 0 0 150px;
         }
 
         @media (max-width: 736px) {
@@ -29,6 +28,7 @@ const MediaWrapper = ({ children, width = "100%", props }) => {
         @media (min-width: 737px) {
           figure {
             width: ${width};
+            margin: 0 0 200px;
           }
         }
       `}</style>
