@@ -1,5 +1,4 @@
-/* eslint-disable @next/next/no-img-element */
-
+import Image from "next/image";
 import Plx from "react-plx";
 
 const StickyMediaTileWrapper = ({ children, margin = "0 0 200px" }) => {
@@ -104,31 +103,18 @@ const StickyMediaCaption = ({ caption }) => {
   );
 };
 
-const StickyMediaImage = ({ src, alt }) => {
+const StickyMediaImage = ({ src, alt, imageWidth, imageHeight }) => {
   return (
-    <>
-      <img src={`/media/${src}`} alt={alt} />
-      <style jsx>{`
-        img {
-          display: block;
-          width: 100%;
-        }
-      `}</style>
-    </>
+    <Image
+      src={src}
+      alt={alt}
+      layout='responsive'
+      // placeholder='blur'
+      width={imageWidth}
+      height={imageHeight}
+    />
   );
 };
-
-const anim = [
-  {
-    start: "t - 100vh - 130px",
-    end: "t - 100vh + 270px",
-    easeFunction: "easeOutSin",
-    opacity: [0, 1],
-    y: ["-200px", 0],
-    ease: "1",
-    disabledWhen: ["static-layout"],
-  },
-];
 
 export const StickyMediaTileText = ({ children }) => {
   const StickyMediaTileTransition = [
@@ -201,11 +187,24 @@ export const StickyMediaTileText = ({ children }) => {
   );
 };
 
-export const StickyMediaTile = ({ alt, children, margin, src, width }) => {
+export const StickyMediaTile = ({
+  alt,
+  children,
+  margin,
+  src,
+  width,
+  imageWidth,
+  imageHeight,
+}) => {
   return (
     <StickyMediaTileWrapper margin={margin}>
       <StickyMediaWrapper width={width}>
-        <StickyMediaImage src={src} alt={alt} />
+        <StickyMediaImage
+          src={src}
+          alt={alt}
+          imageWidth={imageWidth}
+          imageHeight={imageHeight}
+        />
         <StickyMediaCaption caption={alt} />
       </StickyMediaWrapper>
       {children}

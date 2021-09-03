@@ -57,10 +57,10 @@ export default function Components() {
           Interactive elements
         </p>
 
-        <StickyMediaTile
+        {/* <StickyMediaTile
           src={"apple-watch-march-challenge.jpeg"}
           alt={"Completed Apple's March Challenge"}
-        />
+        /> */}
       </main>
 
       <GlobalNav />
