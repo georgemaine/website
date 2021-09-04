@@ -10,7 +10,7 @@ const MediaWrapper = ({ children, width = "100%", props }) => {
       {children}
       <style jsx>{`
         figure {
-          width: 96vw;
+          width: 100%;
           padding: 0;
           will-change: transform;
           border-radius: 10px;

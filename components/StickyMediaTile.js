@@ -26,7 +26,7 @@ const StickyMediaWrapper = ({ children, width = "100%" }) => {
       {children}
       <style jsx>{`
         figure {
-          width: 96vw;
+          width: 100%;
           padding: 0;
           will-change: transform;
           border-radius: 10px;
@@ -34,11 +34,6 @@ const StickyMediaWrapper = ({ children, width = "100%" }) => {
           position: relative;
           z-index: 1000;
           margin: 0;
-        }
-
-        @media (max-width: 736px) {
-          left: 50%;
-          transform: translateX(-50%);
         }
 
         @media (min-width: 737px) {
@@ -109,7 +104,6 @@ const StickyMediaImage = ({ src, alt, imageWidth, imageHeight }) => {
       src={src}
       alt={alt}
       layout='responsive'
-      // placeholder='blur'
       width={imageWidth}
       height={imageHeight}
     />
@@ -122,7 +116,6 @@ export const StickyMediaTileText = ({ children }) => {
       start: "self",
       duration: ".sticky-media-tile-text",
       easing: "easeOutSin",
-      // startOffset: -130,
       endOffset: 270,
       properties: [
         {

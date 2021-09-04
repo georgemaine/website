@@ -3,16 +3,10 @@ import {
   StickyMediaTile,
   StickyMediaTileText,
 } from "../components/StickyMediaTile";
-import {
-  InlineLink,
-  StaticTextTile,
-  TitleTile,
-  TextTile,
-} from "../components/TextTile";
+import { InlineLink, TitleTile, TextTile } from "../components/TextTile";
 import hortus1 from "../public/media/hortus-1.jpeg";
 import hortus3 from "../public/media/hortus-3.jpeg";
 import hortus2 from "../public/media/hortus-2.jpeg";
-import nas from "../public/media/nas.jpeg";
 import plant from "../public/media/plant.jpeg";
 import alwaysSunday from "../public/media/always-sunday.jpg";
 import watch from "../public/media/apple-watch-march-challenge.jpeg";
@@ -24,14 +18,14 @@ export default function Outlet() {
       <GlobalNav />
       <StickyMediaTile
         src={hortus1}
-        alt={"Hibikiy Toki"}
+        alt={"Hortus Botanicus Amsterdam"}
         margin={"0 0 95px"}
         imageWidth={1450}
         imageHeight={1947}
       />
       <StickyMediaTile
         src={hortus3}
-        alt={"Hibikiy Toki"}
+        alt={"Hortus Botanicus Amsterdam"}
         width={"50%"}
         margin={"0 0 95px"}
         imageWidth={3024}
@@ -39,7 +33,7 @@ export default function Outlet() {
       />
       <StickyMediaTile
         src={hortus2}
-        alt={"Hibikiy Toki"}
+        alt={"Hortus Botanicus Amsterdam"}
         imageWidth={2851}
         imageHeight={3997}
       />
@@ -112,7 +106,7 @@ export default function Outlet() {
           width: 86vw;
           margin-left: auto;
           margin-right: auto;
-          padding: calc(7vh + 48px) 0 0;
+          padding: calc(7vw + 48px) 0 0;
           max-width: 168.8rem;
         }
       `}</style>
