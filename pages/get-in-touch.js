@@ -1,12 +1,19 @@
 import GlobalNav from "../components/GlobalNav";
-import { StaticMediaTile } from "../components/MediaTile";
+import { StickyMediaTile } from "../components/StickyMediaTile";
 import { TextTile, InlineLink } from "../components/TextTile";
+import Georgemaine from "../public/media/georgemaine.jpg";
 
 export default function GetInTouch() {
   return (
     <main>
       <GlobalNav />
-      <StaticMediaTile src={"georgemaine.jpeg"} alt={"Georgemaine"} />
+      <StickyMediaTile
+        src={Georgemaine}
+        alt={"Georgemaine Lourens"}
+        margin={"0 0 95px"}
+        imageWidth={4000}
+        imageHeight={2666}
+      />
       <TextTile>Hello, world — I love tinkering with software.</TextTile>
       <TextTile>
         Ever since I was a young kid, I was fascinated with how things worked.
@@ -43,7 +50,7 @@ export default function GetInTouch() {
           width: 86vw;
           margin-left: auto;
           margin-right: auto;
-          padding: 48px 0 0;
+          padding: calc(3.5vw + 48px) 0 0;
           max-width: 168.8rem;
         }
       `}</style>
