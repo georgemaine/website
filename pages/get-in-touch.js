@@ -1,6 +1,6 @@
 import GlobalNav from "../components/GlobalNav";
 import { StaticMediaTile } from "../components/MediaTile";
-import { StaticTextTile, TextTile, InlineLink } from "../components/TextTile";
+import { TextTile, InlineLink } from "../components/TextTile";
 
 export default function GetInTouch() {
   return (

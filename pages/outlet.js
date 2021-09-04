@@ -97,10 +97,8 @@ export default function Outlet() {
         Outlet is a real-time feed of my energy and talents — posted
         chronologically. Hopefully, one day you’ll discover your outlet too.
       </TextTile>
-      {/*
-      
       <TitleTile title={"Spring"} />
-      <TitleTile title={"2021"} /> */}
+      <TitleTile title={"2021"} />
       <style jsx>{`
         main {
           width: 86vw;
