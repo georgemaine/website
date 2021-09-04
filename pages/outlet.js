@@ -104,7 +104,7 @@ export default function Outlet() {
           width: 86vw;
           margin-left: auto;
           margin-right: auto;
-          padding: calc(7vw + 48px) 0 0;
+          padding: calc(3.5vw + 48px) 0 0;
           max-width: 168.8rem;
         }
       `}</style>
