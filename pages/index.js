@@ -1,15 +1,6 @@
 import GlobalNav from "../components/GlobalNav";
 import Plx from "react-plx";
 
-// FIXME: Add fade-in
-const data = { start: "-80vh", cssClass: "fade-in" };
-const fadeTween = {
-  start: "-95vh",
-  end: "-25vh",
-  opacity: ["0.001", "0.999"],
-  ease: 0.8,
-};
-
 const FadeinTextTween = [
   {
     start: "self",
@@ -41,6 +32,18 @@ const MediaTween = [
         unit: "vh",
         property: "translateY",
       },
+    ],
+  },
+];
+
+const FadeMediaAnimationTween = [
+  {
+    start: "self",
+    duration: "100vh",
+    startOffset: "5vh",
+    endOffset: "-25vh",
+    easing: "easeOutQuad",
+    properties: [
       {
         startValue: 0.001,
         endValue: 0.999,
@@ -49,6 +52,7 @@ const MediaTween = [
     ],
   },
 ];
+
 const VideoBackgroundHeroSection = {
   sectionHeadline: "Mobile apps for Mollie Payments",
   sectionClassName: "mobile-apps",
@@ -101,7 +105,7 @@ const VideoBackgroundSection = ({ children }) => {
           background-image: linear-gradient(
             0deg,
             rgba(0, 0, 0, 0.8),
-            rgba(0, 0, 0, 0) 525px
+            rgba(0, 0, 0, 0) 52.5rem
           );
         }
       `}</style>
@@ -111,7 +115,7 @@ const VideoBackgroundSection = ({ children }) => {
 
 const Video = ({ videoSrc }) => {
   return (
-    <video loop autoPlay playsInline preload='auto'>
+    <video loop autoPlay playsInline preload='auto' muted>
       <source src={videoSrc} type='video/mp4' />
       <style jsx>{`
         video {
@@ -142,7 +146,15 @@ const MediaContainer = ({ mediaSrc }) => {
         zIndex: 1,
       }}
     >
-      <Video videoSrc={mediaSrc} />
+      <Plx
+        parallaxData={FadeMediaAnimationTween}
+        animateWhenNotInViewport
+        style={{
+          opacity: 0.001,
+        }}
+      >
+        <Video videoSrc={mediaSrc} />
+      </Plx>
     </Plx>
   );
 };
@@ -158,7 +170,7 @@ const HeroSectionCopy = ({ sectionHeadline, sectionDescription }) => {
           position: relative;
           height: 100%;
           margin-left: 7vw;
-          padding-bottom: 120px;
+          padding-bottom: calc(4.5vh + 7rem);
           color: var(--white);
           display: flex;
           flex-direction: column;
@@ -175,8 +187,8 @@ const HeroSectionCopy = ({ sectionHeadline, sectionDescription }) => {
         }
 
         h2 {
-          font-size: calc(28px + 28 * (100vw - 375px) / 375);
-          max-width: 50%;
+          font-size: calc(2.8rem + 28 * (100vw - 37.5rem) / 375);
+          max-width: 60%;
           margin: 0;
           line-height: 1.08;
           letter-spacing: -0.08rem;
@@ -185,21 +197,23 @@ const HeroSectionCopy = ({ sectionHeadline, sectionDescription }) => {
             transform 0.6s cubic-bezier(0.26, 0.67, 0.48, 0.91);
         }
 
-        @media (min-width: 737px) {
+        @media (min-width: 73.7rem) {
           p {
             font-size: 2.4rem;
           }
 
           h2 {
-            font-size: calc(42px + 42 * (100vw - 740px) / 740);
+            font-size: calc(4.2rem + 42 * (100vw - 74rem) / 740);
+            max-width: 50%;
           }
         }
 
-        @media (min-width: 1260px) {
+        @media (min-width: 126rem) {
           h2 {
-            font-size: calc(56px + 56 * (100vw - 1400px) / 1400);
-            letter-spacing: -0.015em;
+            font-size: calc(5.6rem + 56 * (100vw - 140rem) / 1400);
+            letter-spacing: -0.015rem;
             line-height: 1.05;
+            max-width: 40%;
           }
         }
       `}</style>
@@ -221,7 +235,7 @@ const SectionCopy = ({ sectionHeadline, sectionDescription }) => {
           position: relative;
           height: 100%;
           margin-left: 7vw;
-          padding-bottom: 120px;
+          padding-bottom: 4.5vh;
           color: var(--white);
           display: flex;
           z-index: 2;
@@ -237,7 +251,7 @@ const SectionCopy = ({ sectionHeadline, sectionDescription }) => {
         }
 
         h2 {
-          font-size: calc(28px + 28 * (100vw - 375px) / 375);
+          font-size: calc(2.8rem + 28 * (100vw - 37.5rem) / 375);
           max-width: 60%;
           margin: 0;
           line-height: 1.08;
@@ -247,20 +261,20 @@ const SectionCopy = ({ sectionHeadline, sectionDescription }) => {
             transform 0.6s cubic-bezier(0.26, 0.67, 0.48, 0.91);
         }
 
-        @media (min-width: 737px) {
+        @media (min-width: 73.7rem) {
           p {
             font-size: 2.4rem;
           }
 
           h2 {
-            font-size: calc(42px + 42 * (100vw - 740px) / 740);
+            font-size: calc(4.2rem + 42 * (100vw - 74rem) / 740);
           }
         }
 
-        @media (min-width: 1260px) {
+        @media (min-width: 126rem) {
           h2 {
-            font-size: calc(56px + 56 * (100vw - 1400px) / 1400);
-            letter-spacing: -0.015em;
+            font-size: calc(5.6rem + 56 * (100vw - 140rem) / 1400);
+            letter-spacing: -0.015rem;
             line-height: 1.05;
           }
         }
