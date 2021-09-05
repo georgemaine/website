@@ -158,7 +158,7 @@ const HeroSectionCopy = ({ sectionHeadline, sectionDescription }) => {
           position: relative;
           height: 100%;
           margin-left: 7vw;
-          padding-bottom: 70px;
+          padding-bottom: 120px;
           color: var(--white);
           display: flex;
           flex-direction: column;
@@ -221,7 +221,7 @@ const SectionCopy = ({ sectionHeadline, sectionDescription }) => {
           position: relative;
           height: 100%;
           margin-left: 7vw;
-          padding-bottom: 70px;
+          padding-bottom: 120px;
           color: var(--white);
           display: flex;
           z-index: 2;
