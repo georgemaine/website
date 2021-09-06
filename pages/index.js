@@ -1,5 +1,6 @@
 import GlobalNav from "../components/GlobalNav";
 import Plx from "react-plx";
+import { useRef, useState, useEffect } from "react";
 
 const FadeinTextTween = [
   {
@@ -53,7 +54,7 @@ const FadeMediaAnimationTween = [
   },
 ];
 
-const VideoBackgroundHeroSection = {
+const VideoBackgroundHeroSectionItem = {
   sectionHeadline: "Mobile apps for Mollie Payments",
   sectionClassName: "mobile-apps",
   sectionDescription: "Product Design · 2019-2020",
@@ -81,10 +82,42 @@ const VideoBackgroundSectionItems = [
   },
 ];
 
-const VideoBackgroundSection = ({ children }) => {
+const VideoBackgroundHeroSection = () => {
+  const VideoBackgroundSectionRef = useRef();
+  const [isVisible, setIsVisible] = useState(true);
+
+  useEffect(() => {
+    const node = VideoBackgroundSectionRef.current;
+    const callbackFunction = (entries) => {
+      const [entry] = entries;
+      const isIntersecting = entry.isIntersecting;
+      isIntersecting ? setIsVisible(true) : setIsVisible(false);
+    };
+
+    const observer = new IntersectionObserver(callbackFunction, {
+      threshold: 0.25,
+    });
+
+    node && observer.observe(node);
+
+    return () => {
+      node && observer.unobserve(node);
+    };
+  }, [isVisible, setIsVisible]);
+
   return (
-    <section className='video-background-section'>
-      {children}
+    <section
+      ref={VideoBackgroundSectionRef}
+      className='video-background-section'
+    >
+      <HeroSectionCopy
+        sectionHeadline={VideoBackgroundHeroSectionItem.sectionHeadline}
+        sectionDescription={VideoBackgroundHeroSectionItem.sectionDescription}
+      />
+      <Video
+        videoSrc={VideoBackgroundHeroSectionItem.mediaSrc}
+        isVisible={isVisible}
+      />
       <style jsx>{`
         section {
           background: var(--black);
@@ -113,9 +146,84 @@ const VideoBackgroundSection = ({ children }) => {
   );
 };
 
-const Video = ({ videoSrc }) => {
+const VideoBackgroundSection = ({ VideoBackgroundSectionItem }) => {
+  const VideoBackgroundSectionRef = useRef();
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const node = VideoBackgroundSectionRef.current;
+    const callbackFunction = (entries) => {
+      const [entry] = entries;
+
+      const isIntersecting = entry.isIntersecting;
+      isIntersecting ? setIsVisible(true) : setIsVisible(false);
+    };
+    const observer = new IntersectionObserver(callbackFunction, {
+      threshold: 0.25,
+    });
+
+    node && observer.observe(node);
+
+    return () => {
+      node && observer.unobserve(node);
+    };
+  }, [setIsVisible]);
+
   return (
-    <video loop autoPlay playsInline preload='auto' muted>
+    <section
+      ref={VideoBackgroundSectionRef}
+      className='video-background-section'
+    >
+      <SectionCopy
+        sectionHeadline={VideoBackgroundSectionItem.sectionHeadline}
+        sectionDescription={VideoBackgroundSectionItem.sectionDescription}
+      />
+      <MediaContainer
+        mediaSrc={VideoBackgroundSectionItem.mediaSrc}
+        isVisible={isVisible}
+      />
+      <style jsx>{`
+        section {
+          background: var(--black);
+          height: 100vh;
+          position: relative;
+          overflow: hidden;
+        }
+
+        section:after {
+          content: "";
+          display: block;
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          z-index: 1;
+          background-image: linear-gradient(
+            0deg,
+            rgba(0, 0, 0, 0.8),
+            rgba(0, 0, 0, 0) 52.5rem
+          );
+        }
+      `}</style>
+    </section>
+  );
+};
+
+const Video = ({ videoSrc, isVisible }) => {
+  const videoRef = useRef(null);
+  const handlePlay = () => {
+    videoRef.current.play();
+  };
+  const handlePause = () => {
+    videoRef.current.pause();
+  };
+  useEffect(() => {
+    isVisible ? handlePlay() : handlePause();
+  }, [isVisible]);
+
+  return (
+    <video ref={videoRef} loop autoPlay playsInline preload='auto' muted>
       <source src={videoSrc} type='video/mp4' />
       <style jsx>{`
         video {
@@ -131,7 +239,7 @@ const Video = ({ videoSrc }) => {
   );
 };
 
-const MediaContainer = ({ mediaSrc }) => {
+const MediaContainer = ({ mediaSrc, isVisible }) => {
   return (
     <Plx
       parallaxData={MediaTween}
@@ -153,7 +261,7 @@ const MediaContainer = ({ mediaSrc }) => {
           opacity: 0.001,
         }}
       >
-        <Video videoSrc={mediaSrc} />
+        <Video videoSrc={mediaSrc} isVisible={isVisible} />
       </Plx>
     </Plx>
   );
@@ -287,25 +395,13 @@ export default function Components() {
   return (
     <>
       <main>
-        <VideoBackgroundSection>
-          <HeroSectionCopy
-            sectionHeadline={VideoBackgroundHeroSection.sectionHeadline}
-            sectionDescription={VideoBackgroundHeroSection.sectionDescription}
-          />
-          <Video videoSrc={VideoBackgroundHeroSection.mediaSrc} />
-        </VideoBackgroundSection>
+        <VideoBackgroundHeroSection />
         {VideoBackgroundSectionItems.map((node, index) => {
           return (
             <VideoBackgroundSection
+              VideoBackgroundSectionItem={node}
               key={index}
-              className={node.sectionClassName}
-            >
-              <SectionCopy
-                sectionHeadline={node.sectionHeadline}
-                sectionDescription={node.sectionDescription}
-              />
-              <MediaContainer mediaSrc={node.mediaSrc} />
-            </VideoBackgroundSection>
+            />
           );
         })}
         <style jsx>{`
