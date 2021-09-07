@@ -248,29 +248,27 @@ export const InlineLink = ({ href, text }) => {
   return (
     <a href={href} target='blank'>
       {text}
-      <style jsx>
-        {`
-          a {
-            white-space: nowrap;
-          }
-          a:hover {
-            color: rgba(208, 208, 208);
-            transition: 0.2s ease-out;
-          }
+      <style jsx>{`
+        a {
+          white-space: nowrap;
+          color: #07a7f1;
+        }
+        a:hover {
+          transition: 0.2s ease-out;
+        }
 
-          a::after {
-            display: inline-block;
-            content: " ↗";
-            position: relative;
-            top: 0.03rem;
-            transition: opacity 0.2s ease-out, transform 0.2s ease-out;
-          }
+        a::after {
+          display: inline-block;
+          content: " ↗";
+          position: relative;
+          top: 0.03rem;
+          transition: opacity 0.2s ease-out, transform 0.2s ease-out;
+        }
 
-          a:hover::after {
-            transform: translate3d(0.3rem, -0.3rem, 0);
-          }
-        `}
-      </style>
+        a:hover::after {
+          transform: translate3d(0.3rem, -0.3rem, 0);
+        }
+      `}</style>
     </a>
   );
 };
