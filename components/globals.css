@@ -55,7 +55,7 @@ body {
 
 /* Colors */
 :root {
-  --white: #fff;
+  --white: var(--white);
   --black: rgb(0, 0, 0);
   --text-light: rgb(245, 245, 247);
   --text-dark: rgb(17, 17, 17);
