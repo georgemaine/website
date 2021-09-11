@@ -141,6 +141,10 @@ export const TextTile = ({ margin = "6vh 0", children }) => {
 
   useEffect(() => {
     const node = textRef.current;
+    const thresholdArray = (steps) =>
+      Array(steps + 1)
+        .fill(0)
+        .map((_, index) => index / steps || 0);
 
     let previousY = 0;
     let previousRatio = 0;
@@ -175,7 +179,7 @@ export const TextTile = ({ margin = "6vh 0", children }) => {
     };
 
     const observer = new IntersectionObserver(callbackFunction, {
-      threshold: [0.5, 1],
+      threshold: thresholdArray(2),
     });
     node && observer.observe(node);
 

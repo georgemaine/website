@@ -48,7 +48,7 @@ export default function GetInTouch() {
           margin-left: auto;
           margin-right: auto;
           padding: calc(3.5vw + 4.8rem) 0
-            calc(3.5vw + env(safe-area-inset-bottom));
+            calc(20rem + env(safe-area-inset-bottom));
           max-width: 168.8rem;
         }
       `}</style>
