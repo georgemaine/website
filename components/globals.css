@@ -56,7 +56,6 @@ body {
   --light: rgba(255, 255, 255, 0.85);
   --opaque: rgba(255, 255, 255, 0.55);
   --dark-border: rgba(0, 0, 0, 0.15);
-  --light-border: rgba(255, 255, 255, 0.3);
 }
 
 @supports (color: color(display-p3 1 1 1)) {
@@ -69,6 +68,5 @@ body {
     --light: color(display-p3 1.0001 1 0.9999 / 0.85);
     --opaque: color(display-p3 1.0001 1 0.9999 / 0.55);
     --dark-border: color(display-p3 0 0 0/0.15);
-    --light-border: color(display-p3 1.0001 1 0.9999 / 0.3);
   }
 }
