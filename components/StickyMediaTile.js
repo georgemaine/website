@@ -1,16 +1,16 @@
 import Image from "next/image";
 import Plx from "react-plx";
 
-const StickyMediaTileWrapper = ({ children, margin = "0 0 200px" }) => {
+const StickyMediaTileWrapper = ({ children, margin = "0 0 20rem" }) => {
   return (
     <div>
       {children}
       <style jsx>{`
         div {
-          margin: 0 0 40px;
+          margin: 0 0 4rem;
         }
 
-        @media (min-width: 737px) {
+        @media (min-width: 73.7rem) {
           div {
             margin: ${margin};
           }
@@ -29,14 +29,14 @@ const StickyMediaWrapper = ({ children, width = "100%" }) => {
           width: 100%;
           padding: 0;
           will-change: transform;
-          border-radius: 10px;
+          border-radius: 1rem;
           overflow: hidden;
           position: relative;
           z-index: 1000;
           margin: 0;
         }
 
-        @media (min-width: 737px) {
+        @media (min-width: 73.7rem) {
           figure {
             width: ${width};
           }
@@ -58,11 +58,11 @@ const StickyMediaCaption = ({ caption }) => {
           left: 0;
           right: 0;
           bottom: 0;
-          font-size: calc(28px + 28 * (100vw - 375px) / 375);
+          font-size: calc(2.8rem + 28 * (100vw - 37.5rem) / 375);
           line-height: 1.08;
           letter-spacing: -0.08rem;
           font-weight: 700;
-          border-radius: 10px;
+          border-radius: 1rem;
           color: var(--white);
           background-color: var(--dark-border);
           opacity: 0;
@@ -74,21 +74,21 @@ const StickyMediaCaption = ({ caption }) => {
           opacity: 1;
         }
 
-        @media (max-width: 540px) {
+        @media (max-width: 54rem) {
           figcaption {
-            font-size: calc(28px + 28 * (100vw - 375px) / 375);
+            font-size: calc(2.8rem + 28 * (100vw - 37.5rem) / 375);
           }
         }
 
-        @media (min-width: 737px) {
+        @media (min-width: 73.7rem) {
           figcaption {
-            font-size: calc(42px + 42 * (100vw - 740px) / 740);
+            font-size: calc(4.2rem + 42 * (100vw - 74rem) / 740);
           }
         }
 
-        @media (min-width: 1260px) {
+        @media (min-width: 126rem) {
           figcaption {
-            font-size: calc(56px + 56 * (100vw - 1400px) / 1400);
+            font-size: calc(5.6rem + 56 * (100vw - 140rem) / 1400);
             letter-spacing: -0.015rem;
             line-height: 1.05;
           }
@@ -98,16 +98,8 @@ const StickyMediaCaption = ({ caption }) => {
   );
 };
 
-const StickyMediaImage = ({ src, alt, imageWidth, imageHeight }) => {
-  return (
-    <Image
-      src={src}
-      alt={alt}
-      layout='responsive'
-      width={imageWidth}
-      height={imageHeight}
-    />
-  );
+const StickyMediaImage = ({ src, alt }) => {
+  return <Image src={src} alt={alt} layout='responsive' />;
 };
 
 export const StickyMediaTileText = ({ children }) => {
@@ -153,23 +145,23 @@ export const StickyMediaTileText = ({ children }) => {
             transition: opacity 0.6s linear;
           }
 
-          @media (max-width: 540px) {
+          @media (max-width: 54rem) {
             p {
-              font-size: calc(28px + 28 * (100vw - 375px) / 375);
+              font-size: calc(2.8rem + 28 * (100vw - 37.5rem) / 375);
               padding: 6vh 0 0;
             }
           }
 
-          @media (min-width: 737px) {
+          @media (min-width: 73.7rem) {
             p {
-              font-size: calc(42px + 42 * (100vw - 740px) / 740);
-              padding: 95px 0 0;
+              font-size: calc(4.2rem + 42 * (100vw - 74rem) / 740);
+              padding: 9.5rem 0 0;
             }
           }
 
-          @media (min-width: 1260px) {
+          @media (min-width: 126rem) {
             p {
-              font-size: calc(56px + 56 * (100vw - 1400px) / 1400);
+              font-size: calc(5.6rem + 56 * (100vw - 140rem) / 1400);
               letter-spacing: -0.015rem;
               line-height: 1.05;
             }
@@ -180,24 +172,11 @@ export const StickyMediaTileText = ({ children }) => {
   );
 };
 
-export const StickyMediaTile = ({
-  alt,
-  children,
-  margin,
-  src,
-  width,
-  imageWidth,
-  imageHeight,
-}) => {
+export const StickyMediaTile = ({ alt, children, margin, src, width }) => {
   return (
     <StickyMediaTileWrapper margin={margin}>
       <StickyMediaWrapper width={width}>
-        <StickyMediaImage
-          src={src}
-          alt={alt}
-          imageWidth={imageWidth}
-          imageHeight={imageHeight}
-        />
+        <StickyMediaImage src={src} alt={alt} />
         <StickyMediaCaption caption={alt} />
       </StickyMediaWrapper>
       {children}

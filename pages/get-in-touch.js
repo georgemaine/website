@@ -10,9 +10,7 @@ export default function GetInTouch() {
       <StickyMediaTile
         src={Georgemaine}
         alt={"Georgemaine Lourens"}
-        margin={"0 0 95px"}
-        imageWidth={4000}
-        imageHeight={2666}
+        margin={"0 0 9.5rem"}
       />
       <TextTile>Hello, world — I love tinkering with software.</TextTile>
       <TextTile>
@@ -50,7 +48,7 @@ export default function GetInTouch() {
           width: 86vw;
           margin-left: auto;
           margin-right: auto;
-          padding: calc(3.5vw + 48px) 0 0;
+          padding: calc(3.5vw + 4.8rem) 0 0;
           max-width: 168.8rem;
         }
       `}</style>

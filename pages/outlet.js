@@ -19,31 +19,16 @@ export default function Outlet() {
       <StickyMediaTile
         src={hortus1}
         alt={"Hortus Botanicus Amsterdam"}
-        margin={"0 0 95px"}
-        imageWidth={1450}
-        imageHeight={1947}
+        margin={"0 0 9.5rem"}
       />
       <StickyMediaTile
         src={hortus3}
         alt={"Hortus Botanicus Amsterdam"}
         width={"50%"}
-        margin={"0 0 95px"}
-        imageWidth={3024}
-        imageHeight={4032}
+        margin={"0 0 9.5rem"}
       />
-      <StickyMediaTile
-        src={hortus2}
-        alt={"Hortus Botanicus Amsterdam"}
-        imageWidth={2851}
-        imageHeight={3997}
-      />
-
-      <StickyMediaTile
-        src={plant}
-        alt={"Phyllanthus Mirabilis."}
-        imageWidth={4032}
-        imageHeight={3024}
-      >
+      <StickyMediaTile src={hortus2} alt={"Hortus Botanicus Amsterdam"} />
+      <StickyMediaTile src={plant} alt={"Phyllanthus Mirabilis."}>
         <StickyMediaTileText>
           Meet Phyllanthus Mirabilis. During dusk, the leaves fold together in
           pairs like a butterfly — honestly, I can’t 😍. It’s from{" "}
@@ -58,8 +43,6 @@ export default function Outlet() {
         src={alwaysSunday}
         alt={"Always Sunday by Music"}
         width={"50%"}
-        imageWidth={1158}
-        imageHeight={1158}
       >
         <StickyMediaTileText>
           Lately, most of my weekends start with playing{" "}
@@ -72,19 +55,10 @@ export default function Outlet() {
           in the background. Genuinely enjoying the lovely low-key vibes.
         </StickyMediaTileText>
       </StickyMediaTile>
+      <StickyMediaTile src={hibiki} alt={"Hibiki by Suntory Toki"} />
+
       <TitleTile title={"Summer"} />
-      <StickyMediaTile
-        src={watch}
-        alt={"Completed Apple's March Challenge"}
-        imageWidth={2875}
-        imageHeight={3833}
-      />
-      <StickyMediaTile
-        src={hibiki}
-        alt={"Hibiki by Suntory Toki"}
-        imageWidth={4032}
-        imageHeight={3024}
-      />
+      <StickyMediaTile src={watch} alt={"Completed Apple's March Challenge"} />
       <TextTile>
         The lockdown was a perfect excuse for me to tinker with software,
         discover Amsterdam and buy plants — the urban jungle is real.
@@ -104,7 +78,7 @@ export default function Outlet() {
           width: 86vw;
           margin-left: auto;
           margin-right: auto;
-          padding: calc(3.5vw + 48px) 0 0;
+          padding: calc(3.5vw + 4.8rem) 0 0;
           max-width: 168.8rem;
         }
       `}</style>

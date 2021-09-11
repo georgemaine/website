@@ -13,22 +13,22 @@ const MediaWrapper = ({ children, width = "100%", props }) => {
           width: 100%;
           padding: 0;
           will-change: transform;
-          border-radius: 10px;
+          border-radius: 1rem;
           overflow: hidden;
           position: relative;
           z-index: 1000;
-          margin: 0 0 150px;
+          margin: 0 0 15rem;
         }
 
-        @media (max-width: 736px) {
+        @media (max-width: 73.6rem) {
           left: 50%;
           transform: translateX(-50%);
         }
 
-        @media (min-width: 737px) {
+        @media (min-width: 73.7rem) {
           figure {
             width: ${width};
-            margin: 0 0 200px;
+            margin: 0 0 20rem;
           }
         }
       `}</style>
@@ -92,7 +92,7 @@ const MediaCaption = ({ caption }) => {
           left: 0;
           right: 0;
           bottom: 0;
-          font-size: calc(28px + 28 * (100vw - 375px) / 375);
+          font-size: calc(2.8rem + 28 * (100vw - 37.5rem) / 375);
           line-height: 1.08;
           letter-spacing: -0.08rem;
           font-weight: 700;
@@ -223,25 +223,25 @@ export const StickyMediaTile = ({ alt, margin, src, width }) => {
           transition: opacity 0.6s linear;
         }
 
-        @media (max-width: 540px) {
+        @media (max-width: 54rem) {
           p {
-            font-size: calc(28px + 28 * (100vw - 375px) / 375);
+            font-size: calc(2.8rem + 28 * (100vw - 37.5rem) / 375);
           }
         }
 
-        @media (min-width: 737px) {
+        @media (min-width: 73.7rem) {
           p {
-            font-size: calc(42px + 42 * (100vw - 740px) / 740);
-            padding: calc(42px + 42 * (100vw - 740px) / 740) 0 0;
+            font-size: calc(4.2rem + 42 * (100vw - 74rem) / 740);
+            padding: calc(4.2rem + 42 * (100vw - 74rem) / 740) 0 0;
           }
         }
 
-        @media (min-width: 1260px) {
+        @media (min-width: 126rem) {
           p {
-            font-size: calc(56px + 56 * (100vw - 1400px) / 1400);
-            letter-spacing: -0.015em;
+            font-size: calc(5.6rem + 56 * (100vw - 140rem) / 1400);
+            letter-spacing: -0.015rem;
             line-height: 1.05;
-            padding: calc(56px + 56 * (100vw - 1400px) / 1400) 0 0;
+            padding: calc(5.6rem + 56 * (100vw - 140rem) / 1400) 0 0;
           }
 
           p: last;
@@ -326,9 +326,9 @@ export const StickyAlbumMediaTile = ({ margin }) => {
           transition: opacity 0.6s linear;
         }
 
-        @media (max-width: 540px) {
+        @media (max-width: 54rem) {
           p {
-            font-size: calc(28px + 28 * (100vw - 375px) / 375);
+            font-size: calc(2.8px + 28 * (100vw - 375px) / 375);
           }
         }
 
@@ -342,7 +342,7 @@ export const StickyAlbumMediaTile = ({ margin }) => {
         @media (min-width: 1260px) {
           p {
             font-size: calc(56px + 56 * (100vw - 1400px) / 1400);
-            letter-spacing: -0.015em;
+            letter-spacing: -0.015rem;
             line-height: 1.05;
             padding: calc(56px + 56 * (100vw - 1400px) / 1400) 0 0;
           }

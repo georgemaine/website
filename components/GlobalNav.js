@@ -76,11 +76,11 @@ export default function GlobalNav({ onMedia }) {
           top: 0;
           left: 0;
           right: 0;
-          height: 5.4rem;
+          height: 4.4rem;
           margin: 0;
           padding: 0;
           background: ${onMedia ? "transparent" : "rgba(242, 242, 242, 0.9)"};
-          backdrop-filter: ${onMedia ? "initial" : "saturate(180%) blur(20px)"};
+          backdrop-filter: ${onMedia ? "initial" : "saturate(180%) blur(2rem)"};
           z-index: 9999;
         }
 

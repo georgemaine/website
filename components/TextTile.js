@@ -15,23 +15,23 @@ export const StaticTextTile = ({ children, margin = "18vh 0 12vh" }) => {
             transform 0.6s cubic-bezier(0.26, 0.67, 0.48, 0.91);
         }
 
-        @media (max-width: 540px) {
+        @media (max-width: 54rem) {
           p {
-            font-size: calc(28px + 28 * (100vw - 375px) / 375);
+            font-size: calc(2.8rem + 28 * (100vw - 37.5rem) / 375);
           }
         }
 
-        @media (min-width: 737px) {
+        @media (min-width: 73.7rem) {
           p {
-            font-size: calc(42px + 42 * (100vw - 740px) / 740);
-            margin: calc(56px + 56 * (100vw - 1400px) / 1400) 0 10vh;
+            font-size: calc(4.2rem + 42 * (100vw - 74rem) / 740);
+            margin: calc(5.6rem + 56 * (100vw - 140rem) / 1400) 0 10vh;
           }
         }
 
-        @media (min-width: 1260px) {
+        @media (min-width: 126rem) {
           p {
-            font-size: calc(56px + 56 * (100vw - 1400px) / 1400);
-            letter-spacing: -0.015em;
+            font-size: calc(5.6rem + 56 * (100vw - 140rem) / 1400);
+            letter-spacing: -0.015rem;
             line-height: 1.05;
           }
         }
@@ -99,7 +99,7 @@ export const TitleTile = ({ title }) => {
       ref={titleRef}
       style={{
         opacity: isVisible ? 1 : 0,
-        transform: isVisible ? "translateY(0px)" : "translateY(120px)",
+        transform: isVisible ? "translateY(0)" : "translateY(12rem)",
       }}
     >
       {title}
@@ -113,31 +113,21 @@ export const TitleTile = ({ title }) => {
           transition: opacity 0.6s linear,
             transform 0.6s cubic-bezier(0.26, 0.67, 0.48, 0.91);
         }
-
-        @media (max-width: 540px) {
+        @media (max-width: 54rem) {
           h1 {
-            font-size: calc(42px + 42 * (100vw - 375px) / 375);
+            font-size: calc(4.2rem + 42 * (100vw - 37.5rem) / 375);
           }
         }
-
-        @media (min-width: 737px) {
+        @media (min-width: 73.7rem) {
           h1 {
-            font-size: calc(56px + 56 * (100vw - 740px) / 740);
+            font-size: calc(5.6rem + 56 * (100vw - 74rem) / 740);
             flex-shrink: 0;
-            margin: 200px 0;
+            margin: 20rem 0;
           }
         }
-
-        // @media (min-width: 1260px) {
-        //   h1 {
-        //     font-size: 118px;
-        //     letter-spacing: -0.015em;
-        //     line-height: 1.05;
-        //   }
-        // }
-        @media screen and (min-width: 1770px) {
+        @media screen and (min-width: 177rem) {
           h1 {
-            font-size: 180px;
+            font-size: 18rem;
           }
         }
       `}</style>
@@ -204,7 +194,7 @@ export const TextTile = ({ margin = "6vh 0", children }) => {
       ref={textRef}
       style={{
         opacity: isVisible ? 1 : 0,
-        transform: isVisible ? "translateY(0px)" : "translateY(120px)",
+        transform: isVisible ? "translateY(0)" : "translateY(12rem)",
       }}
     >
       {children}
@@ -219,23 +209,23 @@ export const TextTile = ({ margin = "6vh 0", children }) => {
             transform 0.6s cubic-bezier(0.26, 0.67, 0.48, 0.91);
         }
 
-        @media (max-width: 540px) {
+        @media (max-width: 54rem) {
           p {
-            font-size: calc(28px + 28 * (100vw - 375px) / 375);
+            font-size: calc(2.8rem + 28 * (100vw - 37.5rem) / 375);
           }
         }
 
-        @media (min-width: 737px) {
+        @media (min-width: 73.7rem) {
           p {
-            font-size: calc(42px + 42 * (100vw - 740px) / 740);
-            margin: calc(56px + 56 * (100vw - 1400px) / 1400) 0 10vh;
+            font-size: calc(4.2rem + 42 * (100vw - 74rem) / 740);
+            margin: calc(5.6rem + 56 * (100vw - 140rem) / 1400) 0 10vh;
           }
         }
 
-        @media (min-width: 1260px) {
+        @media (min-width: 126rem) {
           p {
-            font-size: calc(56px + 56 * (100vw - 1400px) / 1400);
-            letter-spacing: -0.015em;
+            font-size: calc(5.6rem + 56 * (100vw - 140rem) / 1400);
+            letter-spacing: -0.015rem;
             line-height: 1.05;
           }
         }
