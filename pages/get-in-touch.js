@@ -1,14 +1,13 @@
 import GlobalNav from "../components/GlobalNav";
 import { StickyMediaTile } from "../components/StickyMediaTile";
 import { TextTile, InlineLink } from "../components/TextTile";
-import Georgemaine from "../public/media/georgemaine.jpg";
 
 export default function GetInTouch() {
   return (
     <main>
       <GlobalNav />
       <StickyMediaTile
-        src={Georgemaine}
+        src={"georgemaine.jpg"}
         alt={"Georgemaine Lourens"}
         margin={"0 0 9.5rem"}
       />

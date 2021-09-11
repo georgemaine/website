@@ -1,4 +1,5 @@
-import Image from "next/image";
+/* eslint-disable @next/next/no-img-element */
+import { useEffect } from "react";
 import Plx from "react-plx";
 
 const StickyMediaTileWrapper = ({ children, margin = "0 0 20rem" }) => {
@@ -99,7 +100,17 @@ const StickyMediaCaption = ({ caption }) => {
 };
 
 const StickyMediaImage = ({ src, alt }) => {
-  return <Image src={src} alt={alt} layout='responsive' />;
+  return (
+    <>
+      <img src={`/media/${src}`} alt={alt} />
+      <style jsx>{`
+        img {
+          width: 100%;
+          display: block;
+        }
+      `}</style>
+    </>
+  );
 };
 
 export const StickyMediaTileText = ({ children }) => {

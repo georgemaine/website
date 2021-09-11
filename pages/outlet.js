@@ -4,31 +4,27 @@ import {
   StickyMediaTileText,
 } from "../components/StickyMediaTile";
 import { InlineLink, TitleTile, TextTile } from "../components/TextTile";
-import hortus1 from "../public/media/hortus-1.jpeg";
-import hortus3 from "../public/media/hortus-3.jpeg";
-import hortus2 from "../public/media/hortus-2.jpeg";
-import plant from "../public/media/plant.jpeg";
-import alwaysSunday from "../public/media/always-sunday.jpg";
-import watch from "../public/media/apple-watch-march-challenge.jpeg";
-import hibiki from "../public/media/hibiki.jpg";
 
 export default function Outlet() {
   return (
     <main>
       <GlobalNav />
       <StickyMediaTile
-        src={hortus1}
+        src={"hortus-1.jpeg"}
         alt={"Hortus Botanicus Amsterdam"}
         margin={"0 0 9.5rem"}
       />
       <StickyMediaTile
-        src={hortus3}
+        src={"hortus-3.jpeg"}
         alt={"Hortus Botanicus Amsterdam"}
         width={"50%"}
         margin={"0 0 9.5rem"}
       />
-      <StickyMediaTile src={hortus2} alt={"Hortus Botanicus Amsterdam"} />
-      <StickyMediaTile src={plant} alt={"Phyllanthus Mirabilis."}>
+      <StickyMediaTile
+        src={"hortus-2.jpeg"}
+        alt={"Hortus Botanicus Amsterdam"}
+      />
+      <StickyMediaTile src={"plant.jpeg"} alt={"Phyllanthus Mirabilis."}>
         <StickyMediaTileText>
           Meet Phyllanthus Mirabilis. During dusk, the leaves fold together in
           pairs like a butterfly — honestly, I can’t 😍. It’s from{" "}
@@ -40,7 +36,7 @@ export default function Outlet() {
         </StickyMediaTileText>
       </StickyMediaTile>
       <StickyMediaTile
-        src={alwaysSunday}
+        src={"always-sunday.jpg"}
         alt={"Always Sunday by Music"}
         width={"50%"}
       >
@@ -55,10 +51,13 @@ export default function Outlet() {
           in the background. Genuinely enjoying the lovely low-key vibes.
         </StickyMediaTileText>
       </StickyMediaTile>
-      <StickyMediaTile src={hibiki} alt={"Hibiki by Suntory Toki"} />
+      <StickyMediaTile src={"hibiki.jpg"} alt={"Hibiki by Suntory Toki"} />
 
       <TitleTile title={"Summer"} />
-      <StickyMediaTile src={watch} alt={"Completed Apple's March Challenge"} />
+      <StickyMediaTile
+        src={"apple-watch-march-challenge.jpeg"}
+        alt={"Completed Apple's March Challenge"}
+      />
       <TextTile>
         The lockdown was a perfect excuse for me to tinker with software,
         discover Amsterdam and buy plants — the urban jungle is real.
