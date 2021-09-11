@@ -77,7 +77,8 @@ export default function Outlet() {
           width: 86vw;
           margin-left: auto;
           margin-right: auto;
-          padding: calc(3.5vw + 4.8rem) 0 0;
+          padding: calc(3.5vw + 4.8rem) 0
+            calc(3.5vw + env(safe-area-inset-bottom));
           max-width: 168.8rem;
         }
       `}</style>
