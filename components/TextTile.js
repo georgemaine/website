@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { debounce } from "lodash";
 
 export const StaticTextTile = ({ children, margin = "18vh 0 12vh" }) => {
   return (
@@ -84,9 +85,12 @@ export const TitleTile = ({ title }) => {
       previousRatio = currentRatio;
     };
 
-    const observer = new IntersectionObserver(callbackFunction, {
-      threshold: thresholdArray(2),
-    });
+    const observer = new IntersectionObserver(
+      _.debounce(callbackFunction, 16),
+      {
+        threshold: thresholdArray(2),
+      }
+    );
     node && observer.observe(node);
 
     return () => {
@@ -161,6 +165,7 @@ export const TextTile = ({ margin = "6vh 0", children }) => {
       if (currentY < previousY) {
         if (currentRatio > previousRatio && isIntersecting) {
           setIsVisible(true);
+          console.log("Scrolling up leave");
         } else {
           console.log("Scrolling down leave");
         }
@@ -178,9 +183,12 @@ export const TextTile = ({ margin = "6vh 0", children }) => {
       previousRatio = currentRatio;
     };
 
-    const observer = new IntersectionObserver(callbackFunction, {
-      threshold: thresholdArray(2),
-    });
+    const observer = new IntersectionObserver(
+      _.debounce(callbackFunction, 16),
+      {
+        threshold: thresholdArray(2),
+      }
+    );
     node && observer.observe(node);
 
     return () => {
