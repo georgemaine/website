@@ -87,6 +87,16 @@ export default function GlobalNav({ onMedia }) {
         li {
           list-style: none;
         }
+
+        @media (prefers-color-scheme: dark) {
+          ul {
+            background: ${onMedia ? "transparent" : "rgba(22, 22, 23, 0.8)"};
+          }
+
+          a {
+            color: var(--white)};
+          }
+        }
       `}</style>
     </nav>
   );
