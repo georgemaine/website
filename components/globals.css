@@ -52,7 +52,7 @@ body {
   --dark: rgba(17, 17, 17);
   --grey: rgba(0, 0, 0, 0.55);
   --white: #fff;
-  --bg: rgba(250, 250, 250, 1);
+  --bg: rgba(242, 242, 242, 1);
   --light: rgba(255, 255, 255, 0.85);
   --opaque: rgba(255, 255, 255, 0.55);
   --dark-border: rgba(0, 0, 0, 0.15);
@@ -65,7 +65,7 @@ body {
     --dark: color(display-p3 0.0667 0.0667 0.0667/1);
     --grey: color(display-p3 0 0 0/0.55);
     --white: color(display-p3 1.0001 1 0.9999);
-    --bg: color(display-p3 0.9804 0.9804 0.9803 /1);
+    --bg: color(display-p3 0.9491 0.949 0.9489);
     --light: color(display-p3 1.0001 1 0.9999 / 0.85);
     --opaque: color(display-p3 1.0001 1 0.9999 / 0.55);
     --dark-border: color(display-p3 0 0 0/0.15);
