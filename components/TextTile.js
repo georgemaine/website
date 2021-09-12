@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import useScrollObserver from "./UseScrollObserver";
+import Plx from "react-plx";
 
 export const StaticTextTile = ({ children, margin = "18vh 0 12vh" }) => {
   return (
@@ -85,7 +85,7 @@ export const TitleTile = ({ title }) => {
       previousRatio = currentRatio;
     };
 
-    const observer = new IntersectionObserver(debounce(callbackFunction, 160), {
+    const observer = new IntersectionObserver(callbackFunction, {
       threshold: thresholdArray(2),
     });
     node && observer.observe(node);
@@ -136,71 +136,62 @@ export const TitleTile = ({ title }) => {
   );
 };
 
+const SlideIn = [
+  {
+    start: "self",
+    duration: "180px",
+    easing: "easeOutSin",
+    startOffset: "24vh",
+    properties: [
+      { startValue: 0, endValue: 1, property: "opacity" },
+      // { startValue: -120, endValue: 0, property: "translateY" },
+    ],
+  },
+];
+
 export const TextTile = ({ margin = "6vh 0 0", children }) => {
-  const ref = useRef(null);
-  const [isIntersecting, percentage] = useScrollObserver(
-    ref,
-    "-60px 0px",
-    true,
-    0
-  );
-  useEffect(() => {
-    console.log(
-      "percentage:",
-      isIntersecting ===
-        ref.current.classList.contains("animated-text-element") &&
-        console.log(percentage)
-    );
-  }, [isIntersecting, percentage]);
   return (
-    <p
-      ref={ref}
-      className={`anim-text-animate ${
-        isIntersecting && "animated-text-element"
-      }`}
+    <Plx
+      parallaxData={SlideIn}
+      className={"anim-text-animate"}
+      style={{
+        opacity: 0,
+      }}
     >
-      {children}
-      <style jsx>{`
-        p {
-          font-size: 2.8rem;
-          line-height: 1.08;
-          letter-spacing: -0.08rem;
-          font-weight: 700;
-          margin: ${margin};
-        }
-        .anim-text-animate {
-          opacity: 0;
-          transform: translateY(12rem);
-          transition: opacity 0.6s linear,
-            transform 0.6s cubic-bezier(0.26, 0.67, 0.48, 0.91);
-        }
-        .animated-text-element {
-          opacity: 1;
-          transform: translateY(0);
-        }
-
-        @media (max-width: 54rem) {
+      <p>
+        {children}
+        <style jsx>{`
           p {
-            font-size: calc(2.8rem + 28 * (100vw - 37.5rem) / 375);
+            font-size: 2.8rem;
+            line-height: 1.08;
+            letter-spacing: -0.08rem;
+            font-weight: 700;
+            margin: ${margin};
           }
-        }
 
-        @media (min-width: 73.7rem) {
-          p {
-            font-size: calc(4.2rem + 42 * (100vw - 74rem) / 740);
-            margin: calc(5.6rem + 56 * (100vw - 140rem) / 1400) 0 0;
+          @media (max-width: 54rem) {
+            p {
+              font-size: calc(2.8rem + 28 * (100vw - 37.5rem) / 375);
+            }
           }
-        }
 
-        @media (min-width: 126rem) {
-          p {
-            font-size: calc(5.6rem + 56 * (100vw - 140rem) / 1400);
-            letter-spacing: -0.015rem;
-            line-height: 1.05;
+          @media (min-width: 73.7rem) {
+            p {
+              font-size: calc(4.2rem + 42 * (100vw - 74rem) / 740);
+              margin: calc(5.6rem + 56 * (100vw - 140rem) / 1400) 0 0;
+            }
           }
-        }
-      `}</style>
-    </p>
+
+          @media (min-width: 126rem) {
+            p {
+              font-size: calc(5.6rem + 56 * (100vw - 140rem) / 1400);
+              letter-spacing: -0.015rem;
+              line-height: 1.05;
+            }
+          }
+        `}</style>
+      </p>
+    </Plx>
   );
 };
 
