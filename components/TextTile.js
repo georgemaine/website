@@ -1,5 +1,17 @@
-import { useEffect, useRef, useState } from "react";
 import Plx from "react-plx";
+
+const SlideIn = [
+  {
+    start: "self",
+    duration: "27vh",
+    easing: "easeOutSin",
+    startOffset: "14vh",
+    properties: [
+      { startValue: 0, endValue: 1, property: "opacity" },
+      { startValue: 70, endValue: 0, property: "translateY" },
+    ],
+  },
+];
 
 export const StaticTextTile = ({ children, margin = "18vh 0 12vh" }) => {
   return (
@@ -42,112 +54,49 @@ export const StaticTextTile = ({ children, margin = "18vh 0 12vh" }) => {
 };
 
 export const TitleTile = ({ title }) => {
-  const titleRef = useRef();
-  const [isVisible, setIsVisible] = useState(false);
-
-  useEffect(() => {
-    const node = titleRef.current;
-
-    const thresholdArray = (steps) =>
-      Array(steps + 1)
-        .fill(0)
-        .map((_, index) => index / steps || 0);
-
-    let previousY = 0;
-    let previousRatio = 0;
-
-    const callbackFunction = (entries) => {
-      const [entry] = entries;
-      const currentY = entry.boundingClientRect.y;
-      const currentRatio = entry.intersectionRatio;
-      const isIntersecting = entry.isIntersecting;
-
-      isIntersecting && setIsVisible(true);
-
-      // Scrolling down/up
-      if (currentY < previousY) {
-        if (currentRatio > previousRatio && isIntersecting) {
-          setIsVisible(true);
-        } else {
-          console.log("Scrolling down leave");
-        }
-      } else if (currentY > previousY && isIntersecting) {
-        if (currentRatio < previousRatio) {
-          setIsVisible(false);
-          //FIXME: Remove
-          console.log("Scrolling up leave");
-        } else {
-          console.log("Scrolling up enter");
-        }
-      }
-
-      previousY = currentY;
-      previousRatio = currentRatio;
-    };
-
-    const observer = new IntersectionObserver(callbackFunction, {
-      threshold: thresholdArray(2),
-    });
-    node && observer.observe(node);
-
-    return () => {
-      node && observer.unobserve(node);
-    };
-  }, [titleRef]);
-
   return (
-    <h1
-      ref={titleRef}
+    <Plx
+      parallaxData={SlideIn}
+      className={"anim-text-animate"}
       style={{
-        opacity: isVisible ? 1 : 0,
-        transform: isVisible ? "translateY(0)" : "translateY(12rem)",
+        opacity: 0,
+        transform: "translateY(70px)",
       }}
     >
-      {title}
-      <style jsx>{`
-        h1 {
-          font-size: 4.2rem;
-          line-height: 1.08;
-          letter-spacing: -0.08rem;
-          font-weight: 700;
-          margin: 18vh 0;
-          transition: opacity 0.6s linear,
-            transform 0.6s cubic-bezier(0.26, 0.67, 0.48, 0.91);
-        }
-        @media (max-width: 54rem) {
+      <h1>
+        {title}
+        <style jsx>{`
           h1 {
-            font-size: calc(4.2rem + 42 * (100vw - 37.5rem) / 375);
+            font-size: 4.2rem;
+            line-height: 1.08;
+            letter-spacing: -0.08rem;
+            font-weight: 700;
+            margin: 18vh 0;
+            transition: opacity 0.6s linear,
+              transform 0.6s cubic-bezier(0.26, 0.67, 0.48, 0.91);
           }
-        }
-        @media (min-width: 73.7rem) {
-          h1 {
-            font-size: calc(5.6rem + 56 * (100vw - 74rem) / 740);
-            flex-shrink: 0;
-            margin: 20rem 0;
+          @media (max-width: 54rem) {
+            h1 {
+              font-size: calc(4.2rem + 42 * (100vw - 37.5rem) / 375);
+            }
           }
-        }
-        @media screen and (min-width: 177rem) {
-          h1 {
-            font-size: 18rem;
+          @media (min-width: 73.7rem) {
+            h1 {
+              font-size: calc(5.6rem + 56 * (100vw - 74rem) / 740);
+              flex-shrink: 0;
+              margin: 20rem 0;
+            }
           }
-        }
-      `}</style>
-    </h1>
+          @media screen and (min-width: 177rem) {
+            h1 {
+              font-size: 18rem;
+            }
+          }
+        `}</style>
+      </h1>
+    </Plx>
   );
 };
-
-const SlideIn = [
-  {
-    start: "self",
-    duration: "180px",
-    easing: "easeOutSin",
-    startOffset: "24vh",
-    properties: [
-      { startValue: 0, endValue: 1, property: "opacity" },
-      // { startValue: -120, endValue: 0, property: "translateY" },
-    ],
-  },
-];
 
 export const TextTile = ({ margin = "6vh 0 0", children }) => {
   return (
@@ -156,6 +105,7 @@ export const TextTile = ({ margin = "6vh 0 0", children }) => {
       className={"anim-text-animate"}
       style={{
         opacity: 0,
+        transform: "translateY(70px)",
       }}
     >
       <p>
