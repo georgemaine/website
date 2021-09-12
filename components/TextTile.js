@@ -85,7 +85,7 @@ export const TitleTile = ({ title }) => {
       previousRatio = currentRatio;
     };
 
-    const observer = new IntersectionObserver(debounce(callbackFunction, 16), {
+    const observer = new IntersectionObserver(debounce(callbackFunction, 160), {
       threshold: thresholdArray(2),
     });
     node && observer.observe(node);
@@ -136,68 +136,9 @@ export const TitleTile = ({ title }) => {
   );
 };
 
-export const TextTile = ({ margin = "6vh 0", children }) => {
-  const textRef = useRef();
-  const [isVisible, setIsVisible] = useState(false);
-
-  useEffect(() => {
-    const node = textRef.current;
-    const thresholdArray = (steps) =>
-      Array(steps + 1)
-        .fill(0)
-        .map((_, index) => index / steps || 0);
-
-    let previousY = 0;
-    let previousRatio = 0;
-
-    const callbackFunction = (entries) => {
-      const [entry] = entries;
-      const currentY = entry.boundingClientRect.y;
-      const currentRatio = entry.intersectionRatio;
-      const isIntersecting = entry.isIntersecting;
-
-      isIntersecting && setIsVisible(true);
-
-      // Scrolling down/up
-      if (currentY < previousY) {
-        if (currentRatio > previousRatio && isIntersecting) {
-          setIsVisible(true);
-          console.log("Scrolling up leave");
-        } else {
-          console.log("Scrolling down leave");
-        }
-      } else if (currentY > previousY && isIntersecting) {
-        if (currentRatio < previousRatio) {
-          setIsVisible(false);
-          //FIXME: Remove
-          console.log("Scrolling up leave");
-        } else {
-          console.log("Scrolling up enter");
-        }
-      }
-
-      previousY = currentY;
-      previousRatio = currentRatio;
-    };
-
-    const observer = new IntersectionObserver(debounce(callbackFunction, 16), {
-      threshold: thresholdArray(2),
-    });
-    node && observer.observe(node);
-
-    return () => {
-      node && observer.unobserve(node);
-    };
-  }, [textRef]);
-
+export const TextTile = ({ margin = "6vh 0 0", children }) => {
   return (
-    <p
-      ref={textRef}
-      style={{
-        opacity: isVisible ? 1 : 0,
-        transform: isVisible ? "translateY(0)" : "translateY(12rem)",
-      }}
-    >
+    <p className={"anim-text-animate"}>
       {children}
       <style jsx>{`
         p {
@@ -206,8 +147,16 @@ export const TextTile = ({ margin = "6vh 0", children }) => {
           letter-spacing: -0.08rem;
           font-weight: 700;
           margin: ${margin};
+        }
+        .anim-text-animate {
+          opacity: 0;
+          transform: translateY(12rem);
           transition: opacity 0.6s linear,
             transform 0.6s cubic-bezier(0.26, 0.67, 0.48, 0.91);
+        }
+        .animated-text-element {
+          opacity: 1;
+          transform: translateY(0);
         }
 
         @media (max-width: 54rem) {
@@ -219,7 +168,7 @@ export const TextTile = ({ margin = "6vh 0", children }) => {
         @media (min-width: 73.7rem) {
           p {
             font-size: calc(4.2rem + 42 * (100vw - 74rem) / 740);
-            margin: calc(5.6rem + 56 * (100vw - 140rem) / 1400) 0 10vh;
+            margin: calc(5.6rem + 56 * (100vw - 140rem) / 1400) 0 0;
           }
         }
 

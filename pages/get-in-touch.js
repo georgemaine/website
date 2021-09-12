@@ -1,8 +1,67 @@
+import { useEffect } from "react";
 import GlobalNav from "../components/GlobalNav";
 import { StickyMediaTile } from "../components/StickyMediaTile";
 import { TextTile, InlineLink } from "../components/TextTile";
 
 export default function GetInTouch() {
+  useEffect(() => {
+    const elements = Array.from(
+      document.querySelectorAll(".anim-text-animate")
+    );
+
+    const thresholds = (steps) =>
+      Array(steps + 1)
+        .fill(0)
+        .map((_, index) => index / steps || 0);
+
+    let previousY = 0;
+    let previousRatio = 0;
+
+    if (!elements.length) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const { isIntersecting } = entry;
+          const currentRatio = entry.intersectionRatio;
+          const currentY = entry.boundingClientRect.y;
+
+          if (isIntersecting && currentRatio > 0.5) {
+            entry.target.classList.add("animated-text-element");
+          }
+
+          // Scrolling down/up
+          if (currentY < previousY) {
+            if (currentRatio > previousRatio && isIntersecting) {
+              console.log("Scrolling down enter");
+            } else {
+              console.log("Scrolling down leave");
+            }
+          } else if (currentY > previousY && isIntersecting) {
+            if (currentRatio < previousRatio && currentRatio < 0.45) {
+              console.log("currentRatio:", currentRatio);
+              entry.target.classList.remove("animated-text-element");
+              console.log("Scrolling up leave");
+            } else {
+              console.log("Scrolling up enter");
+            }
+          }
+
+          previousY = currentY;
+          previousRatio = currentRatio;
+        });
+      },
+      { threshold: thresholds(10) }
+    );
+
+    elements.forEach((el) => {
+      observer.observe(el);
+    });
+
+    return () => {
+      elements.forEach((el) => observer.unobserve(el));
+    };
+  }, []);
   return (
     <main>
       <GlobalNav />
