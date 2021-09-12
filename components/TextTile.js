@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { debounce } from "lodash";
+import useScrollObserver from "./UseScrollObserver";
 
 export const StaticTextTile = ({ children, margin = "18vh 0 12vh" }) => {
   return (
@@ -137,8 +137,28 @@ export const TitleTile = ({ title }) => {
 };
 
 export const TextTile = ({ margin = "6vh 0 0", children }) => {
+  const ref = useRef(null);
+  const [isIntersecting, percentage] = useScrollObserver(
+    ref,
+    "-60px 0px",
+    true,
+    0
+  );
+  useEffect(() => {
+    console.log(
+      "percentage:",
+      isIntersecting ===
+        ref.current.classList.contains("animated-text-element") &&
+        console.log(percentage)
+    );
+  }, [isIntersecting, percentage]);
   return (
-    <p className={"anim-text-animate"}>
+    <p
+      ref={ref}
+      className={`anim-text-animate ${
+        isIntersecting && "animated-text-element"
+      }`}
+    >
       {children}
       <style jsx>{`
         p {

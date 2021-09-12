@@ -5,62 +5,87 @@ import { TextTile, InlineLink } from "../components/TextTile";
 
 export default function GetInTouch() {
   useEffect(() => {
-    const elements = Array.from(
-      document.querySelectorAll(".anim-text-animate")
-    );
-
-    const thresholds = (steps) =>
-      Array(steps + 1)
-        .fill(0)
-        .map((_, index) => index / steps || 0);
-
-    let previousY = 0;
-    let previousRatio = 0;
-
-    if (!elements.length) return;
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          const { isIntersecting } = entry;
-          const currentRatio = entry.intersectionRatio;
-          const currentY = entry.boundingClientRect.y;
-
-          if (isIntersecting && currentRatio > 0.5) {
-            entry.target.classList.add("animated-text-element");
-          }
-
-          // Scrolling down/up
-          if (currentY < previousY) {
-            if (currentRatio > previousRatio && isIntersecting) {
-              console.log("Scrolling down enter");
-            } else {
-              console.log("Scrolling down leave");
-            }
-          } else if (currentY > previousY && isIntersecting) {
-            if (currentRatio < previousRatio && currentRatio < 0.45) {
-              console.log("currentRatio:", currentRatio);
-              entry.target.classList.remove("animated-text-element");
-              console.log("Scrolling up leave");
-            } else {
-              console.log("Scrolling up enter");
-            }
-          }
-
-          previousY = currentY;
-          previousRatio = currentRatio;
-        });
-      },
-      { threshold: thresholds(10) }
-    );
-
-    elements.forEach((el) => {
-      observer.observe(el);
-    });
-
-    return () => {
-      elements.forEach((el) => observer.unobserve(el));
-    };
+    // const elements = Array.from(
+    //   document.querySelectorAll(".anim-text-animate")
+    // );
+    // function inView(el) {
+    //   var rect = el.getBoundingClientRect();
+    //   return (
+    //     rect.top >= 0 &&
+    //     rect.left >= 0 &&
+    //     rect.bottom <=
+    //       (window.innerHeight || document.documentElement.clientHeight) &&
+    //     rect.right <=
+    //       (window.innerWidth || document.documentElement.clientWidth)
+    //   );
+    // }
+    // function onViewChange(el, callback) {
+    //   var old_visible;
+    //   return function () {
+    //     var visible = inView(el);
+    //     if (visible != old_visible) {
+    //       old_visible = visible;
+    //       if (typeof callback == "function") {
+    //         callback();
+    //       }
+    //     }
+    //   };
+    // }
+    // var handler = onViewChange(elements[0], function () {
+    //   if (
+    //     inView(elements[0]) &&
+    //     !elements[0].classList.contains("animated-text-element")
+    //   ) {
+    //     elements[0].classList.add("animated-text-element");
+    //   }
+    // });
+    // window.addEventListener("scroll", handler, {
+    //   passive: true,
+    // });
+    // return () => window.removeEventListener("scroll", handler);
+    // window.addEventListener(
+    //   "DOMContentLoaded",
+    //   elements.forEach((element) => {
+    //     isElementInViewport(element);
+    //   })
+    // );
+    // window.addEventListener(
+    //   "scroll",
+    //   elements.forEach((element) => {
+    //     isElementInViewport(element)
+    //       ? console.log("inView")
+    //       : console.log("OutView");
+    //   })
+    // );
+    // return () => {
+    //   window.removeEventListener(
+    //     "DOMContentLoaded",
+    //     elements.forEach((element) => {
+    //       isElementInViewport(element);
+    //     })
+    //   ),
+    //     window.removeEventListener(
+    //       "scroll",
+    //       elements.forEach((element) => {
+    //         isElementInViewport(element)
+    //           ? console.log("inView")
+    //           : console.log("OutView");
+    //       })
+    //     );
+    // };
+    // if (window.addEventListener) {
+    //   addEventListener('DOMContentLoaded',  elements.forEach((element => {
+    //   isElementInViewport(element)
+    // })), false);
+    //   addEventListener('load',  elements.forEach((element => {
+    //   isElementInViewport(element)
+    // })), false);
+    //   addEventListener('scroll',  elements.forEach((element => {
+    //   isElementInViewport(element)
+    // })), false);
+    //   addEventListener('resize',  elements.forEach((element => {
+    //   isElementInViewport(element)
+    // })), false);
   }, []);
   return (
     <main>
