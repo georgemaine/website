@@ -3,12 +3,12 @@ import Plx from "react-plx";
 const SlideIn = [
   {
     start: "self",
-    duration: "27vh",
-    easing: "easeOutSin",
-    startOffset: "12vh",
+    duration: "15vh",
+    startOffset: "15vh",
+    easing: "easeInOutSin",
     properties: [
       { startValue: 0, endValue: 1, property: "opacity" },
-      { startValue: 70, endValue: 0, property: "translateY" },
+      { startValue: 50, endValue: 0, property: "translateY" },
     ],
   },
 ];
@@ -60,7 +60,7 @@ export const TitleTile = ({ title }) => {
       className={"anim-text-animate"}
       style={{
         opacity: 0,
-        transform: "translateY(70px)",
+        transform: "translateY(50px)",
       }}
     >
       <h1>
@@ -105,7 +105,7 @@ export const TextTile = ({ margin = "6vh 0 0", children }) => {
       className={"anim-text-animate"}
       style={{
         opacity: 0,
-        transform: "translateY(70px)",
+        transform: "translateY(50px)",
       }}
     >
       <p>

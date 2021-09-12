@@ -7,13 +7,13 @@ export default function GetInTouch() {
     <main>
       <GlobalNav />
       <StickyMediaTile
-        src={"georgemaine.jpg"}
+        src={"georgemaine.jpeg"}
         alt={"Georgemaine Lourens"}
         margin={"0 0 9.5rem"}
       />
-      <TextTile>Hello, world — I love tinkering with software.</TextTile>
       <TextTile>
-        Ever since I was a young kid, I was fascinated with how things worked.
+        As you may or may not be aware, I love tinkering with software. Ever
+        since I was a young kid, I was fascinated with how things worked.
       </TextTile>
       <TextTile>
         Can I remake it differently? Would people prefer that better?
