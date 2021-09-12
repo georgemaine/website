@@ -1,9 +1,9 @@
-var latestKnownScrollY = window.pageYOffset || 0,
+const latestKnownScrollY = window.pageYOffset || 0,
   scrollDebounce = false,
   scrollListeners = [],
   scrollListenersLength = 0;
 
-function onRAF() {
+const onRAF = () => {
   for (let i = scrollListenersLength; i--; ) {
     scrollListeners[i]({
       latestKnownScrollY,
@@ -11,9 +11,9 @@ function onRAF() {
   }
 
   scrollDebounce = false;
-}
+};
 
-function onScroll() {
+const onScroll = () => {
   if (scrollDebounce) return;
 
   scrollDebounce = true;
@@ -21,7 +21,7 @@ function onScroll() {
   latestKnownScrollY = window.pageYOffset; // No IE8
 
   requestAnimationFrame(onRAF);
-}
+};
 
 window.addEventListener("scroll", onScroll, { passive: true });
 

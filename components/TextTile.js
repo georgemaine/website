@@ -85,12 +85,9 @@ export const TitleTile = ({ title }) => {
       previousRatio = currentRatio;
     };
 
-    const observer = new IntersectionObserver(
-      _.debounce(callbackFunction, 16),
-      {
-        threshold: thresholdArray(2),
-      }
-    );
+    const observer = new IntersectionObserver(debounce(callbackFunction, 16), {
+      threshold: thresholdArray(2),
+    });
     node && observer.observe(node);
 
     return () => {
@@ -183,12 +180,9 @@ export const TextTile = ({ margin = "6vh 0", children }) => {
       previousRatio = currentRatio;
     };
 
-    const observer = new IntersectionObserver(
-      _.debounce(callbackFunction, 16),
-      {
-        threshold: thresholdArray(2),
-      }
-    );
+    const observer = new IntersectionObserver(debounce(callbackFunction, 16), {
+      threshold: thresholdArray(2),
+    });
     node && observer.observe(node);
 
     return () => {
