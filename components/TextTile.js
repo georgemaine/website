@@ -3,9 +3,9 @@ import Plx from "react-plx";
 const SlideIn = [
   {
     start: "self",
-    duration: "27vh",
+    duration: "20vh",
     easing: "easeOutSin",
-    startOffset: "14vh",
+    startOffset: "15vh",
     properties: [
       { startValue: 0, endValue: 1, property: "opacity" },
       { startValue: 70, endValue: 0, property: "translateY" },
