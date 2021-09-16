@@ -12,22 +12,25 @@ export default function GetInTouch() {
         margin={"0 0 9.5rem"}
       />
       <TextTile>
-        As you may or may not be aware, I love tinkering with software. Ever
-        since I was a young kid, I was fascinated with how things worked.
+        As you may or may not be aware, I’ve always been fascinated with how
+        things work.
       </TextTile>
       <TextTile>
-        Can I remake it differently? Would people prefer that better?
+        Could I remake it differently? Would people prefer that?
       </TextTile>
       <TextTile>
         The part I hated was showing my version to people — Go figure.
       </TextTile>
       <TextTile>
-        Currently, I’m a product designer at Pitch. I work together with
-        incredible people who made me a better person and taught me so much.
+        Currently, I’m an indoor gardener and product designer at{" "}
+        <InlineLink href={"https://pitch.io"} text={"Pitch"} />
       </TextTile>
       <TextTile>
-        And, I still love learning from people their stories. So if you love
-        that too, reach out via{" "}
+        I love surrounding myself with extraordinary people and plants — they
+        teach me so much and make me a better person.
+      </TextTile>
+      <TextTile>
+        If you love that too, reach out via{" "}
         <InlineLink
           href={
             "mailto:georgemaine.lourens@gmail.com?subject=Hello%20%F0%9F%91%8B"
@@ -47,7 +50,7 @@ export default function GetInTouch() {
           width: 86vw;
           margin-left: auto;
           margin-right: auto;
-          padding: calc(3.5vw + 4.8rem) 0;
+          padding: calc(3.5vw + 4.8rem) 0 18vh;
           max-width: 168.8rem;
         }
       `}</style>
