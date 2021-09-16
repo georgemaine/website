@@ -59,27 +59,27 @@ export default function Outlet() {
         alt={"Completed Apple's March Challenge"}
       />
       <TextTile>
-        I love tinkering with things — it empowers me to explore my ideas.
-        Sometimes I get so caught up in projects, and nothing else matters.
+        I love tinkering — it empowers me to explore my ideas. Sometimes I get
+        so caught up in it, and nothing else really matters.
       </TextTile>
       <TextTile>
         And I’ll get so caught up in it that I don’t even realize what time it
         is. Haha.
       </TextTile>
       <TextTile>
-        Inward discussions helped me realize why I could spend hours doing this,
-        thinking it was only a couple of minutes.
+        Inward discussions helped me realize why I could spend hours, thinking
+        it was only a couple of minutes.
       </TextTile>
       <TextTile>
-        It’s just an expression of my emotion, energy, and talent — an outlet.
+        I was expressing my emotion, energy, and talent — it’s an outlet.
       </TextTile>
       <TextTile>
-        So, I came up with this page — Outlet. It’s a real-time feed of those
-        expressions, posted chronologically.
+        So, I came up with Outlet — a real-time feed of those expressions,
+        posted chronologically.
       </TextTile>
       <TextTile>
-        Hopefully, one day this page will tell me a story of how I messed up
-        while exploring my weird ideas and kept going . 🙈
+        Hopefully, one day this page tells the story weird ideas I explored and
+        remind me of how I messed up while doing so and kept going. Haha 🙈
       </TextTile>
       <TitleTile title={"Spring"} />
       <TitleTile title={"2021"} />
