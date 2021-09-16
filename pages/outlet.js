@@ -11,20 +11,23 @@ export default function Outlet() {
       <GlobalNav />
       <StickyMediaTile
         src={"hortus-1.jpeg"}
-        alt={"Hortus Botanicus Amsterdam"}
+        alt={"Visited Hortus Botanicus Amsterdam"}
         margin={"0 0 9.5rem"}
       />
       <StickyMediaTile
         src={"hortus-3.jpeg"}
-        alt={"Hortus Botanicus Amsterdam"}
+        alt={"Visited Hortus Botanicus Amsterdam"}
         width={"50%"}
         margin={"0 0 9.5rem"}
       />
       <StickyMediaTile
         src={"hortus-2.jpeg"}
-        alt={"Hortus Botanicus Amsterdam"}
+        alt={"Visited Hortus Botanicus Amsterdam"}
       />
-      <StickyMediaTile src={"plant.jpeg"} alt={"Phyllanthus Mirabilis."}>
+      <StickyMediaTile
+        src={"plant.jpeg"}
+        alt={"Bought the extraordinary Phyllanthus Mirabilis"}
+      >
         <StickyMediaTileText>
           Meet Phyllanthus Mirabilis. During dusk, the leaves fold together in
           pairs like a butterfly — honestly, I can’t 😍. It’s from{" "}
@@ -51,7 +54,10 @@ export default function Outlet() {
           in the background. Genuinely enjoying the lovely low-key vibes.
         </StickyMediaTileText>
       </StickyMediaTile>
-      <StickyMediaTile src={"hibiki.jpg"} alt={"Hibiki by Suntory Toki"} />
+      <StickyMediaTile
+        src={"hibiki.jpg"}
+        alt={"Finally tasted Hibiki by Suntory Toki"}
+      />
 
       <TitleTile title={"Summer"} />
       <StickyMediaTile
@@ -59,27 +65,26 @@ export default function Outlet() {
         alt={"Completed Apple's March Challenge"}
       />
       <TextTile>
-        I love tinkering — it empowers me to explore my ideas. Sometimes I get
-        so caught up in it, and nothing else really matters.
+        I love tinkering with things — it empowers me to explore my ideas.
       </TextTile>
       <TextTile>
-        And I’ll get so caught up in it that I don’t even realize what time it
-        is. Haha.
+        Sometimes, I get <i>so caught</i> up in tinkering that nothing else
+        really matters — I don’t even realize what time it is 🙈
       </TextTile>
       <TextTile>
-        Inward discussions helped me realize why I could spend hours, thinking
-        it was only a couple of minutes.
+        During the lockdown, I finally realized why I could spend hours
+        tinkering, thinking it’s only a couple of minutes.
       </TextTile>
       <TextTile>
-        I was expressing my emotion, energy, and talent — it’s an outlet.
+        I’m just expressing my emotion, energy, and talent — it’s my outlet.
       </TextTile>
       <TextTile>
-        So, I came up with Outlet — a real-time feed of those expressions,
-        posted chronologically.
+        So, I came up with this page — a real-time feed of some of those
+        expressions, posted chronologically.
       </TextTile>
       <TextTile>
-        Hopefully, one day this page tells the story weird ideas I explored and
-        remind me of how I messed up while doing so and kept going. Haha 🙈
+        Hopefully, one day this page will tell me a story of all the times I
+        messed up and kept going while exploring ideas. Haha.
       </TextTile>
       <TitleTile title={"Spring"} />
       <TitleTile title={"2021"} />
