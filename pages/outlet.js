@@ -59,16 +59,27 @@ export default function Outlet() {
         alt={"Completed Apple's March Challenge"}
       />
       <TextTile>
-        The lockdown was a perfect excuse for me to tinker with software,
-        discover Amsterdam and buy plants — the urban jungle is real.
+        I love tinkering with things — it empowers me to explore my ideas.
+        Sometimes I get so caught up in projects, and nothing else matters.
       </TextTile>
       <TextTile>
-        Inward discussions helped me see that these habits are just expressions
-        of my energy and talent — an outlet.
+        And I’ll get so caught up in it that I don’t even realize what time it
+        is. Haha.
       </TextTile>
       <TextTile>
-        Outlet is a real-time feed of my energy and talents — posted
-        chronologically. Hopefully, one day you’ll discover your outlet too.
+        Inward discussions helped me realize why I could spend hours doing this,
+        thinking it was only a couple of minutes.
+      </TextTile>
+      <TextTile>
+        It’s just an expression of my emotion, energy, and talent — an outlet.
+      </TextTile>
+      <TextTile>
+        So, I came up with this page — Outlet. It’s a real-time feed of those
+        expressions, posted chronologically.
+      </TextTile>
+      <TextTile>
+        Hopefully, one day this page will tell me a story of how I messed up
+        while exploring my weird ideas and kept going . 🙈
       </TextTile>
       <TitleTile title={"Spring"} />
       <TitleTile title={"2021"} />
