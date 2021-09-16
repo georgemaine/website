@@ -53,7 +53,7 @@ export const StaticTextTile = ({ children, margin = "18vh 0 12vh" }) => {
   );
 };
 
-export const TitleTile = ({ title }) => {
+export const TitleTile = ({ children }) => {
   return (
     <Plx
       parallaxData={SlideIn}
@@ -64,7 +64,7 @@ export const TitleTile = ({ title }) => {
       }}
     >
       <h1>
-        {title}
+        {children}
         <style jsx>{`
           h1 {
             font-size: 4.2rem;

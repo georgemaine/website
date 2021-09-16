@@ -24,6 +24,11 @@ export default function Outlet() {
         src={"hortus-2.jpeg"}
         alt={"Visited Hortus Botanicus Amsterdam"}
       />
+      <TitleTile>
+        “No one succeeds alone.”
+        <br /> — Lauren Gallo
+      </TitleTile>
+
       <StickyMediaTile
         src={"plant.jpeg"}
         alt={"Bought the extraordinary Phyllanthus Mirabilis"}
@@ -58,8 +63,7 @@ export default function Outlet() {
         src={"hibiki.jpg"}
         alt={"Finally tasted Hibiki by Suntory Toki"}
       />
-
-      <TitleTile title={"Summer"} />
+      <TitleTile>Summer</TitleTile>
       <StickyMediaTile
         src={"apple-watch-march-challenge.jpeg"}
         alt={"Completed Apple's March Challenge"}
@@ -86,8 +90,8 @@ export default function Outlet() {
         Hopefully, one day this page will tell me a story of all the times I
         messed up and kept going while exploring ideas. Haha.
       </TextTile>
-      <TitleTile title={"Spring"} />
-      <TitleTile title={"2021"} />
+      <TitleTile>Spring</TitleTile>
+      <TitleTile>2021</TitleTile>
       <style jsx>{`
         main {
           width: 86vw;
