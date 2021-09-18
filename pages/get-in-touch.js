@@ -1,10 +1,12 @@
 import GlobalNav from "../components/GlobalNav";
+import Head from "../components/Head";
 import { StickyMediaTile } from "../components/StickyMediaTile";
 import { TextTile, InlineLink } from "../components/TextTile";
 
 export default function GetInTouch() {
   return (
     <main>
+      <Head />
       <GlobalNav />
       <StickyMediaTile
         src={"georgemaine.jpeg"}

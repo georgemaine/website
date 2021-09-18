@@ -1,4 +1,5 @@
 import GlobalNav from "../components/GlobalNav";
+import Head from "../components/Head";
 
 export default function MovieList() {
   return (
@@ -10,6 +11,7 @@ export default function MovieList() {
         padding: 30,
       }}
     >
+      <Head />
       <GlobalNav />
     </main>
   );

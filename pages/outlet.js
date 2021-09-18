@@ -1,4 +1,5 @@
 import GlobalNav from "../components/GlobalNav";
+import Head from "../components/Head";
 import {
   StickyMediaTile,
   StickyMediaTileText,
@@ -8,6 +9,7 @@ import { InlineLink, TitleTile, TextTile } from "../components/TextTile";
 export default function Outlet() {
   return (
     <main>
+      <Head />
       <GlobalNav />
       <StickyMediaTile
         src={"hortus-1.jpeg"}

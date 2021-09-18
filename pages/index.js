@@ -1,6 +1,7 @@
 import GlobalNav from "../components/GlobalNav";
 import Plx from "react-plx";
 import { useRef, useState, useEffect } from "react";
+import Head from "../components/Head";
 
 const FadeinTextTween = [
   {
@@ -395,6 +396,7 @@ export default function Components() {
   return (
     <>
       <main>
+        <Head />
         <VideoBackgroundHeroSection />
         {VideoBackgroundSectionItems.map((node, index) => {
           return (
