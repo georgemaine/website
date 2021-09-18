@@ -1,16 +1,13 @@
 import NextHead from "next/head";
 
 export default function Head({
-  title = `Georgemaine Lourens - Indoor gardener and Product Designer at Pitch @ 2021 Outlet`,
+  title = `Georgemaine Lourens — indoor gardener and product designer at Pitch`,
   description = "Product designer with a passion for taking on complex problems and designing elegant, simple solutions that surprise and delight users. My goal is to create experiences that influence the industry, aswell as people’s lives. By constantly focusing on the consumer, I create products that are not only amazing to look at, but also intuitive and useful to people worldwide.",
-  image = "og-image.jpeg",
+  image = "https://georgemaine.com/og-image.jpg",
 }) {
   return (
     <NextHead>
-      <title>
-        Georgemaine Lourens - Indoor gardener and Product Designer at Pitch @
-        2021 Outlet
-      </title>
+      <title>{title}</title>
       <link rel='icon' href='favicon.svg' />
       <link rel='mask-icon' href='mask-icon.svg' color='var(--black)' />
       <link rel='apple-touch-icon' href='apple-touch-icon.png' />
