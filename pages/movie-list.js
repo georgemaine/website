@@ -3,7 +3,7 @@ import Head from "../components/Head";
 import { Poster } from "../components/ShowTile";
 import Rebound from "../components/Rebound";
 
-const Posters = [
+const MovieCollection = [
   {
     name: "The morning show",
     image: "show1.jpg",
@@ -50,7 +50,7 @@ export default function MovieList() {
     <main>
       <Head />
       <GlobalNav />
-      {Posters.map((value, i) => {
+      {MovieCollection.map((value, i) => {
         const scale = selectScaleIndex[i];
         const x = calculateXOffsetForIndex(i, scale);
         const opacity = selectOpacityIndex[i];
