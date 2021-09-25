@@ -41,6 +41,14 @@ var viewportHeight = 0;
 const selectScaleIndex = [1, 0.9, 0.82, 0.74, 0.68];
 const selectOffsetScale = [1, 0.86, 0.86, 0.78, 0.77];
 const selectOpacityIndex = [0.03, 0.14, 0.77, 0.67, 0.58];
+// FIXME: Go from hardcoded values into calculated
+const xPosVariants = [
+  [0, 19, 35, 46, 55],
+  [19, 0, -19, -35, -46],
+  [35 / 2, 19 / 2, 0, -19 / 2, -35 / 2],
+  [46 / 3, 35 / 3, 19 / 3, 0, -19 / 3],
+  [55 / 4, 46 / 4, 35 / 4, 19 / 4, 0],
+];
 
 var springSystem = new rebound.SpringSystem();
 var mainSpring = springSystem.createSpring();
@@ -58,18 +66,14 @@ var isCurrentlyDetectingGesture = false;
 var endOfDetectionTimer;
 var restartDetectionTimer;
 
+// Utils
 const calculateXOffsetForIndex = (index, scale) => {
   const imageWidth = 225;
   const offset = imageWidth - imageWidth * scale;
   return offset * selectOffsetScale[index];
 };
-const xPosVariants = [
-  [0, 19, 35, 46, 55],
-  [19, 0, -19, -35, -46],
-  [35 / 2, 19 / 2, 0, -19 / 2, -35 / 2],
-  [46 / 3, 35 / 3, 19 / 3, 0, -19 / 3],
-  [55 / 4, 46 / 4, 35 / 4, 19 / 4, 0],
-];
+
+
 
 const transitionForProgressInRange = (progress, startValue, endValue) => {
   return startValue + progress * (endValue - startValue);
@@ -166,7 +170,6 @@ export default function MovieList() {
 
     mainSpring.addListener({
       onSpringUpdate: function (spring) {
-        // Progress from 0 to n
         var progress = spring.getCurrentValue();
 
         // Other transitions
@@ -200,10 +203,6 @@ export default function MovieList() {
             );
             captions[i].style["opacity"] = captionOpacity;
           }
-     
-
-          // Hide the off-screen images so they don't reveal themselves if you resize the browser
-          // val.style["opacity"] = slideProgress > 0 ? 1.0 : 0.0;
         });
       },
     });
