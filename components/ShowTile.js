@@ -1,3 +1,5 @@
+import { useEffect, useRef } from "react";
+
 export const Poster = ({
   src = "show1.jpg",
   style,
@@ -7,9 +9,10 @@ export const Poster = ({
   index,
 }) => {
   const url = `url(/media/${src})`;
+
   return (
-    <figure style={style}>
-      <figcaption>
+    <figure style={style} className='movie'>
+      <figcaption className='caption'>
         <strong>{caption}</strong>
         <br />
         {description}
