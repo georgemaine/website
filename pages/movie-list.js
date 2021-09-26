@@ -2,7 +2,13 @@ import GlobalNav from "../components/GlobalNav";
 import Head from "../components/Head";
 import { Poster } from "../components/ShowTile";
 import rebound from "rebound";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
+import {
+  progressForValueInRange,
+  calculateXOffsetForIndex,
+  transitionForProgressInRange,
+  transitionForProgressInSteps,
+} from "../components/utils";
 
 const log = (element) => {
   console.log("element:", element);
@@ -43,7 +49,6 @@ var viewportWidth = 0;
 var viewportHeight = 0;
 
 const selectScaleIndex = [1, 0.9, 0.82, 0.74, 0.68];
-const selectOffsetScale = [1, 0.86, 0.86, 0.78, 0.77];
 const selectOpacityIndex = [0.03, 0.14, 0.77, 0.67, 0.58];
 
 // FIXME: Go from hardcoded values into calculated
@@ -95,15 +100,6 @@ var endOfDetectionTimer;
 var restartDetectionTimer;
 
 // Utils
-const calculateXOffsetForIndex = (index, scale) => {
-  const imageWidth = 225;
-  const offset = imageWidth - imageWidth * scale;
-  return offset * selectOffsetScale[index];
-};
-
-const transitionForProgressInRange = (progress, startValue, endValue) => {
-  return startValue + progress * (endValue - startValue);
-};
 
 const mapValueFromRangeToRange = (value, fromLow, fromHigh, toLow, toHigh) => {
   const fromRangeSize = fromHigh - fromLow;
@@ -123,6 +119,169 @@ const setMovieIndex = (i, animated) => {
   } else {
     mainSpring.setCurrentValue(i);
   }
+};
+
+const handlePanning = () => {
+  const ref = document.querySelector(".collection");
+  ref.addEventListener(
+    "touchstart",
+    function (e) {
+      var touch = e.touches[0];
+      startDragging(touch.pageX);
+    },
+    false
+  );
+
+  ref.addEventListener(
+    "touchmove",
+    function (e) {
+      e.preventDefault(); // Stop vertical rubberbanding on iOS
+
+      var touch = e.touches[0];
+      continueDragging(touch.pageX);
+    },
+    false
+  );
+
+  ref.addEventListener(
+    "touchend",
+    function (e) {
+      endTrackingInputMode("drag");
+    },
+    false
+  );
+
+  ref.addEventListener(
+    "touchcancel",
+    function (e) {
+      endTrackingInputMode("drag");
+    },
+    false
+  );
+
+  ref.addEventListener(
+    "mousedown",
+    function (e) {
+      startDragging(e.clientX);
+    },
+    false
+  );
+
+  ref.addEventListener(
+    "mousemove",
+    function (e) {
+      if (isDragging) continueDragging(e.clientX);
+    },
+    false
+  );
+
+  ref.addEventListener(
+    "mouseup",
+    function (e) {
+      endTrackingInputMode("drag");
+    },
+    false
+  );
+
+  ref.addEventListener(
+    "mouseleave",
+    function (e) {
+      if (isDragging) endTrackingInputMode("drag");
+    },
+    false
+  );
+
+  window.addEventListener(
+    "wheel",
+    function (e) {
+      scrollWithVelocity(e.wheelDeltaX);
+    },
+    false
+  );
+
+  return () => {
+    ref.removeEventListener(
+      "touchstart",
+      function (e) {
+        var touch = e.touches[0];
+        startDragging(touch.pageX);
+      },
+      false
+    );
+
+    ref.removeEventListener(
+      "touchmove",
+      function (e) {
+        e.preventDefault(); // Stop vertical rubberbanding on iOS
+
+        var touch = e.touches[0];
+        continueDragging(touch.pageX);
+      },
+      false
+    );
+
+    ref.removeEventListener(
+      "touchend",
+      function (e) {
+        endTrackingInputMode("drag");
+      },
+      false
+    );
+
+    ref.removeEventListener(
+      "touchcancel",
+      function (e) {
+        endTrackingInputMode("drag");
+      },
+      false
+    );
+
+    ref.removeEventListener(
+      "mousedown",
+      function (e) {
+        startDragging(e.clientX);
+      },
+      false
+    );
+
+    ref.removeEventListener(
+      "mousemove",
+      function (e) {
+        if (isDragging) continueDragging(e.clientX);
+      },
+      false
+    );
+
+    ref.removeEventListener(
+      "mouseup",
+      function (e) {
+        endTrackingInputMode("drag");
+      },
+      false
+    );
+
+    ref.removeEventListener(
+      "mouseleave",
+      function (e) {
+        if (isDragging) endTrackingInputMode("drag");
+      },
+      false
+    );
+    ref.removeEventListener(
+      "mouseleave",
+      function (e) {
+        if (isDragging) endTrackingInputMode("drag");
+      },
+      false
+    );
+    window.removeEventListener(
+      "wheel",
+      function (e) {
+        scrollWithVelocity(e.wheelDeltaX);
+      },
+      false
+    );
+  };
 };
 
 const handleArrowKeys = () => {
@@ -251,32 +410,38 @@ export default function MovieList() {
       },
     });
 
+    handlePanning();
+
     handleArrowKeys();
   }, []);
+
   return (
     <main>
       <Head />
       <GlobalNav />
-      {collection.map((value, i) => {
-        const scale = selectScaleIndex[i];
-        const x = calculateXOffsetForIndex(i, scale);
-        const opacity = selectOpacityIndex[i];
-        const z = -1 * i;
-        const rotate = i * 2;
-        return (
-          <Poster
-            key={i}
-            src={value.image}
-            caption={value.name}
-            description={value.description}
-            opacity={opacity}
-            index={i}
-            style={{
-              transform: `translate3d(${x}px, 0,${z}px) rotate(${rotate}deg) scale(${scale})`,
-            }}
-          />
-        );
-      })}
+      <ul className='collection'>
+        {collection.map((value, i) => {
+          const scale = selectScaleIndex[i];
+          const x = calculateXOffsetForIndex(i, scale);
+          const opacity = selectOpacityIndex[i];
+          const z = -1 * i;
+          const rotate = i * 2;
+          return (
+            <li key={i}>
+              <Poster
+                src={value.image}
+                caption={value.name}
+                description={value.description}
+                opacity={opacity}
+                index={i}
+                style={{
+                  transform: `translate3d(${x}px, 0,${z}px) rotate(${rotate}deg) scale(${scale})`,
+                }}
+              />
+            </li>
+          );
+        })}
+      </ul>
       <style jsx>{`
         main {
           position: fixed;
@@ -290,58 +455,85 @@ export default function MovieList() {
     </main>
   );
 }
-const progressForValueInRange = (value, startValue, endValue) => {
-  return (value - startValue) / (endValue - startValue);
+
+const startDragging = (x) => {
+  lastX = x;
+  isDragging = true;
+  viewportWidth = 225;
+  mainSpring.setAtRest();
 };
 
-const transitionForProgressInSteps = (progress, steps) => {
-  var transition = -1;
-  var normalizedProgress;
+const continueDragging = (x) => {
+  panVelocity = x - lastX;
+  lastX = x;
 
-  // Bail if there's fewer than two steps
-  if (steps.length < 2) {
-    console.log("Bail if there's fewer than two steps");
-    return transition;
+  continueTrackingWithDelta(panVelocity);
+};
+
+const continueTrackingWithDelta = (delta) => {
+  panVelocity = delta;
+
+  var progress = progressForValueInRange(delta, 0, -viewportWidth);
+
+  var currentValue = mainSpring.getCurrentValue();
+
+  // Rubberband when beyond the scroll boundaries
+  if (
+    currentValue + progress < 0 ||
+    currentValue + progress > collection.length - 1
+  ) {
+    progress *= 0.5;
   }
 
-  // If the progress is before the beginning of the range, extrapolate from the first and second steps.
-  if (progress < 0) {
-    transition = transitionForProgressInRange(progress, steps[0], steps[1]);
+  mainSpring.setCurrentValue(currentValue + progress);
+  mainSpring.setAtRest();
+};
+
+const endTrackingInputMode = (inputMode) => {
+  var currentPosition = mainSpring.getCurrentValue();
+  var startPosition = endValue;
+
+  var positionDelta = currentPosition - startPosition;
+  var swipingTowardsCurrentPage =
+    (positionDelta > 0 && panVelocity > 0) ||
+    (positionDelta < 0 && panVelocity < 0);
+  var passedVelocityTolerance = Math.abs(panVelocity) > 3;
+  var passedDistanceTolerance = Math.abs(positionDelta) > 0.3;
+
+  if (inputMode == "desktop-scroll") {
+    passedDistanceTolerance = true;
   }
 
-  // If the progress is after the end of the range, extrapolate from the second last and last steps.
-  else if (progress > steps.length - 1) {
-    normalizedProgress = progressForValueInRange(
-      progress,
-      Math.floor(progress),
-      Math.floor(progress) + 1
-    );
-    normalizedProgress = normalizedProgress + 1;
-    transition = transitionForProgressInRange(
-      normalizedProgress,
-      steps[steps.length - 2],
-      steps[steps.length - 1]
-    );
+  var shouldAdvance =
+    (passedDistanceTolerance || passedVelocityTolerance) &&
+    !swipingTowardsCurrentPage;
+  var directionIsForward = panVelocity <= 0;
+
+  if (shouldAdvance) {
+    var targetIndex;
+
+    if (currentPosition == startPosition) {
+      // Current position is integral i.e. no tracking
+      targetIndex = directionIsForward
+        ? currentPosition + 1
+        : currentPosition - 1;
+    } else {
+      targetIndex = directionIsForward
+        ? Math.ceil(currentPosition)
+        : Math.floor(currentPosition);
+    }
+
+    setMovieIndex(targetIndex, true);
+  } else {
+    setMovieIndex(startPosition, true);
   }
 
-  // Supress potential NaNs
-  else if (progress == steps.length - 1 || progress == 0) {
-    transition = steps[progress];
-  }
-
-  // Otherwise interpolate between steps
-  else {
-    normalizedProgress = progressForValueInRange(
-      progress,
-      Math.floor(progress),
-      Math.floor(progress) + 1
-    );
-    transition = transitionForProgressInRange(
-      normalizedProgress,
-      steps[Math.floor(progress)],
-      steps[Math.floor(progress) + 1]
-    );
-  }
-
-  return transition;
+  var normalizedVelocity = progressForValueInRange(
+    panVelocity,
+    0,
+    -viewportWidth
+  );
+  mainSpring.setVelocity(normalizedVelocity * 30);
+  panVelocity = 0;
+  isDragging = false;
 };

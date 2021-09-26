@@ -38,6 +38,11 @@ export const Poster = ({
           display: flex;
           flex-direction: column;
           justify-content: flex-end;
+          cursor: grab;
+        }
+
+        figure:active {
+          cursor: grabbing;
         }
 
         figcaption {
@@ -65,6 +70,7 @@ export const Poster = ({
           z-index: 1;
           border-radius: 1.8rem;
           opacity: ${opacity};
+          user-select: none;
         }
       `}</style>
     </figure>
