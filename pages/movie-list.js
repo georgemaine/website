@@ -47,44 +47,35 @@ const selectOffsetScale = [1, 0.86, 0.86, 0.78, 0.77];
 const selectOpacityIndex = [0.03, 0.14, 0.77, 0.67, 0.58];
 
 // FIXME: Go from hardcoded values into calculated
-const zVariants = {
-  0: [0, -1, -2, -3, -4, -5],
-  1: [1, 0, -1, -2, -3, -4],
-  2: [-2, -1, 0, -1, -2, -3],
-  3: [-3, -2, -1, 0, -1, -2],
-  4: [-4, -3, -2, -1, 0, -1],
+const zSteps = {
+  0: [0, -15, -20, -3, -4, -15],
+  1: [-15, 0, -1, -20, -3, -4],
+  2: [-20, -1, 0, -1, -20, -3],
+  3: [-3, -20, -1, 0, -1, -20],
+  4: [-4, -3, -20, -1, 0, -1],
 };
 
-const rotateVariants = {
-  0: [0, -2, -4, -6, -8, -8],
-  1: [2, 0, -2, -4, -6, -8],
-  2: [4, 2, 0, -2, -4, -6],
-  3: [6, 4, 2, 0, -2, -4],
-  4: [8, 6, 4, 2, 0, -2],
+const xSteps = {
+  0: [-0, -19, -35, -46, -55],
+  1: [19, -0, -19, -35, -46],
+  2: [35, 19, -0, -19, -35],
+  3: [46, 35, 19, -0, -19],
+  4: [55, 46, 35, 19, -0],
 };
 
-const xVariants = {
-  0: [0, 19, 35, 46, 55],
-  1: [19, 0, -19, -35, -46],
-  2: [35 / 2, 19 / 2, 0, -19 / 2, -35 / 2],
-  3: [46 / 3, 35 / 3, 19 / 3, 0, -19 / 3],
-  4: [55 / 4, 46 / 4, 35 / 4, 19 / 4, 0],
+const rotateSteps = {
+  0: [-0, -2, -4, -6, -8],
+  1: [2, -0, -2, -4, -6],
+  2: [4, 2, 0, -2, -4],
+  3: [6, 4, 2, 0, -2],
+  4: [8, 6, 4, 2, 0],
 };
-
-const scaleStartValue = {
-  0: [1, 1, 0.9, 0.82, 0.74, 0.68],
-  1: [0.9, 0.9, 1, 0.9, 0.82],
-  2: [0.82, 0.82, 0.9, 1, 0.9],
-  3: [0.74, 0.74, 0.82, 0.9, 1],
-  4: [0.68, 0.68, 0.74, 0.82, 0.9],
-};
-
-const scaleEndValue = {
-  0: [0.9, 0.1, 0.08 / 2, 0.08 / 3, 0.06 / 4],
-  1: [1, -0.1, 0.1 / 2, 0.08 / 3, 0.08 / 4],
-  2: [0.9, -0.08, -0.1 / 2, 0.1 / 3, 0.08 / 4],
-  3: [0.82, -0.08, -0.08 / 2, -0.1 / 3, 0.1 / 4],
-  4: [0.74, -0.06, -0.08 / 2, -0.08 / 3, -0.1 / 4],
+const scaleSteps = {
+  0: [1, 0.9, 0.82, 0.74, 0.68],
+  1: [0.9, 1, 0.9, 0.82, 0.74],
+  2: [0.82, 0.9, 1, 0.9, 0.82],
+  3: [0.74, 0.82, 0.9, 1, 0.9],
+  4: [0.68, 0.74, 0.82, 0.9, 1],
 };
 
 var springSystem = new rebound.SpringSystem();
@@ -217,32 +208,20 @@ export default function MovieList() {
           var slideProgress = 1 - Math.abs(progress - i);
 
           // Slide and transition the images
-          var x =
-            xVariants[i][i] -
-            progress * xVariants[endValue > 5 ? 5 : endValue][i];
-          var rotate =
-            rotateVariants[i][i] -
-            progress * rotateVariants[endValue > 5 ? 5 : endValue][i];
 
           // Filter the progress through an ease out curve and use that to control scaling
           var easeOutSlideProgress =
             slideProgress < 1 ? slideProgress * (2 - slideProgress) : 1;
-          var scale =
-            scaleStartValue[i][endValue] -
-            progress * scaleEndValue[i][endValue];
-
-          // if (progress > 1 && i === 4) {
-          //   log(scaleStartValue[i][endValue]);
-          //   log(scaleEndValue[i][endValue]);
-          //   log(progress);
-          //   log(progress * scaleEndValue[i][endValue]);
-          // }
+          var rotate = transitionForProgressInSteps(progress, rotateSteps[i]);
+          var scale = transitionForProgressInSteps(progress, scaleSteps[i]);
+          var x = transitionForProgressInSteps(progress, xSteps[i]);
+          var z = transitionForProgressInSteps(progress, zSteps[i]);
 
           val.style["webkitTransform"] =
             "translate3d(" +
             x +
             "px, 0," +
-            i * -1 +
+            z +
             "px) scale(" +
             scale +
             ") rotate(" +
@@ -252,7 +231,7 @@ export default function MovieList() {
             "translate3d(" +
             x +
             "px, 0," +
-            i * -1 +
+            z +
             "px) scale(" +
             scale +
             ") rotate(" +
@@ -311,3 +290,58 @@ export default function MovieList() {
     </main>
   );
 }
+const progressForValueInRange = (value, startValue, endValue) => {
+  return (value - startValue) / (endValue - startValue);
+};
+
+const transitionForProgressInSteps = (progress, steps) => {
+  var transition = -1;
+  var normalizedProgress;
+
+  // Bail if there's fewer than two steps
+  if (steps.length < 2) {
+    console.log("Bail if there's fewer than two steps");
+    return transition;
+  }
+
+  // If the progress is before the beginning of the range, extrapolate from the first and second steps.
+  if (progress < 0) {
+    transition = transitionForProgressInRange(progress, steps[0], steps[1]);
+  }
+
+  // If the progress is after the end of the range, extrapolate from the second last and last steps.
+  else if (progress > steps.length - 1) {
+    normalizedProgress = progressForValueInRange(
+      progress,
+      Math.floor(progress),
+      Math.floor(progress) + 1
+    );
+    normalizedProgress = normalizedProgress + 1;
+    transition = transitionForProgressInRange(
+      normalizedProgress,
+      steps[steps.length - 2],
+      steps[steps.length - 1]
+    );
+  }
+
+  // Supress potential NaNs
+  else if (progress == steps.length - 1 || progress == 0) {
+    transition = steps[progress];
+  }
+
+  // Otherwise interpolate between steps
+  else {
+    normalizedProgress = progressForValueInRange(
+      progress,
+      Math.floor(progress),
+      Math.floor(progress) + 1
+    );
+    transition = transitionForProgressInRange(
+      normalizedProgress,
+      steps[Math.floor(progress)],
+      steps[Math.floor(progress) + 1]
+    );
+  }
+
+  return transition;
+};
