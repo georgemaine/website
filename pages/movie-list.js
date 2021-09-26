@@ -4,6 +4,10 @@ import { Poster } from "../components/ShowTile";
 import rebound from "rebound";
 import { useEffect } from "react";
 
+const log = (element) => {
+  console.log("element:", element);
+};
+
 const collection = [
   {
     name: "The morning show",
@@ -41,14 +45,47 @@ var viewportHeight = 0;
 const selectScaleIndex = [1, 0.9, 0.82, 0.74, 0.68];
 const selectOffsetScale = [1, 0.86, 0.86, 0.78, 0.77];
 const selectOpacityIndex = [0.03, 0.14, 0.77, 0.67, 0.58];
+
 // FIXME: Go from hardcoded values into calculated
-const xPosVariants = [
-  [0, 19, 35, 46, 55],
-  [19, 0, -19, -35, -46],
-  [35 / 2, 19 / 2, 0, -19 / 2, -35 / 2],
-  [46 / 3, 35 / 3, 19 / 3, 0, -19 / 3],
-  [55 / 4, 46 / 4, 35 / 4, 19 / 4, 0],
-];
+const zVariants = {
+  0: [0, -1, -2, -3, -4, -5],
+  1: [1, 0, -1, -2, -3, -4],
+  2: [-2, -1, 0, -1, -2, -3],
+  3: [-3, -2, -1, 0, -1, -2],
+  4: [-4, -3, -2, -1, 0, -1],
+};
+
+const rotateVariants = {
+  0: [0, -2, -4, -6, -8, -8],
+  1: [2, 0, -2, -4, -6, -8],
+  2: [4, 2, 0, -2, -4, -6],
+  3: [6, 4, 2, 0, -2, -4],
+  4: [8, 6, 4, 2, 0, -2],
+};
+
+const xVariants = {
+  0: [0, 19, 35, 46, 55],
+  1: [19, 0, -19, -35, -46],
+  2: [35 / 2, 19 / 2, 0, -19 / 2, -35 / 2],
+  3: [46 / 3, 35 / 3, 19 / 3, 0, -19 / 3],
+  4: [55 / 4, 46 / 4, 35 / 4, 19 / 4, 0],
+};
+
+const scaleStartValue = {
+  0: [1, 1, 0.9, 0.82, 0.74, 0.68],
+  1: [0.9, 0.9, 1, 0.9, 0.82],
+  2: [0.82, 0.82, 0.9, 1, 0.9],
+  3: [0.74, 0.74, 0.82, 0.9, 1],
+  4: [0.68, 0.68, 0.74, 0.82, 0.9],
+};
+
+const scaleEndValue = {
+  0: [0.9, 0.1, 0.08 / 2, 0.08 / 3, 0.06 / 4],
+  1: [1, -0.1, 0.1 / 2, 0.08 / 3, 0.08 / 4],
+  2: [0.9, -0.08, -0.1 / 2, 0.1 / 3, 0.08 / 4],
+  3: [0.82, -0.08, -0.08 / 2, -0.1 / 3, 0.1 / 4],
+  4: [0.74, -0.06, -0.08 / 2, -0.08 / 3, -0.1 / 4],
+};
 
 var springSystem = new rebound.SpringSystem();
 var mainSpring = springSystem.createSpring();
@@ -73,10 +110,15 @@ const calculateXOffsetForIndex = (index, scale) => {
   return offset * selectOffsetScale[index];
 };
 
-
-
 const transitionForProgressInRange = (progress, startValue, endValue) => {
   return startValue + progress * (endValue - startValue);
+};
+
+const mapValueFromRangeToRange = (value, fromLow, fromHigh, toLow, toHigh) => {
+  const fromRangeSize = fromHigh - fromLow;
+  const toRangeSize = toHigh - toLow;
+  const valueScale = (value - fromLow) / fromRangeSize;
+  return toLow + valueScale * toRangeSize;
 };
 
 const setMovieIndex = (i, animated) => {
@@ -138,8 +180,7 @@ const handleArrowKeys = () => {
   // When rubberbanding, snap back to the correct rest value on key up
   const handleKeyUp = (e) => {
     var currentIndex = endValue;
-  
- 
+
     if (e.key == "ArrowLeft" && isRubberbanding) {
       // Left arrow key
       setMovieIndex(currentIndex - 1, true);
@@ -166,7 +207,6 @@ export default function MovieList() {
   useEffect(() => {
     const collection = document.querySelectorAll(".movie");
     const captions = document.querySelectorAll(".caption");
-  
 
     mainSpring.addListener({
       onSpringUpdate: function (spring) {
@@ -175,24 +215,49 @@ export default function MovieList() {
         // Other transitions
         collection.forEach(function (val, i) {
           var slideProgress = 1 - Math.abs(progress - i);
-         
-    
-          // Slide and scale the images
-          var x = xPosVariants[i].[i] - progress * xPosVariants[endValue > 5 ? 5 : endValue].[i];
+
+          // Slide and transition the images
+          var x =
+            xVariants[i][i] -
+            progress * xVariants[endValue > 5 ? 5 : endValue][i];
+          var rotate =
+            rotateVariants[i][i] -
+            progress * rotateVariants[endValue > 5 ? 5 : endValue][i];
 
           // Filter the progress through an ease out curve and use that to control scaling
           var easeOutSlideProgress =
             slideProgress < 1 ? slideProgress * (2 - slideProgress) : 1;
-          var scale = transitionForProgressInRange(
-            easeOutSlideProgress,
-            0.9,
-            1.0
-          );
+          var scale =
+            scaleStartValue[i][endValue] -
+            progress * scaleEndValue[i][endValue];
+
+          // if (progress > 1 && i === 4) {
+          //   log(scaleStartValue[i][endValue]);
+          //   log(scaleEndValue[i][endValue]);
+          //   log(progress);
+          //   log(progress * scaleEndValue[i][endValue]);
+          // }
 
           val.style["webkitTransform"] =
-            "translate3d(" + x + "px, 0, 0) scale(" + scale + ")";
+            "translate3d(" +
+            x +
+            "px, 0," +
+            i * -1 +
+            "px) scale(" +
+            scale +
+            ") rotate(" +
+            rotate +
+            "deg)";
           val.style["MozTransform"] =
-            "translate3d(" + x + "px, 0, 0) scale(" + scale + ")";
+            "translate3d(" +
+            x +
+            "px, 0," +
+            i * -1 +
+            "px) scale(" +
+            scale +
+            ") rotate(" +
+            rotate +
+            "deg)";
 
           // Fade in the caption when nearing rest
           if (i < captions.length) {
