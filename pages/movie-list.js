@@ -53,11 +53,11 @@ const selectOpacityIndex = [0.03, 0.14, 0.77, 0.67, 0.58];
 
 // FIXME: Go from hardcoded values into calculated
 const zSteps = {
-  0: [0, -15, -20, -3, -4, -15],
-  1: [-15, 0, -1, -20, -3, -4],
-  2: [-20, -1, 0, -1, -20, -3],
-  3: [-3, -20, -1, 0, -1, -20],
-  4: [-4, -3, -20, -1, 0, -1],
+  0: [0, -15, -30, -45, -60, -75],
+  1: [-15, 0, -15, -30, -45, -60],
+  2: [-30, -15, 0, -15, -30, -45],
+  3: [-45, -30, -15, 0, -15, -30],
+  4: [-60, -45, -30, -15, 0, -15],
 };
 
 const xSteps = {
@@ -94,19 +94,8 @@ mainSpring.setSpringConfig(
 var lastX = 0;
 var panVelocity = 0;
 var isDragging = false;
-var shouldStartDetectingGesture = true;
-var isCurrentlyDetectingGesture = false;
-var endOfDetectionTimer;
-var restartDetectionTimer;
 
 // Utils
-
-const mapValueFromRangeToRange = (value, fromLow, fromHigh, toLow, toHigh) => {
-  const fromRangeSize = fromHigh - fromLow;
-  const toRangeSize = toHigh - toLow;
-  const valueScale = (value - fromLow) / fromRangeSize;
-  return toLow + valueScale * toRangeSize;
-};
 
 const setMovieIndex = (i, animated) => {
   if (i < 0) i = 0;
@@ -191,13 +180,13 @@ const handlePanning = () => {
     false
   );
 
-  window.addEventListener(
-    "wheel",
-    function (e) {
-      scrollWithVelocity(e.wheelDeltaX);
-    },
-    false
-  );
+  // window.addEventListener(
+  //   "wheel",
+  //   function (e) {
+  //     scrollWithVelocity(e.wheelDeltaX);
+  //   },
+  //   false
+  // );
 
   return () => {
     ref.removeEventListener(
@@ -274,13 +263,13 @@ const handlePanning = () => {
       },
       false
     );
-    window.removeEventListener(
-      "wheel",
-      function (e) {
-        scrollWithVelocity(e.wheelDeltaX);
-      },
-      false
-    );
+    // window.removeEventListener(
+    //   "wheel",
+    //   function (e) {
+    //     scrollWithVelocity(e.wheelDeltaX);
+    //   },
+    //   false
+    // );
   };
 };
 
@@ -399,11 +388,20 @@ export default function MovieList() {
 
           // Fade in the caption when nearing rest
           if (i < captions.length) {
-            var captionOpacity = transitionForProgressInRange(
+            const captionOpacity = transitionForProgressInRange(
               slideProgress,
               -8.0,
               1.0
             );
+
+            const shadowOpacity = transitionForProgressInRange(
+              slideProgress,
+              -8.0,
+              0.09
+            );
+            collection[i].style[
+              "box-shadow"
+            ] = `10px 10px 20px 0px rgba(0,0,0, ${shadowOpacity}),-10px 0 20px 0px rgba(0,0,0, ${shadowOpacity})`;
             captions[i].style["opacity"] = captionOpacity;
           }
         });

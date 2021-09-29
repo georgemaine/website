@@ -33,7 +33,7 @@ export const Poster = ({
           border-radius: 1.8rem;
           padding: 0;
           box-shadow: ${index === 0
-            ? "0 1.2rem 4rem 0 var(--dark-border)"
+            ? "10px 10px 20px 0px var(--dark-border),-10px 0 20px 0px var(--dark-border)"
             : null};
           display: flex;
           flex-direction: column;
