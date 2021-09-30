@@ -2,7 +2,7 @@ import GlobalNav from "../components/GlobalNav";
 import Head from "../components/Head";
 import { Poster } from "../components/ShowTile";
 import rebound from "rebound";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   progressForValueInRange,
   calculateXOffsetForIndex,
@@ -343,6 +343,7 @@ const handleArrowKeys = () => {
 };
 
 export default function MovieList() {
+  const [isExpanded, setIsExpanded] = useState(false);
   useEffect(() => {
     const collection = document.querySelectorAll(".movie");
     const captions = document.querySelectorAll(".caption");
@@ -432,8 +433,11 @@ export default function MovieList() {
                 description={value.description}
                 opacity={opacity}
                 index={i}
+                onClick={() => setIsExpanded(!isExpanded)}
                 style={{
-                  transform: `translate3d(${x}px, 0,${z}px) rotate(${rotate}deg) scale(${scale})`,
+                  transform: `translate3d(${
+                    isExpanded ? -100 : x
+                  }px, 0,${z}px) rotate(${rotate}deg) scale(${scale})`,
                 }}
               />
             </li>

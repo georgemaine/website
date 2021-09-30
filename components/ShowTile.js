@@ -1,5 +1,3 @@
-import { useEffect, useRef } from "react";
-
 export const Poster = ({
   src = "show1.jpg",
   style,
@@ -7,11 +5,12 @@ export const Poster = ({
   caption,
   description,
   index,
+  onClick,
 }) => {
   const url = `url(/media/${src})`;
 
   return (
-    <figure style={style} className='movie'>
+    <figure style={style} className='movie' onClick={onClick}>
       <figcaption className='caption'>
         <strong>{caption}</strong>
         <br />
@@ -39,6 +38,7 @@ export const Poster = ({
           flex-direction: column;
           justify-content: flex-end;
           cursor: grab;
+          user-select: initial;
         }
 
         figure:active {

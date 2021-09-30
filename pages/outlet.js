@@ -1,3 +1,4 @@
+import { useEffect, useRef, useState } from "react";
 import GlobalNav from "../components/GlobalNav";
 import Head from "../components/Head";
 import {
@@ -6,11 +7,134 @@ import {
 } from "../components/StickyMediaTile";
 import { InlineLink, TitleTile, TextTile } from "../components/TextTile";
 
+const ScrollBarBackground = () => {
+  return (
+    <div>
+      <style jsx>{`
+        div {
+          background: var(--black);
+          opacity: 0.2;
+          border-radius: 0.4rem;
+          width: 0.4rem;
+          position: absolute;
+          top: 0;
+          bottom: 0;
+        }
+      `}</style>
+    </div>
+  );
+};
+
+const getOffsetTop = (el) => {
+  const rect = el.getBoundingClientRect();
+  const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+  return rect.top + scrollTop;
+};
+
+const modulate = (value, rangeA, rangeB, limit = false) => {
+  const [fromLow, fromHigh] = rangeA;
+  const [toLow, toHigh] = rangeB;
+  const result =
+    toLow + ((value - fromLow) / (fromHigh - fromLow)) * (toHigh - toLow);
+
+  if (limit === true) {
+    if (toLow < toHigh) {
+      if (result < toLow) {
+        return toLow;
+      }
+      if (result > toHigh) {
+        return toHigh;
+      }
+    } else {
+      if (result > toLow) {
+        return toLow;
+      }
+      if (result < toHigh) {
+        return toHigh;
+      }
+    }
+  }
+
+  return result;
+};
+
+const ScrollThumb = () => {
+  const [progress, setProgress] = useState(0);
+  useEffect(() => {
+    const ref = document.querySelector(".outlet");
+    const scrollHandler = () => {
+      const scrollPos = window.scrollY;
+      const startPos = getOffsetTop(ref);
+      const endPos = startPos + ref.clientHeight;
+      const progress = modulate(scrollPos, [startPos, endPos], [0, 1], true);
+      setProgress(progress);
+    };
+
+    if (ref) {
+      document.body.addEventListener("touchmove", scrollHandler);
+      window.addEventListener("scroll", scrollHandler);
+      scrollHandler();
+    }
+
+    console.log("progress", progress);
+  }, [progress]);
+  return (
+    <div style={{ transform: `translateY(${progress * 5.2}rem)` }}>
+      <style jsx>{`
+        div {
+          height: 1.2rem;
+          width: 0.4rem;
+          background: var(--black);
+          border-radius: 0.4rem;
+          position: absolute;
+          margin: auto 0;
+        }
+      `}</style>
+    </div>
+  );
+};
+
+const ScrollBar = ({ children }) => {
+  return (
+    <div>
+      {children}
+      <style jsx>{`
+        div {
+          width: 0.4rem;
+          height: 6.4rem;
+          right: 1.2rem;
+          position: fixed;
+          top: 0;
+          bottom: 0;
+          margin: auto 0;
+          z-index: 40;
+          /* animation: scrollbar-show 0.7s ease 0.6s 1 normal both; */
+        }
+
+        @keyframes scrollbar-show {
+          0% {
+            opacity: 0;
+          }
+
+          to {
+            opacity: 1;
+          }
+        }
+      `}</style>
+    </div>
+  );
+};
+
 export default function Outlet() {
   return (
-    <main>
+    <main className='outlet'>
       <Head />
       <GlobalNav />
+      <ScrollBar>
+        <ScrollBarBackground />
+        <ScrollThumb />
+      </ScrollBar>
       <StickyMediaTile
         src={"hortus-1.jpeg"}
         alt={"Visited Hortus Botanicus Amsterdam"}
@@ -101,6 +225,12 @@ export default function Outlet() {
           margin-right: auto;
           padding: calc(3.5vw + 4.8rem) 0;
           max-width: 168.8rem;
+        }
+
+        ::-webkit-scrollbar {
+          width: 0;
+          background: transparent;
+          display: none;
         }
       `}</style>
     </main>
