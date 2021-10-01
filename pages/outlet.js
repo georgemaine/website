@@ -225,6 +225,7 @@ export default function Outlet() {
           margin-right: auto;
           padding: calc(3.5vw + 4.8rem) 0;
           max-width: 168.8rem;
+          min-height: 100vh;
         }
 
         ::-webkit-scrollbar {
