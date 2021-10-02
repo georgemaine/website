@@ -1,32 +1,30 @@
 import { useEffect, useState } from "react";
 
-const ProgressBar = () => {
-  const [progress, setProgress] = useState(0);
+const ScrollTrack = () => {
+  const [scrollProgress, setScrollProgress] = useState(0);
 
   useEffect(() => {
+    const ref = document.querySelector(".scrollContainer");
     const handleScroll = () => {
-      const scrollPosition =
-        document.body.scrollTop || document.documentElement.scrollTop;
-      const height =
-        document.documentElement.scrollHeight -
-        document.documentElement.clientHeight;
+      const scrollPosition = ref.scrollTop;
+      const height = ref.scrollHeight - ref.clientHeight;
       const scrolled = scrollPosition / height;
 
-      setProgress(scrolled);
+      setScrollProgress(scrolled);
     };
 
-    document.body.addEventListener("touchmove", handleScroll);
-    window.addEventListener("scroll", handleScroll);
+    ref.addEventListener("touchmove", handleScroll);
+    ref.addEventListener("scroll", handleScroll);
     handleScroll();
 
     return () => {
-      document.body.removeEventListener("touchmove", handleScroll);
-      window.removeEventListener("scroll", handleScroll);
+      ref.removeEventListener("touchmove", handleScroll);
+      ref.removeEventListener("scroll", handleScroll);
     };
-  }, [progress]);
+  }, [scrollProgress]);
 
   return (
-    <div style={{ transform: `translate3d(0, ${progress * 4.8}rem, 0)` }}>
+    <div style={{ transform: `translate3d(0, ${scrollProgress * 4.8}rem, 0)` }}>
       <style jsx>{`
         div {
           height: 1.2rem;
@@ -46,13 +44,14 @@ const ProgressBar = () => {
   );
 };
 
-const ProgressContainer = ({ children }) => {
+export const ScrollBar = () => {
   return (
     <div>
-      {children}
+      <ScrollTrack />
       <style jsx>{`
         div {
           width: 0.4rem;
+          border-radius: 0.4rem;
           background: var(--dark-border);
           height: 6rem;
           right: 1.2rem;
@@ -80,13 +79,5 @@ const ProgressContainer = ({ children }) => {
         }
       `}</style>
     </div>
-  );
-};
-
-export const ScrollBar = () => {
-  return (
-    <ProgressContainer>
-      <ProgressBar />
-    </ProgressContainer>
   );
 };
