@@ -17,12 +17,12 @@ export const progressForValueInRange = (value, startValue, endValue) => {
 };
 
 export const transitionForProgressInSteps = (progress, steps) => {
+  // FIXME: clean up to ES6
   var transition = -1;
   var normalizedProgress;
 
   // Bail if there's fewer than two steps
   if (steps.length < 2) {
-    console.log("Bail if there's fewer than two steps");
     return transition;
   }
 

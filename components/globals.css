@@ -45,6 +45,12 @@ body {
   color: var(--text-dark);
   background: var(--bg-light);
   font-variant-ligatures: common-ligatures;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+body::-webkit-scrollbar {
+  display: none;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -62,7 +68,8 @@ body {
   --text-dark: rgb(17, 17, 17);
   --bg-light: rgb(242, 242, 242);
   --bg-dark: rgb(22, 22, 23);
-  --dark-border: rgba(0, 0, 0, 0.09);
+  --dark-border: rgba(0, 0, 0, 0.15);
+  --light-border: rgba(255, 255, 255, 0.15);
 }
 
 @supports (color: color(display-p3 1 1 1)) {
@@ -73,6 +80,7 @@ body {
     --text-dark: color(display-p3 0.0667 0.0667 0.0667/1);
     --bg-light: color(display-p3 0.9491 0.949 0.9489);
     --bg-dark: color(display-p3 0.0863 0.0863 0.0898);
-    --dark-border: color(display-p3 0 0 0/0.09);
+    --dark-border: color(display-p3 0 0 0/0.15);
+    --light-border: color(display-p3 1.0001 1 0.9999 / 0.15);
   }
 }
