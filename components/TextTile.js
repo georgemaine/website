@@ -135,17 +135,19 @@ export const TextWithTransition = ({ children }) => {
   useEffect(() => {
     const media = document.querySelectorAll("video");
     const images = Array.from(document.images);
-    const windowHeight = window.innerHeight;
-    const textPosition = textRef.current.getBoundingClientRect().top;
 
     if (images.length > 0) {
       onImagesLoaded(images).then(function () {
+        const windowHeight = window.innerHeight;
+        const textPosition = textRef.current.getBoundingClientRect().top;
         setScreenHeight(windowHeight);
         setHeight(textPosition);
       });
     }
     if (media.length > 0) {
       onVideoLoaded(media[0], function () {
+        const windowHeight = window.innerHeight;
+        const textPosition = textRef.current.getBoundingClientRect().top;
         setScreenHeight(windowHeight);
         setHeight(textPosition);
       });
@@ -250,17 +252,19 @@ export const TitleTile = ({ children }) => {
   useEffect(() => {
     const media = document.querySelectorAll("video");
     const images = Array.from(document.images);
-    const windowHeight = window.innerHeight;
-    const textPosition = textRef.current.getBoundingClientRect().top;
 
     if (images.length > 0) {
       onImagesLoaded(images).then(function () {
+        const windowHeight = window.innerHeight;
+        const textPosition = textRef.current.getBoundingClientRect().top;
         setScreenHeight(windowHeight);
         setHeight(textPosition);
       });
     }
     if (media.length > 0) {
       onVideoLoaded(media[0], function () {
+        const windowHeight = window.innerHeight;
+        const textPosition = textRef.current.getBoundingClientRect().top;
         setScreenHeight(windowHeight);
         setHeight(textPosition);
       });

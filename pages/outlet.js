@@ -18,22 +18,7 @@ const alwaysSunday = "/media/always-sunday.jpg";
 const hibiki = "/media/hibiki.jpg";
 const appleWatchMarchChallenge = "/media/apple-watch-march-challenge.jpeg";
 
-const imageList = [
-  hortus1,
-  hortus2,
-  hortus3,
-  plant,
-  alwaysSunday,
-  hibiki,
-  appleWatchMarchChallenge,
-];
-
 export default function Outlet() {
-  useEffect(() => {
-    imageList.forEach((image) => {
-      new Image().src = image;
-    });
-  }, []);
   return (
     // FIXME: Make reuable without inline styles
     <div style={{ minHeight: "100vh" }}>
