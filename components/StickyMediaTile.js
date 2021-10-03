@@ -1,5 +1,4 @@
 /* eslint-disable @next/next/no-img-element */
-
 const StickyMediaTileWrapper = ({ children, margin = "0 0 20rem" }) => {
   return (
     <div>
@@ -109,6 +108,7 @@ const StickyMediaImage = ({ src, alt, imgWidth, imgHeight }) => {
       <style jsx>{`
         img {
           max-width: 100%;
+          display: block;
           height: auto;
           aspect-ratio: attr(width) / attr(height);
         }

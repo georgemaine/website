@@ -51,16 +51,22 @@ export default function Outlet() {
                 src={"hortus-1.jpeg"}
                 alt={"Visited Hortus Botanicus Amsterdam"}
                 margin={"0 0 9.5rem"}
+                imgHeight={1450 * 2}
+                imgWidth={1947 * 2}
               />
               <StickyMediaTile
                 src={"hortus-3.jpeg"}
                 alt={"Visited Hortus Botanicus Amsterdam"}
                 width={"50%"}
                 margin={"0 0 9.5rem"}
+                imgHeight={3024}
+                imgWidth={4032}
               />
               <StickyMediaTile
                 src={"hortus-2.jpeg"}
                 alt={"Visited Hortus Botanicus Amsterdam"}
+                imgHeight={2851}
+                imgWidth={3997}
               />
               <TitleTile>
                 “No one succeeds alone.”
@@ -70,6 +76,8 @@ export default function Outlet() {
               <StickyMediaTile
                 src={"plant.jpeg"}
                 alt={"Bought the extraordinary Phyllanthus Mirabilis"}
+                imgWidth={4032}
+                imgHeight={3024}
               >
                 <TextWithTransition>
                   Meet Phyllanthus Mirabilis. During dusk, the leaves fold
@@ -86,6 +94,8 @@ export default function Outlet() {
                 src={"always-sunday.jpg"}
                 alt={"Always Sunday by Music"}
                 width={"50%"}
+                imgWidth={1158}
+                imgHeight={1158}
               >
                 <TextWithTransition>
                   Lately, most of my weekends start with playing{" "}
@@ -102,11 +112,15 @@ export default function Outlet() {
               <StickyMediaTile
                 src={"hibiki.jpg"}
                 alt={"Finally tasted Hibiki by Suntory Toki"}
+                imgWidth={4032}
+                imgHeight={3024}
               />
               <TitleTile>Summer</TitleTile>
               <StickyMediaTile
                 src={"apple-watch-march-challenge.jpeg"}
                 alt={"Completed Apple's March Challenge"}
+                imgWidth={2875}
+                imgHeight={3833}
               />
               <TextWithTransition>
                 I love tinkering with things — it empowers me to explore my
