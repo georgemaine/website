@@ -40,14 +40,14 @@ export const TextWithTransition = ({ children }) => {
       }
     };
 
-    scrollerRef.addEventListener("touchmove", scrollerHandler);
-    scrollerRef.addEventListener("scroll", scrollerHandler);
-    scrollerHandler();
+    // scrollerRef.addEventListener("touchmove", scrollerHandler);
+    // scrollerRef.addEventListener("scroll", scrollerHandler);
+    // scrollerHandler();
 
-    return () => {
-      scrollerRef.removeEventListener("touchmove", scrollerHandler);
-      scrollerRef.removeEventListener("scroll", scrollerHandler);
-    };
+    // return () => {
+    //   scrollerRef.removeEventListener("touchmove", scrollerHandler);
+    //   scrollerRef.removeEventListener("scroll", scrollerHandler);
+    // };
   }, [height, onScreen, screenHeight]);
   return (
     <p
