@@ -1,32 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import { useOnScreen } from "./utils";
 
-const modulate = (value, rangeA, rangeB, limit = false) => {
-  const [fromLow, fromHigh] = rangeA;
-  const [toLow, toHigh] = rangeB;
-  const result =
-    toLow + ((value - fromLow) / (fromHigh - fromLow)) * (toHigh - toLow);
-
-  if (limit === true) {
-    if (toLow < toHigh) {
-      if (result < toLow) {
-        return toLow;
-      }
-      if (result > toHigh) {
-        return toHigh;
-      }
-    } else {
-      if (result > toLow) {
-        return toLow;
-      }
-      if (result < toHigh) {
-        return toHigh;
-      }
-    }
-  }
-
-  return result;
-};
+const modulate = (value, inMin, inMax, outMin, outMax) =>
+  ((value - inMin) * (outMax - outMin)) / (inMax - inMin) + outMin;
 
 export const TextWithTransition = ({ children }) => {
   const [height, setHeight] = useState(0);
@@ -48,7 +24,7 @@ export const TextWithTransition = ({ children }) => {
       const value = scrollerRef.scrollTop;
       const startValue = Math.floor(height - screenHeight * 0.85);
       const endValue = Math.floor(height - screenHeight * 0.7);
-      const yProgress = modulate(value, [startValue, endValue], [50, 0], true);
+      const yProgress = modulate(value, startValue, endValue, 50, 0);
       if (onScreen) {
         // const opacityProgress = modulate(
         //   value,
