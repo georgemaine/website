@@ -10,8 +10,10 @@ export const TextWithTransition = ({ children }) => {
   const onScreen = useOnScreen(textRef, "-50% 0px 0px 0px");
 
   useEffect(() => {
-    setScreenHeight(window.innerHeight);
-    setHeight(textRef.current.getBoundingClientRect().top);
+    if (textRef) {
+      setScreenHeight(window.innerHeight);
+      setHeight(textRef.current.getBoundingClientRect().top);
+    }
   }, []);
 
   useEffect(() => {
@@ -40,13 +42,15 @@ export const TextWithTransition = ({ children }) => {
       }
     };
 
-    scrollerRef.addEventListener("touchmove", scrollerHandler);
-    scrollerRef.addEventListener("scroll", scrollerHandler);
+    if (scrollerRef) {
+      scrollerRef.addEventListener("touchmove", scrollerHandler);
+      scrollerRef.addEventListener("scroll", scrollerHandler);
 
-    return () => {
-      scrollerRef.removeEventListener("touchmove", scrollerHandler);
-      scrollerRef.removeEventListener("scroll", scrollerHandler);
-    };
+      return () => {
+        scrollerRef.removeEventListener("touchmove", scrollerHandler);
+        scrollerRef.removeEventListener("scroll", scrollerHandler);
+      };
+    }
   }, [height, onScreen, screenHeight]);
 
   return (
