@@ -1,5 +1,32 @@
 import { useEffect, useRef, useState } from "react";
-import { modulate, useOnScreen } from "./utils";
+import { useOnScreen } from "./utils";
+
+const modulate = (value, rangeA, rangeB, limit = false) => {
+  const [fromLow, fromHigh] = rangeA;
+  const [toLow, toHigh] = rangeB;
+  const result =
+    toLow + ((value - fromLow) / (fromHigh - fromLow)) * (toHigh - toLow);
+
+  if (limit === true) {
+    if (toLow < toHigh) {
+      if (result < toLow) {
+        return toLow;
+      }
+      if (result > toHigh) {
+        return toHigh;
+      }
+    } else {
+      if (result > toLow) {
+        return toLow;
+      }
+      if (result < toHigh) {
+        return toHigh;
+      }
+    }
+  }
+
+  return result;
+};
 
 export const TextWithTransition = ({ children }) => {
   const [height, setHeight] = useState(0);
