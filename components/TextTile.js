@@ -1,10 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { modulate, useOnScreen } from "./utils";
 
-export const TextWithTransition = ({
-  children,
-  scrollerContainer = ".scrollContainer",
-}) => {
+export const StaticTextTile = ({ children }) => {
   const [height, setHeight] = useState(0);
   const [screenHeight, setScreenHeight] = useState(0);
   const [y, setY] = useState(5);
@@ -13,17 +10,12 @@ export const TextWithTransition = ({
   const onScreen = useOnScreen(textRef, "-50% 0px 0px 0px");
 
   useEffect(() => {
-    const objRef = textRef.current;
-    const scrollPosition = objRef.getBoundingClientRect().top;
-
-    if (objRef) {
-      setScreenHeight(window.innerHeight);
-      setHeight(scrollPosition);
-    }
+    setScreenHeight(window.innerHeight);
+    setHeight(textRef.current.getBoundingClientRect().top);
   }, []);
 
   useEffect(() => {
-    const scrollerRef = document.querySelector(scrollerContainer);
+    const scrollerRef = document.querySelector(".scrollContainer");
 
     const scrollerHandler = () => {
       const value = scrollerRef.scrollTop;
@@ -52,13 +44,11 @@ export const TextWithTransition = ({
     scrollerRef.addEventListener("scroll", scrollerHandler);
     scrollerHandler();
 
-      return () => {
-        scrollerRef.removeEventListener("touchmove", scrollerHandler);
-        scrollerRef.removeEventListener("scroll", scrollerHandler);
-      };
-    }
-  }, [height, onScreen, screenHeight, scrollerContainer]);
-
+    return () => {
+      scrollerRef.removeEventListener("touchmove", scrollerHandler);
+      scrollerRef.removeEventListener("scroll", scrollerHandler);
+    };
+  }, [height, onScreen, screenHeight]);
   return (
     <p
       ref={textRef}
@@ -71,7 +61,7 @@ export const TextWithTransition = ({
           line-height: 1.08;
           letter-spacing: -0.08rem;
           font-weight: 700;
-          margin: 6vh 0 0;
+          margin: 5vh 0;
         }
 
         @media (max-width: 54rem) {
@@ -132,6 +122,44 @@ export const TitleTile = ({ children }) => {
         }
       `}</style>
     </h1>
+  );
+};
+
+export const TextTile = ({ margin = "6vh 0 0", children }) => {
+  return (
+    <p>
+      {children}
+      <style jsx>{`
+        p {
+          font-size: 2.8rem;
+          line-height: 1.08;
+          letter-spacing: -0.08rem;
+          font-weight: 700;
+          margin: ${margin};
+        }
+
+        @media (max-width: 54rem) {
+          p {
+            font-size: calc(2.8rem + 28 * (100vw - 37.5rem) / 375);
+          }
+        }
+
+        @media (min-width: 73.7rem) {
+          p {
+            font-size: calc(4.2rem + 42 * (100vw - 74rem) / 740);
+            margin: calc(5.6rem + 56 * (100vw - 140rem) / 1400) 0 0;
+          }
+        }
+
+        @media (min-width: 126rem) {
+          p {
+            font-size: calc(5.6rem + 56 * (100vw - 140rem) / 1400);
+            letter-spacing: -0.015rem;
+            line-height: 1.05;
+          }
+        }
+      `}</style>
+    </p>
   );
 };
 
