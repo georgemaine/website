@@ -31,20 +31,19 @@ export const TextWithTransition = ({ children }) => {
           [0, 1],
           true
         );
-        console.log("hello");
         setY(yProgress);
         setOpacity(opacityProgress);
       }
     };
 
-    // scrollerRef.addEventListener("touchmove", scrollerHandler);
-    // scrollerRef.addEventListener("scroll", scrollerHandler);
-    // scrollerHandler();
+    scrollerRef.addEventListener("touchmove", scrollerHandler);
+    scrollerRef.addEventListener("scroll", scrollerHandler);
+    scrollerHandler();
 
-    // return () => {
-    //   scrollerRef.removeEventListener("touchmove", scrollerHandler);
-    //   scrollerRef.removeEventListener("scroll", scrollerHandler);
-    // };
+    return () => {
+      scrollerRef.removeEventListener("touchmove", scrollerHandler);
+      scrollerRef.removeEventListener("scroll", scrollerHandler);
+    };
   }, [height, onScreen, screenHeight]);
   return (
     <p
