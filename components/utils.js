@@ -1,3 +1,5 @@
+import { useState, useEffect } from "react";
+
 export const calculateXOffsetForIndex = (index, scale) => {
   const selectOffsetScale = [1, 0.86, 0.86, 0.78, 0.77];
   const imageWidth = 225;
@@ -66,4 +68,54 @@ export const transitionForProgressInSteps = (progress, steps) => {
   }
 
   return transition;
+};
+
+export const modulate = (value, rangeA, rangeB, limit = false) => {
+  const [fromLow, fromHigh] = rangeA;
+  const [toLow, toHigh] = rangeB;
+  const result =
+    toLow + ((value - fromLow) / (fromHigh - fromLow)) * (toHigh - toLow);
+
+  if (limit === true) {
+    if (toLow < toHigh) {
+      if (result < toLow) {
+        return toLow;
+      }
+      if (result > toHigh) {
+        return toHigh;
+      }
+    } else {
+      if (result > toLow) {
+        return toLow;
+      }
+      if (result < toHigh) {
+        return toHigh;
+      }
+    }
+  }
+
+  return result;
+};
+
+export const useOnScreen = (ref, rootMargin = "0px") => {
+  const [isIntersecting, setIntersecting] = useState(false);
+
+  useEffect(() => {
+    const objRef = ref.current;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIntersecting(entry.isIntersecting);
+      },
+      {
+        rootMargin,
+      }
+    );
+    if (objRef) {
+      observer.observe(objRef);
+    }
+    return () => {
+      observer.unobserve(objRef);
+    };
+  }, [ref, rootMargin]);
+  return isIntersecting;
 };

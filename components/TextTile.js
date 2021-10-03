@@ -1,21 +1,59 @@
-import Plx from "react-plx";
+import { useEffect, useRef, useState } from "react";
+import { modulate, useOnScreen } from "./utils";
 
-const SlideIn = [
-  {
-    start: "self",
-    duration: "15vh",
-    startOffset: "15vh",
-    easing: "easeInOutSin",
-    properties: [
-      { startValue: 0, endValue: 1, property: "opacity" },
-      { startValue: 50, endValue: 0, property: "translateY" },
-    ],
-  },
-];
+export const TextWithTransition = ({ children }) => {
+  const [height, setHeight] = useState(0);
+  const [screenHeight, setScreenHeight] = useState(0);
+  const [y, setY] = useState(5);
+  const [opacity, setOpacity] = useState(0);
+  const textRef = useRef();
+  const onScreen = useOnScreen(textRef, "-50% 0px 0px 0px");
 
-export const StaticTextTile = ({ children, margin = "18vh 0 12vh" }) => {
+  useEffect(() => {
+    setScreenHeight(window.innerHeight);
+    setHeight(textRef.current.getBoundingClientRect().top);
+  }, []);
+
+  useEffect(() => {
+    const scrollerRef = document.querySelector(".scrollContainer");
+
+    const scrollerHandler = (e) => {
+      const value = e.target.scrollTop;
+      const startValue = Math.floor(height - screenHeight * 0.85);
+      const endValue = Math.floor(height - screenHeight * 0.7);
+
+      if (onScreen) {
+        const yProgress = modulate(
+          value,
+          [startValue, endValue],
+          [50, 0],
+          true
+        );
+        const opacityProgress = modulate(
+          value,
+          [startValue, endValue],
+          [0, 1],
+          true
+        );
+        setY(yProgress);
+        setOpacity(opacityProgress);
+      }
+    };
+
+    scrollerRef.addEventListener("touchmove", scrollerHandler);
+    scrollerRef.addEventListener("scroll", scrollerHandler);
+
+    return () => {
+      scrollerRef.removeEventListener("touchmove", scrollerHandler);
+      scrollerRef.removeEventListener("scroll", scrollerHandler);
+    };
+  }, [height, onScreen, screenHeight]);
+
   return (
-    <p>
+    <p
+      ref={textRef}
+      style={{ transform: `translate3d(0, ${y / 10}rem, 0)`, opacity: opacity }}
+    >
       {children}
       <style jsx>{`
         p {
@@ -23,9 +61,7 @@ export const StaticTextTile = ({ children, margin = "18vh 0 12vh" }) => {
           line-height: 1.08;
           letter-spacing: -0.08rem;
           font-weight: 700;
-          margin: ${margin};
-          transition: opacity 0.6s linear,
-            transform 0.6s cubic-bezier(0.26, 0.67, 0.48, 0.91);
+          margin: 6vh 0 0;
         }
 
         @media (max-width: 54rem) {
@@ -55,93 +91,37 @@ export const StaticTextTile = ({ children, margin = "18vh 0 12vh" }) => {
 
 export const TitleTile = ({ children }) => {
   return (
-    <Plx
-      parallaxData={SlideIn}
-      className={"anim-text-animate"}
-      style={{
-        opacity: 0,
-        transform: "translateY(50px)",
-      }}
-    >
-      <h1>
-        {children}
-        <style jsx>{`
+    <h1>
+      {children}
+      <style jsx>{`
+        h1 {
+          font-size: 4.2rem;
+          line-height: 1.08;
+          letter-spacing: -0.08rem;
+          font-weight: 700;
+          margin: 18vh 0;
+          transition: opacity 0.6s linear,
+            transform 0.6s cubic-bezier(0.26, 0.67, 0.48, 0.91);
+        }
+        @media (max-width: 54rem) {
           h1 {
-            font-size: 4.2rem;
-            line-height: 1.08;
-            letter-spacing: -0.08rem;
-            font-weight: 700;
-            margin: 18vh 0;
-            transition: opacity 0.6s linear,
-              transform 0.6s cubic-bezier(0.26, 0.67, 0.48, 0.91);
+            font-size: calc(4.2rem + 42 * (100vw - 37.5rem) / 375);
           }
-          @media (max-width: 54rem) {
-            h1 {
-              font-size: calc(4.2rem + 42 * (100vw - 37.5rem) / 375);
-            }
+        }
+        @media (min-width: 73.7rem) {
+          h1 {
+            font-size: calc(5.6rem + 56 * (100vw - 74rem) / 740);
+            flex-shrink: 0;
+            margin: 20rem 0;
           }
-          @media (min-width: 73.7rem) {
-            h1 {
-              font-size: calc(5.6rem + 56 * (100vw - 74rem) / 740);
-              flex-shrink: 0;
-              margin: 20rem 0;
-            }
+        }
+        @media screen and (min-width: 177rem) {
+          h1 {
+            font-size: 18rem;
           }
-          @media screen and (min-width: 177rem) {
-            h1 {
-              font-size: 18rem;
-            }
-          }
-        `}</style>
-      </h1>
-    </Plx>
-  );
-};
-
-export const TextTile = ({ margin = "6vh 0 0", children }) => {
-  return (
-    <Plx
-      parallaxData={SlideIn}
-      className={"anim-text-animate"}
-      style={{
-        opacity: 0,
-        transform: "translateY(50px)",
-      }}
-    >
-      <p>
-        {children}
-        <style jsx>{`
-          p {
-            font-size: 2.8rem;
-            line-height: 1.08;
-            letter-spacing: -0.08rem;
-            font-weight: 700;
-            margin: ${margin};
-          }
-
-          @media (max-width: 54rem) {
-            p {
-              font-size: calc(2.8rem + 28 * (100vw - 37.5rem) / 375);
-            }
-          }
-
-          @media (min-width: 73.7rem) {
-            p {
-              font-size: calc(4.2rem + 42 * (100vw - 74rem) / 740);
-              margin: calc(5.6rem + 56 * (100vw - 140rem) / 1400) 0 0;
-            }
-          }
-
-          @media (min-width: 126rem) {
-            p {
-              font-size: calc(5.6rem + 56 * (100vw - 140rem) / 1400);
-              letter-spacing: -0.015rem;
-              line-height: 1.05;
-            }
-          }
-        `}</style>
-      </p>
-    </Plx>
+        }
+      `}</style>
+    </h1>
   );
 };
 
