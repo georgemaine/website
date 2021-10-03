@@ -49,10 +49,12 @@ export default function GetInTouch() {
                 playsInline
                 preload='auto'
                 muted
+                width={1080 * 2}
+                height={1920 * 2}
                 style={{
-                  width: "100%",
+                  maxWidth: "100%",
+                  height: "auto",
                   borderRadius: "1rem",
-                  border: "1px solid var(--dark-border)",
                 }}
               >
                 <source src={"media/georgemaine.mp4"} type='video/mp4' />
