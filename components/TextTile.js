@@ -1,5 +1,22 @@
 import { useEffect, useRef, useState } from "react";
 import { modulate, useOnScreen, onVideoLoaded, onImagesLoaded } from "./utils";
+import { throttle } from "lodash";
+
+const useRaf = (onFrame) => {
+  const requestRef = React.useRef();
+  const startTimeRef = React.useRef();
+  const callback = (time) => {
+    if (!startTimeRef.current) startTimeRef.current = time;
+    const progress = time - startTimeRef.current;
+    onFrame(progress);
+    requestRef.current = requestAnimationFrame(callback);
+  };
+
+  React.useEffect(() => {
+    requestRef.current = requestAnimationFrame(callback);
+    return () => cancelAnimationFrame(requestRef.current);
+  }, []);
+};
 
 export const TextWithTransition = ({ children }) => {
   const [height, setHeight] = useState(0);
@@ -57,27 +74,19 @@ export const TextWithTransition = ({ children }) => {
         setOpacity(opacityProgress);
       }
     };
-    let currentRequest;
-    scrollerRef.addEventListener("touchmove", function () {
-      cancelAnimationFrame(currentRequest);
-      currentRequest = requestAnimationFrame(scrollerHandler);
-    });
-    scrollerRef.addEventListener("scroll", function () {
-      cancelAnimationFrame(currentRequest);
-      currentRequest = requestAnimationFrame(scrollerHandler);
-    });
+
+    scrollerRef.addEventListener("touchmove", throttle(scrollerHandler), 16);
+    scrollerRef.addEventListener("scroll", throttle(scrollerHandler), 16);
     window.addEventListener("resize", scrollerHandler);
     scrollerHandler();
 
     return () => {
-      scrollerRef.removeEventListener("touchmove", function () {
-        cancelAnimationFrame(currentRequest);
-        currentRequest = requestAnimationFrame(scrollerHandler);
-      });
-      scrollerRef.removeEventListener("scroll", function () {
-        cancelAnimationFrame(currentRequest);
-        currentRequest = requestAnimationFrame(scrollerHandler);
-      });
+      scrollerRef.removeEventListener(
+        "touchmove",
+        throttle(scrollerHandler),
+        16
+      );
+      scrollerRef.removeEventListener("scroll", throttle(scrollerHandler), 16);
       window.removeEventListener("resize", scrollerHandler);
     };
   }, [height, onScreen, screenHeight]);

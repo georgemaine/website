@@ -1,3 +1,4 @@
+import { throttle } from "lodash";
 import { useEffect, useState } from "react";
 
 const ScrollTrack = () => {
@@ -12,13 +13,13 @@ const ScrollTrack = () => {
       setProgress(scrolled);
     };
 
-    ref.addEventListener("touchmove", handleScroll);
-    ref.addEventListener("scroll", handleScroll);
+    ref.addEventListener("touchmove", throttle(handleScroll), 16);
+    ref.addEventListener("scroll", throttle(handleScroll), 16);
     handleScroll();
 
     return () => {
-      ref.removeEventListener("touchmove", handleScroll);
-      ref.removeEventListener("scroll", handleScroll);
+      ref.removeEventListener("touchmove", throttle(handleScroll), 16);
+      ref.removeEventListener("scroll", throttle(handleScroll), 16);
     };
   }, [progress]);
 
