@@ -17,28 +17,28 @@ export const TextWithTransition = ({ children }) => {
   useEffect(() => {
     const scrollerRef = document.querySelector(".scroll-container");
 
-    const scrollerHandler = () => {
-      const value = scrollerRef.scrollTop;
-      const startValue = Math.floor(height - screenHeight * 0.85);
-      const endValue = Math.floor(height - screenHeight * 0.7);
+    // const scrollerHandler = () => {
+    //   const value = scrollerRef.scrollTop;
+    //   const startValue = Math.floor(height - screenHeight * 0.85);
+    //   const endValue = Math.floor(height - screenHeight * 0.7);
 
-      if (onScreen) {
-        const yProgress = modulate(
-          value,
-          [startValue, endValue],
-          [50, 0],
-          true
-        );
-        const opacityProgress = modulate(
-          value,
-          [startValue, endValue],
-          [0, 1],
-          true
-        );
-        setY(yProgress);
-        setOpacity(opacityProgress);
-      }
-    };
+    //   if (onScreen) {
+    //     const yProgress = modulate(
+    //       value,
+    //       [startValue, endValue],
+    //       [50, 0],
+    //       true
+    //     );
+    //     const opacityProgress = modulate(
+    //       value,
+    //       [startValue, endValue],
+    //       [0, 1],
+    //       true
+    //     );
+    //     setY(yProgress);
+    //     setOpacity(opacityProgress);
+    //   }
+    // };
 
     // scrollerRef.addEventListener("touchmove", scrollerHandler);
     // scrollerRef.addEventListener("scroll", scrollerHandler);
