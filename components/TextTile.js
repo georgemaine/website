@@ -38,11 +38,13 @@ export const TextWithTransition = ({ children }) => {
 
     scrollerRef.addEventListener("touchmove", scrollerHandler);
     scrollerRef.addEventListener("scroll", scrollerHandler);
+    window.addEventListener("resize", scrollerHandler);
     scrollerHandler();
 
     return () => {
       scrollerRef.removeEventListener("touchmove", scrollerHandler);
       scrollerRef.removeEventListener("scroll", scrollerHandler);
+      window.removeEventListener("resize", scrollerHandler);
     };
   }, [height, onScreen, screenHeight]);
   return (

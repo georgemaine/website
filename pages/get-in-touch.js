@@ -44,7 +44,6 @@ export default function GetInTouch() {
               <GlobalNav />
 
               <video
-                loop
                 autoPlay
                 playsInline
                 preload='auto'
