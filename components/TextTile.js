@@ -6,7 +6,7 @@ export const TextWithTransition = ({ children }) => {
   const [screenHeight, setScreenHeight] = useState(0);
   const [y, setY] = useState(5);
   const [opacity, setOpacity] = useState(0);
-  const textRef = useRef();
+  const textRef = useRef(null);
   const onScreen = useOnScreen(textRef, "-50% 0px 0px 0px");
 
   useEffect(() => {

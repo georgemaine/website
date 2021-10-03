@@ -110,9 +110,9 @@ export const useOnScreen = (ref, rootMargin = "0px") => {
         rootMargin,
       }
     );
-    if (objRef) {
-      observer.observe(objRef);
-    }
+
+    observer.observe(objRef);
+
     return () => {
       observer.unobserve(objRef);
     };
