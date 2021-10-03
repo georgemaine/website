@@ -2,6 +2,7 @@ import GlobalNav from "../components/GlobalNav";
 import Head from "../components/Head";
 import { StickyMediaTile } from "../components/StickyMediaTile";
 import {
+  CaptionWithTransition,
   InlineLink,
   TitleTile,
   TextWithTransition,
@@ -104,7 +105,7 @@ export default function Outlet() {
                 imgWidth={4032}
                 imgHeight={3024}
               >
-                <TextWithTransition>
+                <CaptionWithTransition>
                   Meet Phyllanthus Mirabilis. During dusk, the leaves fold
                   together in pairs like a butterfly — honestly, I can’t 😍.
                   It’s from{" "}
@@ -113,7 +114,7 @@ export default function Outlet() {
                     text=' Avalonamsterdam'
                   />
                   , a cute plants shop.
-                </TextWithTransition>
+                </CaptionWithTransition>
               </StickyMediaTile>
               <StickyMediaTile
                 src={alwaysSunday}
@@ -122,7 +123,7 @@ export default function Outlet() {
                 imgWidth={1158}
                 imgHeight={1158}
               >
-                <TextWithTransition>
+                <CaptionWithTransition>
                   Lately, most of my weekends start with playing{" "}
                   <InlineLink
                     href={
@@ -132,7 +133,7 @@ export default function Outlet() {
                   />{" "}
                   in the background. Genuinely enjoying the lovely low-key
                   vibes.
-                </TextWithTransition>
+                </CaptionWithTransition>
               </StickyMediaTile>
               <StickyMediaTile
                 src={hibiki}
