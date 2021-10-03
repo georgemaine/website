@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { modulate, useOnScreen, onVideoLoaded } from "./utils";
+import { modulate, useOnScreen, onVideoLoaded, onImagesLoaded } from "./utils";
 
 export const TextWithTransition = ({ children }) => {
   const [height, setHeight] = useState(0);
@@ -11,12 +11,24 @@ export const TextWithTransition = ({ children }) => {
 
   useEffect(() => {
     const media = document.querySelectorAll("video");
-    onVideoLoaded(media[0], function () {
-      const windowHeight = window.innerHeight;
-      const textPosition = textRef.current.getBoundingClientRect().top;
-      setScreenHeight(windowHeight);
-      setHeight(textPosition);
-    });
+    const images = document.querySelectorAll("img");
+
+    if (images.length > 0) {
+      onImagesLoaded(images[images.length - 1]).then(() => {
+        const windowHeight = window.innerHeight;
+        const textPosition = textRef.current.getBoundingClientRect().top;
+        setScreenHeight(windowHeight);
+        setHeight(textPosition);
+      });
+    }
+    if (media.length > 0) {
+      onVideoLoaded(media[0], function () {
+        const windowHeight = window.innerHeight;
+        const textPosition = textRef.current.getBoundingClientRect().top;
+        setScreenHeight(windowHeight);
+        setHeight(textPosition);
+      });
+    }
   }, []);
 
   useEffect(() => {
@@ -26,8 +38,14 @@ export const TextWithTransition = ({ children }) => {
       const value = scrollerRef.scrollTop;
       const startValue = Math.floor(height - screenHeight * 0.85);
       const endValue = Math.floor(height - screenHeight * 0.7);
-      const yProgress = modulate(value, [startValue, endValue], [50, 0], true);
+
       if (onScreen) {
+        const yProgress = modulate(
+          value,
+          [startValue, endValue],
+          [50, 0],
+          true
+        );
         const opacityProgress = modulate(
           value,
           [startValue, endValue],
@@ -41,13 +59,11 @@ export const TextWithTransition = ({ children }) => {
 
     scrollerRef.addEventListener("touchmove", scrollerHandler);
     scrollerRef.addEventListener("scroll", scrollerHandler);
-    window.addEventListener("resize", scrollerHandler);
     scrollerHandler();
 
     return () => {
       scrollerRef.removeEventListener("touchmove", scrollerHandler);
       scrollerRef.removeEventListener("scroll", scrollerHandler);
-      window.removeEventListener("resize", scrollerHandler);
     };
   }, [height, onScreen, screenHeight]);
   return (
@@ -63,6 +79,7 @@ export const TextWithTransition = ({ children }) => {
           letter-spacing: -0.08rem;
           font-weight: 700;
           margin: 5vh 0;
+          opacity: 0;
         }
 
         @media (max-width: 54rem) {
