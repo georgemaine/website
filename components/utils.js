@@ -170,21 +170,39 @@ export const onVideoLoaded = (video, callback, stage = 2) => {
   video.addEventListener("loadeddata", onVideoLoaded);
 };
 
-export const throttle = (callback) => {
-  var active = false; // a simple flag
-  var evt; // to keep track of the last event
-  var handler = function () {
-    // fired only when screen has refreshed
-    active = false; // release our flag
-    callback(evt);
+/**
+ * From https://stackoverflow.com/a/44779316
+ *
+ * @param {Function} fn Callback function
+ * @param {Boolean|undefined} [throttle] Optionally throttle callback
+ * @return {Function} Bound function
+ *
+ * @example
+ * //generate rAFed function
+ * jQuery.fn.addClassRaf = bindRaf(jQuery.fn.addClass);
+ *
+ * //use rAFed function
+ * $('div').addClassRaf('is-stuck');
+ */
+export function bindRaf(fn, throttle) {
+  var isRunning;
+  var that;
+  var args;
+
+  var run = function () {
+    isRunning = false;
+    fn.apply(that, args);
   };
-  return function handleEvent(e) {
-    // the actual event handler
-    evt = e; // save our event at each call
-    if (!active) {
-      // only if we weren't already doing it
-      active = true; // raise the flag
-      requestAnimationFrame(handler); // wait for next screen refresh
+
+  return function () {
+    that = this;
+    args = arguments;
+
+    if (isRunning && throttle) {
+      return;
     }
+
+    isRunning = true;
+    requestAnimationFrame(run);
   };
-};
+}

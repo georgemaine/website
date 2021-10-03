@@ -1,22 +1,12 @@
 import { useEffect, useRef, useState } from "react";
-import { modulate, useOnScreen, onVideoLoaded, onImagesLoaded } from "./utils";
+import {
+  bindRaf,
+  modulate,
+  useOnScreen,
+  onVideoLoaded,
+  onImagesLoaded,
+} from "./utils";
 import { throttle } from "lodash";
-
-const useRaf = (onFrame) => {
-  const requestRef = React.useRef();
-  const startTimeRef = React.useRef();
-  const callback = (time) => {
-    if (!startTimeRef.current) startTimeRef.current = time;
-    const progress = time - startTimeRef.current;
-    onFrame(progress);
-    requestRef.current = requestAnimationFrame(callback);
-  };
-
-  React.useEffect(() => {
-    requestRef.current = requestAnimationFrame(callback);
-    return () => cancelAnimationFrame(requestRef.current);
-  }, []);
-};
 
 export const TextWithTransition = ({ children }) => {
   const [height, setHeight] = useState(0);
@@ -24,25 +14,22 @@ export const TextWithTransition = ({ children }) => {
   const [y, setY] = useState(5);
   const [opacity, setOpacity] = useState(0);
   const textRef = useRef(null);
-  const onScreen = useOnScreen(textRef, "-50% 0px 0px 0px");
+  const onScreen = useOnScreen(textRef, "-100% 0px 0px 0px");
 
   useEffect(() => {
     const media = document.querySelectorAll("video");
-    const images = document.querySelectorAll("img");
-    const imgList = Array.from(images);
+    const images = Array.from(document.images);
+    const windowHeight = window.innerHeight;
+    const textPosition = textRef.current.getBoundingClientRect().top;
 
-    if (imgList.length > 0) {
-      onImagesLoaded(imgList).then(function () {
-        const windowHeight = window.innerHeight;
-        const textPosition = textRef.current.getBoundingClientRect().top;
+    if (images.length > 0) {
+      onImagesLoaded(images).then(function () {
         setScreenHeight(windowHeight);
         setHeight(textPosition);
       });
     }
     if (media.length > 0) {
       onVideoLoaded(media[0], function () {
-        const windowHeight = window.innerHeight;
-        const textPosition = textRef.current.getBoundingClientRect().top;
         setScreenHeight(windowHeight);
         setHeight(textPosition);
       });
@@ -71,25 +58,36 @@ export const TextWithTransition = ({ children }) => {
           true
         );
         setY(yProgress);
-        setOpacity(opacityProgress);
+        isNaN(opacityProgress) ? null : setOpacity(opacityProgress);
       }
     };
 
-    scrollerRef.addEventListener("touchmove", throttle(scrollerHandler), 16);
-    scrollerRef.addEventListener("scroll", throttle(scrollerHandler), 16);
-    window.addEventListener("resize", scrollerHandler);
+    scrollerRef.addEventListener(
+      "touchmove",
+      bindRaf(scrollerHandler, throttle)
+    ),
+      { passive: true };
+    window.addEventListener("resize", bindRaf(scrollerHandler, throttle)),
+      { passive: true };
+    scrollerRef.addEventListener("scroll", bindRaf(scrollerHandler, throttle));
+
     scrollerHandler();
 
     return () => {
       scrollerRef.removeEventListener(
         "touchmove",
-        throttle(scrollerHandler),
-        16
+        bindRaf(scrollerHandler, throttle)
+      ),
+        { passive: true };
+      window.removeEventListener("resize", bindRaf(scrollerHandler, throttle)),
+        { passive: true };
+      scrollerRef.removeEventListener(
+        "scroll",
+        bindRaf(scrollerHandler, throttle)
       );
-      scrollerRef.removeEventListener("scroll", throttle(scrollerHandler), 16);
-      window.removeEventListener("resize", scrollerHandler);
     };
   }, [height, onScreen, screenHeight]);
+
   return (
     <p
       ref={textRef}
@@ -121,7 +119,7 @@ export const TextWithTransition = ({ children }) => {
 
         @media (min-width: 126rem) {
           p {
-            font-size: calc(5.6rem + 56 * (100vw - 140rem) / 1400);
+            font-size: calc(5.6rem + 56 * (100vw - 126rem) / 1260);
             letter-spacing: -0.015rem;
             line-height: 1.05;
           }
@@ -132,8 +130,90 @@ export const TextWithTransition = ({ children }) => {
 };
 
 export const TitleTile = ({ children }) => {
+  const [height, setHeight] = useState(0);
+  const [screenHeight, setScreenHeight] = useState(0);
+  const [y, setY] = useState(5);
+  const [opacity, setOpacity] = useState(0);
+  const textRef = useRef(null);
+  const onScreen = useOnScreen(textRef, "-100% 0px 0px 0px");
+
+  useEffect(() => {
+    const media = document.querySelectorAll("video");
+    const images = Array.from(document.images);
+    const windowHeight = window.innerHeight;
+    const textPosition = textRef.current.getBoundingClientRect().top;
+
+    if (images.length > 0) {
+      onImagesLoaded(images).then(function () {
+        setScreenHeight(windowHeight);
+        setHeight(textPosition);
+      });
+    }
+    if (media.length > 0) {
+      onVideoLoaded(media[0], function () {
+        setScreenHeight(windowHeight);
+        setHeight(textPosition);
+      });
+    }
+  }, []);
+
+  useEffect(() => {
+    const scrollerRef = document.querySelector(".scroll-container");
+
+    const scrollerHandler = () => {
+      const value = scrollerRef.scrollTop;
+      const startValue = Math.floor(height - screenHeight * 0.85);
+      const endValue = Math.floor(height - screenHeight * 0.7);
+
+      if (onScreen) {
+        const yProgress = modulate(
+          value,
+          [startValue, endValue],
+          [50, 0],
+          true
+        );
+        const opacityProgress = modulate(
+          value,
+          [startValue, endValue],
+          [0, 1],
+          true
+        );
+        setY(yProgress);
+        isNaN(opacityProgress) ? null : setOpacity(opacityProgress);
+      }
+    };
+
+    scrollerRef.addEventListener(
+      "touchmove",
+      bindRaf(scrollerHandler, throttle)
+    ),
+      { passive: true };
+    window.addEventListener("resize", bindRaf(scrollerHandler, throttle)),
+      { passive: true };
+    scrollerRef.addEventListener("scroll", bindRaf(scrollerHandler, throttle));
+
+    scrollerHandler();
+
+    return () => {
+      scrollerRef.removeEventListener(
+        "touchmove",
+        bindRaf(scrollerHandler, throttle)
+      ),
+        { passive: true };
+      window.removeEventListener("resize", bindRaf(scrollerHandler, throttle)),
+        { passive: true };
+      scrollerRef.removeEventListener(
+        "scroll",
+        bindRaf(scrollerHandler, throttle)
+      );
+    };
+  }, [height, onScreen, screenHeight]);
+
   return (
-    <h1>
+    <h1
+      ref={textRef}
+      style={{ transform: `translate3d(0, ${y / 10}rem, 0)`, opacity: opacity }}
+    >
       {children}
       <style jsx>{`
         h1 {
@@ -142,14 +222,14 @@ export const TitleTile = ({ children }) => {
           letter-spacing: -0.08rem;
           font-weight: 700;
           margin: 18vh 0;
-          transition: opacity 0.6s linear,
-            transform 0.6s cubic-bezier(0.26, 0.67, 0.48, 0.91);
         }
+
         @media (max-width: 54rem) {
           h1 {
             font-size: calc(4.2rem + 42 * (100vw - 37.5rem) / 375);
           }
         }
+
         @media (min-width: 73.7rem) {
           h1 {
             font-size: calc(5.6rem + 56 * (100vw - 74rem) / 740);
@@ -157,6 +237,7 @@ export const TitleTile = ({ children }) => {
             margin: 20rem 0;
           }
         }
+
         @media screen and (min-width: 177rem) {
           h1 {
             font-size: 18rem;
@@ -164,44 +245,6 @@ export const TitleTile = ({ children }) => {
         }
       `}</style>
     </h1>
-  );
-};
-
-export const TextTile = ({ margin = "6vh 0 0", children }) => {
-  return (
-    <p>
-      {children}
-      <style jsx>{`
-        p {
-          font-size: 2.8rem;
-          line-height: 1.08;
-          letter-spacing: -0.08rem;
-          font-weight: 700;
-          margin: ${margin};
-        }
-
-        @media (max-width: 54rem) {
-          p {
-            font-size: calc(2.8rem + 28 * (100vw - 37.5rem) / 375);
-          }
-        }
-
-        @media (min-width: 73.7rem) {
-          p {
-            font-size: calc(4.2rem + 42 * (100vw - 74rem) / 740);
-            margin: calc(5.6rem + 56 * (100vw - 140rem) / 1400) 0 0;
-          }
-        }
-
-        @media (min-width: 126rem) {
-          p {
-            font-size: calc(5.6rem + 56 * (100vw - 140rem) / 1400);
-            letter-spacing: -0.015rem;
-            line-height: 1.05;
-          }
-        }
-      `}</style>
-    </p>
   );
 };
 

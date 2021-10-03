@@ -7,14 +7,6 @@ import {
   TextWithTransition,
 } from "../components/TextTile";
 import { ScrollBar } from "../components/ScrollBar";
-// import hortus1 from "/media/hortus-1.jpeg";
-// import hortus2 from "/media/hortus-2.jpeg";
-// import hortus3 from "/media/hortus-3.jpeg";
-// import plant from "/media/plant.jpeg";
-// import alwaysSunday from "/media/always-sunday.jpg";
-// import hibiki from "/media/hibiki.jpg";
-// import appleWatchMarchChallenge from "/media/apple-watch-march-challenge.jpeg";
-import { useEffect } from "react";
 
 const hortus1 = "/media/hortus-1.jpeg";
 const hortus2 = "/media/hortus-2.jpeg";
@@ -23,6 +15,7 @@ const plant = "/media/plant.jpeg";
 const alwaysSunday = "/media/always-sunday.jpg";
 const hibiki = "/media/hibiki.jpg";
 const appleWatchMarchChallenge = "/media/apple-watch-march-challenge.jpeg";
+
 const imageList = [
   hortus1,
   hortus2,
@@ -32,14 +25,10 @@ const imageList = [
   hibiki,
   appleWatchMarchChallenge,
 ];
+
 export default function Outlet() {
-  useEffect(() => {
-    // console.log("imagesList", imageList);
-    imageList.forEach((image) => {
-      new Image().src = image;
-    });
-  }, []);
   return (
+    // FIXME: Make reuable without inline styles
     <div style={{ minHeight: "100vh" }}>
       <div
         style={{
