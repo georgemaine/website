@@ -29,6 +29,7 @@ export const TextWithTransition = ({ children }) => {
         //   [0, 1],
         //   true
         // );
+        console.log("hello");
         // setY(yProgress);
         // setOpacity(opacityProgress);
       }
