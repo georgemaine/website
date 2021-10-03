@@ -1,10 +1,15 @@
 import { useEffect, useState } from "react";
 
+<<<<<<< HEAD
 const ScrollTrack = () => {
   const [progress, setProgress] = useState(0);
+=======
+const ScrollTrack = ({ scrollContainer }) => {
+  const [scrollProgress, setScrollProgress] = useState(0);
+>>>>>>> 492b7613aca5d7266e534a56a0c481dd7d9604c2
 
   useEffect(() => {
-    const ref = document.querySelector(".scrollContainer");
+    const ref = document.querySelector(scrollContainer);
     const handleScroll = () => {
       const scrollPosition = ref.scrollTop;
       const height = ref.scrollHeight - ref.clientHeight;
@@ -21,7 +26,11 @@ const ScrollTrack = () => {
       ref.removeEventListener("touchmove", handleScroll);
       ref.removeEventListener("scroll", handleScroll);
     };
+<<<<<<< HEAD
   }, [progress]);
+=======
+  }, [scrollContainer, scrollProgress]);
+>>>>>>> 492b7613aca5d7266e534a56a0c481dd7d9604c2
 
   return (
     <div style={{ transform: `translate3d(0, ${progress * 4.8}rem, 0)` }}>
@@ -44,10 +53,10 @@ const ScrollTrack = () => {
   );
 };
 
-export const ScrollBar = () => {
+export const ScrollBar = ({ scrollContainer }) => {
   return (
     <div>
-      <ScrollTrack />
+      <ScrollTrack scrollContainer={scrollContainer} />
       <style jsx>{`
         div {
           width: 0.4rem;
