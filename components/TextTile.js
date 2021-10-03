@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { modulate, useOnScreen } from "./utils";
 
-export const StaticTextTile = ({ children }) => {
+export const TextWithTransition = ({ children }) => {
   const [height, setHeight] = useState(0);
   const [screenHeight, setScreenHeight] = useState(0);
   const [y, setY] = useState(5);
