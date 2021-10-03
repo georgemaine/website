@@ -51,6 +51,7 @@ export const TextWithTransition = ({
     if (scrollerRef) {
       scrollerRef.addEventListener("touchmove", scrollerHandler);
       scrollerRef.addEventListener("scroll", scrollerHandler);
+      scrollerHandler();
 
       return () => {
         scrollerRef.removeEventListener("touchmove", scrollerHandler);
