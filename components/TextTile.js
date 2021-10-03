@@ -63,16 +63,34 @@ export const TextWithTransition = ({ children }) => {
         setOpacity(opacityProgress);
       }
     };
-
-    scrollerRef.addEventListener("touchmove", throttle(scrollerHandler));
-    scrollerRef.addEventListener("scroll", throttle(scrollerHandler));
-    window.addEventListener("resize", throttle(scrollerHandler));
+    let currentRequest;
+    scrollerRef.addEventListener("touchmove", () => {
+      cancelAnimationFrame(currentRequest);
+      currentRequest = requestAnimationFrame(scrollerHandler);
+    });
+    scrollerRef.addEventListener("scroll", () => {
+      cancelAnimationFrame(currentRequest);
+      currentRequest = requestAnimationFrame(scrollerHandler);
+    });
+    window.addEventListener("resize", () => {
+      cancelAnimationFrame(currentRequest);
+      currentRequest = requestAnimationFrame(scrollerHandler);
+    });
     scrollerHandler();
 
     return () => {
-      scrollerRef.removeEventListener("touchmove", throttle(scrollerHandler));
-      scrollerRef.removeEventListener("scroll", throttle(scrollerHandler));
-      window.removeEventListener("resize", throttle(scrollerHandler));
+      scrollerRef.removeEventListener("touchmove", () => {
+        cancelAnimationFrame(currentRequest);
+        currentRequest = requestAnimationFrame(scrollerHandler);
+      });
+      scrollerRef.removeEventListener("scroll", () => {
+        cancelAnimationFrame(currentRequest);
+        currentRequest = requestAnimationFrame(scrollerHandler);
+      });
+      window.removeEventListener("resize", () => {
+        cancelAnimationFrame(currentRequest);
+        currentRequest = requestAnimationFrame(scrollerHandler);
+      });
     };
   }, [height, onScreen, screenHeight]);
   return (
