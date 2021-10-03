@@ -3,16 +3,8 @@ import Head from "../components/Head";
 import { StickyMediaTile } from "../components/StickyMediaTile";
 import { TextWithTransition, InlineLink } from "../components/TextTile";
 import { ScrollBar } from "../components/ScrollBar";
-import { onImagesLoaded } from "../components/utils";
-import { useEffect, useState } from "react";
 
 export default function GetInTouch() {
-  const [imagesLoaded, setImagesLoaded] = useState(false);
-  useEffect(() => {
-    const images = document.querySelectorAll("img");
-    onImagesLoaded(images).then(setImagesLoaded(true));
-  }, []);
-
   return (
     <div style={{ minHeight: "100vh" }}>
       <div
@@ -51,54 +43,59 @@ export default function GetInTouch() {
               <Head />
               <GlobalNav />
 
-              <StickyMediaTile
-                src={"georgemaine.jpeg"}
-                alt={"Georgemaine Lourens"}
-                margin={"0 0 9.5rem"}
-              />
-              {imagesLoaded ? (
-                <>
-                  <TextWithTransition>
-                    As you may or may not be aware, I’ve always been fascinated
-                    with how things work.
-                  </TextWithTransition>
+              <video
+                loop
+                autoPlay
+                playsInline
+                preload='auto'
+                muted
+                style={{
+                  width: "100%",
+                  borderRadius: "1rem",
+                  border: "1px solid var(--dark-border)",
+                }}
+              >
+                <source src={"media/georgemaine.mp4"} type='video/mp4' />
+              </video>
 
-                  <TextWithTransition>
-                    Could I remake it differently? Would people prefer that?
-                  </TextWithTransition>
-                  <TextWithTransition>
-                    The part I hated was showing my version to people — Go
-                    figure.
-                  </TextWithTransition>
-                  <TextWithTransition>
-                    Currently, I’m an indoor gardener and product designer at{" "}
-                    <InlineLink href={"https://pitch.io"} text={"Pitch"} />
-                  </TextWithTransition>
-                  <TextWithTransition>
-                    I love surrounding myself with extraordinary people and
-                    plants — they teach me so much and make me a better person.
-                  </TextWithTransition>
-                  <TextWithTransition>
-                    If you love that too, reach out via{" "}
-                    <InlineLink
-                      href={
-                        "mailto:georgemaine.lourens@gmail.com?subject=Hello%20%F0%9F%91%8B"
-                      }
-                      text={"Email"}
-                    />
-                    ,
-                    <InlineLink
-                      href={"https://twitter.com/georgemaine"}
-                      text={"Twitter"}
-                    />
-                    , or{" "}
-                    <InlineLink
-                      href={"https://www.linkedin.com/in/georgemaine"}
-                      text={"LinkedIn"}
-                    />
-                  </TextWithTransition>
-                </>
-              ) : null}
+              <TextWithTransition>
+                As you may or may not be aware, I’ve always been fascinated with
+                how things work.
+              </TextWithTransition>
+
+              <TextWithTransition>
+                Could I remake it differently? Would people prefer that?
+              </TextWithTransition>
+              <TextWithTransition>
+                The part I hated was showing my version to people — Go figure.
+              </TextWithTransition>
+              <TextWithTransition>
+                Currently, I’m an indoor gardener and product designer at{" "}
+                <InlineLink href={"https://pitch.io"} text={"Pitch"} />
+              </TextWithTransition>
+              <TextWithTransition>
+                I love surrounding myself with extraordinary people and plants —
+                they teach me so much and make me a better person.
+              </TextWithTransition>
+              <TextWithTransition>
+                If you love that too, reach out via{" "}
+                <InlineLink
+                  href={
+                    "mailto:georgemaine.lourens@gmail.com?subject=Hello%20%F0%9F%91%8B"
+                  }
+                  text={"Email"}
+                />
+                ,
+                <InlineLink
+                  href={"https://twitter.com/georgemaine"}
+                  text={"Twitter"}
+                />
+                , or{" "}
+                <InlineLink
+                  href={"https://www.linkedin.com/in/georgemaine"}
+                  text={"LinkedIn"}
+                />
+              </TextWithTransition>
             </main>
           </div>
         </div>

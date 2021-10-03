@@ -97,25 +97,44 @@ const StickyMediaCaption = ({ caption }) => {
   );
 };
 
-const StickyMediaImage = ({ src, alt }) => {
+const StickyMediaImage = ({ src, alt, imgWidth, imgHeight }) => {
   return (
     <>
-      <img src={`/media/${src}`} alt={alt} />
+      <img
+        src={`/media/${src}`}
+        alt={alt}
+        width={imgWidth}
+        height={imgHeight}
+      />
       <style jsx>{`
         img {
-          width: 100%;
-          display: block;
+          max-width: 100%;
+          height: auto;
+          aspect-ratio: attr(width) / attr(height);
         }
       `}</style>
     </>
   );
 };
 
-export const StickyMediaTile = ({ alt, children, margin, src, width }) => {
+export const StickyMediaTile = ({
+  alt,
+  children,
+  margin,
+  src,
+  width,
+  imgWidth,
+  imgHeight,
+}) => {
   return (
     <StickyMediaTileWrapper margin={margin}>
       <StickyMediaWrapper width={width}>
-        <StickyMediaImage src={src} alt={alt} />
+        <StickyMediaImage
+          src={src}
+          alt={alt}
+          imgWidth={imgWidth}
+          imgHeight={imgHeight}
+        />
         <StickyMediaCaption caption={alt} />
       </StickyMediaWrapper>
       {children}
