@@ -47,7 +47,7 @@ export default function GetInTouch() {
                 alt={"Georgemaine Lourens"}
                 margin={"0 0 9.5rem"}
               />
-              <TextWithTransition>
+              {/* <TextWithTransition>
                 As you may or may not be aware, I’ve always been fascinated with
                 how things work.
               </TextWithTransition>
@@ -83,7 +83,7 @@ export default function GetInTouch() {
                   href={"https://www.linkedin.com/in/georgemaine"}
                   text={"LinkedIn"}
                 />
-              </TextWithTransition>
+              </TextWithTransition> */}
             </main>
           </div>
         </div>

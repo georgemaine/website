@@ -71,7 +71,7 @@ export default function Outlet() {
                 src={"plant.jpeg"}
                 alt={"Bought the extraordinary Phyllanthus Mirabilis"}
               >
-                <TextWithTransition>
+                {/* <TextWithTransition>
                   Meet Phyllanthus Mirabilis. During dusk, the leaves fold
                   together in pairs like a butterfly — honestly, I can’t 😍.
                   It’s from{" "}
@@ -80,14 +80,14 @@ export default function Outlet() {
                     text=' Avalonamsterdam'
                   />
                   , a cute plants shop.
-                </TextWithTransition>
+                </TextWithTransition> */}
               </StickyMediaTile>
               <StickyMediaTile
                 src={"always-sunday.jpg"}
                 alt={"Always Sunday by Music"}
                 width={"50%"}
               >
-                <TextWithTransition>
+                {/* <TextWithTransition>
                   Lately, most of my weekends start with playing{" "}
                   <InlineLink
                     href={
@@ -97,7 +97,7 @@ export default function Outlet() {
                   />{" "}
                   in the background. Genuinely enjoying the lovely low-key
                   vibes.
-                </TextWithTransition>
+                </TextWithTransition> */}
               </StickyMediaTile>
               <StickyMediaTile
                 src={"hibiki.jpg"}
@@ -108,7 +108,7 @@ export default function Outlet() {
                 src={"apple-watch-march-challenge.jpeg"}
                 alt={"Completed Apple's March Challenge"}
               />
-              <TextWithTransition>
+              {/* <TextWithTransition>
                 I love tinkering with things — it empowers me to explore my
                 ideas.
               </TextWithTransition>
@@ -131,7 +131,7 @@ export default function Outlet() {
               <TextWithTransition>
                 Hopefully, one day this page will tell me a story of all the
                 times I messed up and kept going while exploring ideas. Haha.
-              </TextWithTransition>
+              </TextWithTransition> */}
               <TitleTile>Spring</TitleTile>
               <TitleTile>2021</TitleTile>
             </main>
