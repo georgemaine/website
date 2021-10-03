@@ -18,6 +18,16 @@ const alwaysSunday = "/media/always-sunday.jpg";
 const hibiki = "/media/hibiki.jpg";
 const appleWatchMarchChallenge = "/media/apple-watch-march-challenge.jpeg";
 
+const imageList = [
+  hortus1,
+  hortus2,
+  hortus3,
+  plant,
+  alwaysSunday,
+  hibiki,
+  appleWatchMarchChallenge,
+];
+
 export default function Outlet() {
   return (
     // FIXME: Make reuable without inline styles
@@ -55,7 +65,13 @@ export default function Outlet() {
           >
             <ScrollBar />
             <main>
-              <Head />
+              <Head>
+                {imageList.map((image, index) => {
+                  return (
+                    <link key={index} rel='preload' href={image} as='image' />
+                  );
+                })}
+              </Head>
               <GlobalNav />
 
               <StickyMediaTile
