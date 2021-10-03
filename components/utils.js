@@ -120,7 +120,7 @@ export const useOnScreen = (ref, rootMargin = "0px") => {
   return isIntersecting;
 };
 
-export const onImagesLoaded = (images) => {
+export function onImagesLoaded(images) {
   return new Promise((resolve) => {
     if (!images.length) {
       resolve();
@@ -130,7 +130,7 @@ export const onImagesLoaded = (images) => {
 
     let loadedCount = 0;
 
-    const onComplete = () => {
+    function onComplete(e) {
       ++loadedCount;
 
       if (loadedCount === images.length) {
@@ -139,18 +139,18 @@ export const onImagesLoaded = (images) => {
 
       this.removeEventListener("load", onComplete);
       this.removeEventListener("error", onComplete);
-    };
+    }
 
     images.forEach((img) => {
       if (img.complete) {
         onComplete.call(img);
       } else {
-        img.addEventListener("load", onComplete);
-        img.addEventListener("error", onComplete);
+        img.addEventListener("load", onComplete());
+        img.addEventListener("error", onComplete());
       }
     });
   });
-};
+}
 
 export const onVideoLoaded = (video, callback, stage = 2) => {
   if (video.readyState >= stage) {
