@@ -10,50 +10,45 @@ export const TextWithTransition = ({ children }) => {
   const onScreen = useOnScreen(textRef, "-50% 0px 0px 0px");
 
   useEffect(() => {
-    const windowHeight = window.innerHeight;
-    const textPosition = textRef.current.getBoundingClientRect().top;
-    setScreenHeight(windowHeight);
-    setHeight(textPosition);
+    const media = document.querySelectorAll("video");
+    onVideoLoaded(media[0], function () {
+      const windowHeight = window.innerHeight;
+      const textPosition = textRef.current.getBoundingClientRect().top;
+      setScreenHeight(windowHeight);
+      setHeight(textPosition);
+    });
   }, []);
 
   useEffect(() => {
     const scrollerRef = document.querySelector(".scroll-container");
-    const media = document.querySelectorAll("video");
 
-    onVideoLoaded(media[0], function () {
-      const scrollerHandler = () => {
-        const value = scrollerRef.scrollTop;
-        const startValue = Math.floor(height - screenHeight * 0.85);
-        const endValue = Math.floor(height - screenHeight * 0.7);
-        const yProgress = modulate(
+    const scrollerHandler = () => {
+      const value = scrollerRef.scrollTop;
+      const startValue = Math.floor(height - screenHeight * 0.85);
+      const endValue = Math.floor(height - screenHeight * 0.7);
+      const yProgress = modulate(value, [startValue, endValue], [50, 0], true);
+      if (onScreen) {
+        const opacityProgress = modulate(
           value,
           [startValue, endValue],
-          [50, 0],
+          [0, 1],
           true
         );
-        if (onScreen) {
-          const opacityProgress = modulate(
-            value,
-            [startValue, endValue],
-            [0, 1],
-            true
-          );
-          setY(yProgress);
-          setOpacity(opacityProgress);
-        }
-      };
+        setY(yProgress);
+        setOpacity(opacityProgress);
+      }
+    };
 
-      scrollerRef.addEventListener("touchmove", scrollerHandler);
-      scrollerRef.addEventListener("scroll", scrollerHandler);
-      window.addEventListener("resize", scrollerHandler);
-      scrollerHandler();
+    scrollerRef.addEventListener("touchmove", scrollerHandler);
+    scrollerRef.addEventListener("scroll", scrollerHandler);
+    window.addEventListener("resize", scrollerHandler);
+    scrollerHandler();
 
-      return () => {
-        scrollerRef.removeEventListener("touchmove", scrollerHandler);
-        scrollerRef.removeEventListener("scroll", scrollerHandler);
-        window.removeEventListener("resize", scrollerHandler);
-      };
-    });
+    return () => {
+      scrollerRef.removeEventListener("touchmove", scrollerHandler);
+      scrollerRef.removeEventListener("scroll", scrollerHandler);
+      window.removeEventListener("resize", scrollerHandler);
+    };
   }, [height, onScreen, screenHeight]);
   return (
     <p
