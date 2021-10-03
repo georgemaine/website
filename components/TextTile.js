@@ -1,7 +1,10 @@
 import { useEffect, useRef, useState } from "react";
 import { modulate, useOnScreen } from "./utils";
 
-export const TextWithTransition = ({ children }) => {
+export const TextWithTransition = ({
+  children,
+  scrollerContainer = ".scrollContainer",
+}) => {
   const [height, setHeight] = useState(0);
   const [screenHeight, setScreenHeight] = useState(0);
   const [y, setY] = useState(5);
@@ -10,14 +13,17 @@ export const TextWithTransition = ({ children }) => {
   const onScreen = useOnScreen(textRef, "-50% 0px 0px 0px");
 
   useEffect(() => {
-    if (textRef) {
+    const objRef = textRef.current;
+    const scrollPosition = objRef.getBoundingClientRect().top;
+
+    if (objRef) {
       setScreenHeight(window.innerHeight);
-      setHeight(textRef.current.getBoundingClientRect().top);
+      setHeight(scrollPosition);
     }
   }, []);
 
   useEffect(() => {
-    const scrollerRef = document.querySelector(".scrollContainer");
+    const scrollerRef = document.querySelector(scrollerContainer);
 
     const scrollerHandler = (e) => {
       const value = e.target.scrollTop;
@@ -51,7 +57,7 @@ export const TextWithTransition = ({ children }) => {
         scrollerRef.removeEventListener("scroll", scrollerHandler);
       };
     }
-  }, [height, onScreen, screenHeight]);
+  }, [height, onScreen, screenHeight, scrollerContainer]);
 
   return (
     <p

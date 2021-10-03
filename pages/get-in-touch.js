@@ -28,7 +28,7 @@ export default function GetInTouch() {
           }}
         >
           <div
-            className='scrollContainer'
+            className='get-in-touch-scroll-container'
             style={{
               position: "absolute",
               overflowY: "scroll",
@@ -38,8 +38,8 @@ export default function GetInTouch() {
               left: 0,
             }}
           >
-            <ScrollBar />
-            <main className='scrollContent'>
+            <ScrollBar scrollContainer={".get-in-touch-scroll-container"} />
+            <main>
               <Head />
               <GlobalNav />
               <StickyMediaTile
@@ -47,25 +47,25 @@ export default function GetInTouch() {
                 alt={"Georgemaine Lourens"}
                 margin={"0 0 9.5rem"}
               />
-              <TextWithTransition>
+              <TextWithTransition scrollerContainer='.get-in-touch-scroll-container'>
                 As you may or may not be aware, I’ve always been fascinated with
                 how things work.
               </TextWithTransition>
-              <TextWithTransition>
+              <TextWithTransition scrollerContainer='.get-in-touch-scroll-container'>
                 Could I remake it differently? Would people prefer that?
               </TextWithTransition>
-              <TextWithTransition>
+              <TextWithTransition scrollerContainer='.get-in-touch-scroll-container'>
                 The part I hated was showing my version to people — Go figure.
               </TextWithTransition>
-              <TextWithTransition>
+              <TextWithTransition scrollerContainer='.get-in-touch-scroll-container'>
                 Currently, I’m an indoor gardener and product designer at{" "}
                 <InlineLink href={"https://pitch.io"} text={"Pitch"} />
               </TextWithTransition>
-              <TextWithTransition>
+              <TextWithTransition scrollerContainer='.get-in-touch-scroll-container'>
                 I love surrounding myself with extraordinary people and plants —
                 they teach me so much and make me a better person.
               </TextWithTransition>
-              <TextWithTransition>
+              <TextWithTransition scrollerContainer='.get-in-touch-scroll-container'>
                 If you love that too, reach out via{" "}
                 <InlineLink
                   href={

@@ -32,7 +32,7 @@ export default function Outlet() {
           }}
         >
           <div
-            className='scrollContainer'
+            className='outlet-scroll-container'
             style={{
               position: "absolute",
               overflowY: "scroll",
@@ -42,8 +42,8 @@ export default function Outlet() {
               left: 0,
             }}
           >
-            <ScrollBar />
-            <main className='scrollContent'>
+            <ScrollBar scrollContainer={".outlet-scroll-container"} />
+            <main>
               <Head />
               <GlobalNav />
 
@@ -71,7 +71,7 @@ export default function Outlet() {
                 src={"plant.jpeg"}
                 alt={"Bought the extraordinary Phyllanthus Mirabilis"}
               >
-                <TextWithTransition>
+                <TextWithTransition scrollerContainer='.outlet-scroll-container'>
                   Meet Phyllanthus Mirabilis. During dusk, the leaves fold
                   together in pairs like a butterfly — honestly, I can’t 😍.
                   It’s from{" "}
@@ -87,7 +87,7 @@ export default function Outlet() {
                 alt={"Always Sunday by Music"}
                 width={"50%"}
               >
-                <TextWithTransition>
+                <TextWithTransition scrollerContainer='.outlet-scroll-container'>
                   Lately, most of my weekends start with playing{" "}
                   <InlineLink
                     href={
@@ -108,27 +108,27 @@ export default function Outlet() {
                 src={"apple-watch-march-challenge.jpeg"}
                 alt={"Completed Apple's March Challenge"}
               />
-              <TextWithTransition>
+              <TextWithTransition scrollerContainer='.outlet-scroll-container'>
                 I love tinkering with things — it empowers me to explore my
                 ideas.
               </TextWithTransition>
-              <TextWithTransition>
+              <TextWithTransition scrollerContainer='.outlet-scroll-container'>
                 Sometimes, I get <i>so caught</i> up in tinkering that nothing
                 else really matters — I don’t even realize what time it is 🙈
               </TextWithTransition>
-              <TextWithTransition>
+              <TextWithTransition scrollerContainer='.outlet-scroll-container'>
                 During the lockdown, I finally realized why I could spend hours
                 tinkering, thinking it’s only a couple of minutes.
               </TextWithTransition>
-              <TextWithTransition>
+              <TextWithTransition scrollerContainer='.outlet-scroll-container'>
                 I’m just expressing my emotion, energy, and talent — it’s my
                 outlet.
               </TextWithTransition>
-              <TextWithTransition>
+              <TextWithTransition scrollerContainer='.outlet-scroll-container'>
                 So, I came up with this page — a real-time feed of some of those
                 expressions, posted chronologically.
               </TextWithTransition>
-              <TextWithTransition>
+              <TextWithTransition scrollerContainer='.outlet-scroll-container'>
                 Hopefully, one day this page will tell me a story of all the
                 times I messed up and kept going while exploring ideas. Haha.
               </TextWithTransition>
