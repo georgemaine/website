@@ -7,8 +7,38 @@ import {
   TextWithTransition,
 } from "../components/TextTile";
 import { ScrollBar } from "../components/ScrollBar";
+// import hortus1 from "/media/hortus-1.jpeg";
+// import hortus2 from "/media/hortus-2.jpeg";
+// import hortus3 from "/media/hortus-3.jpeg";
+// import plant from "/media/plant.jpeg";
+// import alwaysSunday from "/media/always-sunday.jpg";
+// import hibiki from "/media/hibiki.jpg";
+// import appleWatchMarchChallenge from "/media/apple-watch-march-challenge.jpeg";
+import { useEffect } from "react";
 
+const hortus1 = "/media/hortus-1.jpeg";
+const hortus2 = "/media/hortus-2.jpeg";
+const hortus3 = "/media/hortus-3.jpeg";
+const plant = "/media/plant.jpeg";
+const alwaysSunday = "/media/always-sunday.jpg";
+const hibiki = "/media/hibiki.jpg";
+const appleWatchMarchChallenge = "/media/apple-watch-march-challenge.jpeg";
+const imageList = [
+  hortus1,
+  hortus2,
+  hortus3,
+  plant,
+  alwaysSunday,
+  hibiki,
+  appleWatchMarchChallenge,
+];
 export default function Outlet() {
+  useEffect(() => {
+    // console.log("imagesList", imageList);
+    imageList.forEach((image) => {
+      new Image().src = image;
+    });
+  }, []);
   return (
     <div style={{ minHeight: "100vh" }}>
       <div
@@ -44,18 +74,24 @@ export default function Outlet() {
           >
             <ScrollBar />
             <main>
-              <Head />
+              <Head>
+                {imageList.map((image, index) => {
+                  return (
+                    <link key={index} rel='preload' href={image} as='image' />
+                  );
+                })}
+              </Head>
               <GlobalNav />
 
               <StickyMediaTile
-                src={"hortus-1.jpeg"}
+                src={hortus1}
                 alt={"Visited Hortus Botanicus Amsterdam"}
                 margin={"0 0 9.5rem"}
-                imgHeight={1450 * 2}
-                imgWidth={1947 * 2}
+                imgHeight={1450}
+                imgWidth={1947}
               />
               <StickyMediaTile
-                src={"hortus-3.jpeg"}
+                src={hortus3}
                 alt={"Visited Hortus Botanicus Amsterdam"}
                 width={"50%"}
                 margin={"0 0 9.5rem"}
@@ -63,7 +99,7 @@ export default function Outlet() {
                 imgWidth={4032}
               />
               <StickyMediaTile
-                src={"hortus-2.jpeg"}
+                src={hortus2}
                 alt={"Visited Hortus Botanicus Amsterdam"}
                 imgHeight={2851}
                 imgWidth={3997}
@@ -74,7 +110,7 @@ export default function Outlet() {
               </TitleTile>
 
               <StickyMediaTile
-                src={"plant.jpeg"}
+                src={plant}
                 alt={"Bought the extraordinary Phyllanthus Mirabilis"}
                 imgWidth={4032}
                 imgHeight={3024}
@@ -91,7 +127,7 @@ export default function Outlet() {
                 </TextWithTransition>
               </StickyMediaTile>
               <StickyMediaTile
-                src={"always-sunday.jpg"}
+                src={alwaysSunday}
                 alt={"Always Sunday by Music"}
                 width={"50%"}
                 imgWidth={1158}
@@ -110,14 +146,14 @@ export default function Outlet() {
                 </TextWithTransition>
               </StickyMediaTile>
               <StickyMediaTile
-                src={"hibiki.jpg"}
+                src={hibiki}
                 alt={"Finally tasted Hibiki by Suntory Toki"}
                 imgWidth={4032}
                 imgHeight={3024}
               />
               <TitleTile>Summer</TitleTile>
               <StickyMediaTile
-                src={"apple-watch-march-challenge.jpeg"}
+                src={appleWatchMarchChallenge}
                 alt={"Completed Apple's March Challenge"}
                 imgWidth={2875}
                 imgHeight={3833}

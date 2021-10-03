@@ -99,12 +99,7 @@ const StickyMediaCaption = ({ caption }) => {
 const StickyMediaImage = ({ src, alt, imgWidth, imgHeight }) => {
   return (
     <>
-      <img
-        src={`/media/${src}`}
-        alt={alt}
-        width={imgWidth}
-        height={imgHeight}
-      />
+      <img src={src} alt={alt} width={imgWidth} height={imgHeight} />
       <style jsx>{`
         img {
           max-width: 100%;
