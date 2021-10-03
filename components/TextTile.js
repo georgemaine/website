@@ -15,7 +15,7 @@ export const TextWithTransition = ({ children }) => {
   }, []);
 
   useEffect(() => {
-    const scrollerRef = document.querySelector(".scrollContainer");
+    const scrollerRef = document.querySelector(".scroll-container");
 
     const scrollerHandler = () => {
       const value = scrollerRef.scrollTop;
