@@ -21,14 +21,8 @@ export const TextWithTransition = ({ children }) => {
       const value = scrollerRef.scrollTop;
       const startValue = Math.floor(height - screenHeight * 0.85);
       const endValue = Math.floor(height - screenHeight * 0.7);
-
+      const yProgress = modulate(value, [startValue, endValue], [50, 0], true);
       if (onScreen) {
-        const yProgress = modulate(
-          value,
-          [startValue, endValue],
-          [50, 0],
-          true
-        );
         // const opacityProgress = modulate(
         //   value,
         //   [startValue, endValue],
