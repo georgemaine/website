@@ -1,11 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import {
-  throttle,
-  modulate,
-  useOnScreen,
-  onVideoLoaded,
-  onImagesLoaded,
-} from "./utils";
+import { modulate, useOnScreen, onVideoLoaded, onImagesLoaded } from "./utils";
 
 export const TextWithTransition = ({ children }) => {
   const [height, setHeight] = useState(0);
@@ -64,33 +58,27 @@ export const TextWithTransition = ({ children }) => {
       }
     };
     let currentRequest;
-    scrollerRef.addEventListener("touchmove", () => {
+    scrollerRef.addEventListener("touchmove", function () {
       cancelAnimationFrame(currentRequest);
       currentRequest = requestAnimationFrame(scrollerHandler);
     });
-    scrollerRef.addEventListener("scroll", () => {
+    scrollerRef.addEventListener("scroll", function () {
       cancelAnimationFrame(currentRequest);
       currentRequest = requestAnimationFrame(scrollerHandler);
     });
-    window.addEventListener("resize", () => {
-      cancelAnimationFrame(currentRequest);
-      currentRequest = requestAnimationFrame(scrollerHandler);
-    });
+    window.addEventListener("resize", scrollerHandler);
     scrollerHandler();
 
     return () => {
-      scrollerRef.removeEventListener("touchmove", () => {
+      scrollerRef.removeEventListener("touchmove", function () {
         cancelAnimationFrame(currentRequest);
         currentRequest = requestAnimationFrame(scrollerHandler);
       });
-      scrollerRef.removeEventListener("scroll", () => {
+      scrollerRef.removeEventListener("scroll", function () {
         cancelAnimationFrame(currentRequest);
         currentRequest = requestAnimationFrame(scrollerHandler);
       });
-      window.removeEventListener("resize", () => {
-        cancelAnimationFrame(currentRequest);
-        currentRequest = requestAnimationFrame(scrollerHandler);
-      });
+      window.removeEventListener("resize", scrollerHandler);
     };
   }, [height, onScreen, screenHeight]);
   return (
