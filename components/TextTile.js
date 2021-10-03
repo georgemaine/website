@@ -1,5 +1,11 @@
 import { useEffect, useRef, useState } from "react";
-import { modulate, useOnScreen, onVideoLoaded, onImagesLoaded } from "./utils";
+import {
+  throttle,
+  modulate,
+  useOnScreen,
+  onVideoLoaded,
+  onImagesLoaded,
+} from "./utils";
 
 export const TextWithTransition = ({ children }) => {
   const [height, setHeight] = useState(0);
@@ -58,15 +64,15 @@ export const TextWithTransition = ({ children }) => {
       }
     };
 
-    scrollerRef.addEventListener("touchmove", scrollerHandler);
-    scrollerRef.addEventListener("scroll", scrollerHandler);
-    window.addEventListener("resize", scrollerHandler);
+    scrollerRef.addEventListener("touchmove", throttle(scrollerHandler));
+    scrollerRef.addEventListener("scroll", throttle(scrollerHandler));
+    window.addEventListener("resize", throttle(scrollerHandler));
     scrollerHandler();
 
     return () => {
-      scrollerRef.removeEventListener("touchmove", scrollerHandler);
-      scrollerRef.removeEventListener("scroll", scrollerHandler);
-      window.removeEventListener("resize", scrollerHandler);
+      scrollerRef.removeEventListener("touchmove", throttle(scrollerHandler));
+      scrollerRef.removeEventListener("scroll", throttle(scrollerHandler));
+      window.removeEventListener("resize", throttle(scrollerHandler));
     };
   }, [height, onScreen, screenHeight]);
   return (

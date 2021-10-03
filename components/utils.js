@@ -169,3 +169,22 @@ export const onVideoLoaded = (video, callback, stage = 2) => {
 
   video.addEventListener("loadeddata", onVideoLoaded);
 };
+
+export const throttle = (callback) => {
+  var active = false; // a simple flag
+  var evt; // to keep track of the last event
+  var handler = function () {
+    // fired only when screen has refreshed
+    active = false; // release our flag
+    callback(evt);
+  };
+  return function handleEvent(e) {
+    // the actual event handler
+    evt = e; // save our event at each call
+    if (!active) {
+      // only if we weren't already doing it
+      active = true; // raise the flag
+      requestAnimationFrame(handler); // wait for next screen refresh
+    }
+  };
+};
