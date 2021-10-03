@@ -39,7 +39,7 @@ export default function GetInTouch() {
             }}
           >
             <ScrollBar />
-            <main className='scrollContent'>
+            <main>
               <Head />
               <GlobalNav />
               <StickyMediaTile

@@ -17,8 +17,8 @@ export const TextWithTransition = ({ children }) => {
   useEffect(() => {
     const scrollerRef = document.querySelector(".scrollContainer");
 
-    const scrollerHandler = (e) => {
-      const value = e.target.scrollTop;
+    const scrollerHandler = () => {
+      const value = scrollerRef.scrollTop;
       const startValue = Math.floor(height - screenHeight * 0.85);
       const endValue = Math.floor(height - screenHeight * 0.7);
 
@@ -42,6 +42,7 @@ export const TextWithTransition = ({ children }) => {
 
     scrollerRef.addEventListener("touchmove", scrollerHandler);
     scrollerRef.addEventListener("scroll", scrollerHandler);
+    scrollerHandler();
 
     return () => {
       scrollerRef.removeEventListener("touchmove", scrollerHandler);

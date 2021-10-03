@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 const ScrollTrack = () => {
-  const [scrollProgress, setScrollProgress] = useState(0);
+  const [progress, setProgress] = useState(0);
 
   useEffect(() => {
     const ref = document.querySelector(".scrollContainer");
@@ -10,7 +10,7 @@ const ScrollTrack = () => {
       const height = ref.scrollHeight - ref.clientHeight;
       const scrolled = scrollPosition / height;
 
-      setScrollProgress(scrolled);
+      setProgress(scrolled);
     };
 
     ref.addEventListener("touchmove", handleScroll);
@@ -21,10 +21,10 @@ const ScrollTrack = () => {
       ref.removeEventListener("touchmove", handleScroll);
       ref.removeEventListener("scroll", handleScroll);
     };
-  }, [scrollProgress]);
+  }, [progress]);
 
   return (
-    <div style={{ transform: `translate3d(0, ${scrollProgress * 4.8}rem, 0)` }}>
+    <div style={{ transform: `translate3d(0, ${progress * 4.8}rem, 0)` }}>
       <style jsx>{`
         div {
           height: 1.2rem;
