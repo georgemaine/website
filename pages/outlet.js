@@ -55,13 +55,7 @@ export default function Outlet() {
           >
             <ScrollBar />
             <main>
-              <Head>
-                {imageList.map((image, index) => {
-                  return (
-                    <link key={index} rel='preload' href={image} as='image' />
-                  );
-                })}
-              </Head>
+              <Head />
               <GlobalNav />
 
               <StickyMediaTile
