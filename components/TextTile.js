@@ -1,11 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import {
-  bindRaf,
-  modulate,
-  useOnScreen,
-  onVideoLoaded,
-  onImagesLoaded,
-} from "./utils";
+import { modulate, useOnScreen, onVideoLoaded, onImagesLoaded } from "./utils";
 import { throttle } from "lodash";
 
 export const CaptionWithTransition = ({ children }) => {
@@ -19,17 +13,19 @@ export const CaptionWithTransition = ({ children }) => {
   useEffect(() => {
     const media = document.querySelectorAll("video");
     const images = Array.from(document.images);
-    const windowHeight = window.innerHeight;
-    const textPosition = textRef.current.getBoundingClientRect().top;
 
     if (images.length > 0) {
       onImagesLoaded(images).then(function () {
+        const windowHeight = window.innerHeight;
+        const textPosition = textRef.current.getBoundingClientRect().top;
         setScreenHeight(windowHeight);
         setHeight(textPosition);
       });
     }
     if (media.length > 0) {
       onVideoLoaded(media[0], function () {
+        const windowHeight = window.innerHeight;
+        const textPosition = textRef.current.getBoundingClientRect().top;
         setScreenHeight(windowHeight);
         setHeight(textPosition);
       });
@@ -62,29 +58,23 @@ export const CaptionWithTransition = ({ children }) => {
       }
     };
 
-    scrollerRef.addEventListener(
-      "touchmove",
-      bindRaf(scrollerHandler, throttle)
-    ),
+    scrollerRef.addEventListener("touchmove", throttle(scrollerHandler, 16)),
       { passive: true };
-    window.addEventListener("resize", bindRaf(scrollerHandler, throttle)),
+    window.addEventListener("resize", throttle(scrollerHandler, 16)),
       { passive: true };
-    scrollerRef.addEventListener("scroll", bindRaf(scrollerHandler, throttle));
+    scrollerRef.addEventListener("scroll", throttle(scrollerHandler, 16));
 
     scrollerHandler();
 
     return () => {
       scrollerRef.removeEventListener(
         "touchmove",
-        bindRaf(scrollerHandler, throttle)
+        throttle(scrollerHandler, 16)
       ),
         { passive: true };
-      window.removeEventListener("resize", bindRaf(scrollerHandler, throttle)),
+      window.removeEventListener("resize", throttle(scrollerHandler, 16)),
         { passive: true };
-      scrollerRef.removeEventListener(
-        "scroll",
-        bindRaf(scrollerHandler, throttle)
-      );
+      scrollerRef.removeEventListener("scroll", throttle(scrollerHandler, 16));
     };
   }, [height, onScreen, screenHeight]);
 
@@ -188,29 +178,23 @@ export const TextWithTransition = ({ children }) => {
       }
     };
 
-    scrollerRef.addEventListener(
-      "touchmove",
-      bindRaf(scrollerHandler, throttle)
-    ),
+    scrollerRef.addEventListener("touchmove", throttle(scrollerHandler, 16)),
       { passive: true };
-    window.addEventListener("resize", bindRaf(scrollerHandler, throttle)),
+    window.addEventListener("resize", throttle(scrollerHandler, 16)),
       { passive: true };
-    scrollerRef.addEventListener("scroll", bindRaf(scrollerHandler, throttle));
+    scrollerRef.addEventListener("scroll", throttle(scrollerHandler, 16));
 
     scrollerHandler();
 
     return () => {
       scrollerRef.removeEventListener(
         "touchmove",
-        bindRaf(scrollerHandler, throttle)
+        throttle(scrollerHandler, 16)
       ),
         { passive: true };
-      window.removeEventListener("resize", bindRaf(scrollerHandler, throttle)),
+      window.removeEventListener("resize", throttle(scrollerHandler, 16)),
         { passive: true };
-      scrollerRef.removeEventListener(
-        "scroll",
-        bindRaf(scrollerHandler, throttle)
-      );
+      scrollerRef.removeEventListener("scroll", throttle(scrollerHandler, 16));
     };
   }, [height, onScreen, screenHeight]);
 
@@ -309,29 +293,23 @@ export const TitleTile = ({ children }) => {
       }
     };
 
-    scrollerRef.addEventListener(
-      "touchmove",
-      bindRaf(scrollerHandler, throttle)
-    ),
+    scrollerRef.addEventListener("touchmove", throttle(scrollerHandler, 16)),
       { passive: true };
-    window.addEventListener("resize", bindRaf(scrollerHandler, throttle)),
+    window.addEventListener("resize", throttle(scrollerHandler, 16)),
       { passive: true };
-    scrollerRef.addEventListener("scroll", bindRaf(scrollerHandler, throttle));
+    scrollerRef.addEventListener("scroll", throttle(scrollerHandler, 16));
 
     scrollerHandler();
 
     return () => {
       scrollerRef.removeEventListener(
         "touchmove",
-        bindRaf(scrollerHandler, throttle)
+        throttle(scrollerHandler, 16)
       ),
         { passive: true };
-      window.removeEventListener("resize", bindRaf(scrollerHandler, throttle)),
+      window.removeEventListener("resize", throttle(scrollerHandler, 16)),
         { passive: true };
-      scrollerRef.removeEventListener(
-        "scroll",
-        bindRaf(scrollerHandler, throttle)
-      );
+      scrollerRef.removeEventListener("scroll", throttle(scrollerHandler, 16));
     };
   }, [height, onScreen, screenHeight]);
 

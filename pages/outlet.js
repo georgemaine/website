@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import GlobalNav from "../components/GlobalNav";
 import Head from "../components/Head";
 import { StickyMediaTile } from "../components/StickyMediaTile";
@@ -28,6 +29,11 @@ const imageList = [
 ];
 
 export default function Outlet() {
+  useEffect(() => {
+    imageList.forEach((image) => {
+      new Image().src = image;
+    });
+  }, []);
   return (
     // FIXME: Make reuable without inline styles
     <div style={{ minHeight: "100vh" }}>
