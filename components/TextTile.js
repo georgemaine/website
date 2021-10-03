@@ -10,8 +10,10 @@ export const TextWithTransition = ({ children }) => {
   const onScreen = useOnScreen(textRef, "-50% 0px 0px 0px");
 
   useEffect(() => {
-    setScreenHeight(window.innerHeight);
-    setHeight(textRef.current.getBoundingClientRect().top);
+    const windowHeight = window.innerHeight;
+    const textPosition = textRef.current.getBoundingClientRect().top;
+    setScreenHeight(windowHeight);
+    setHeight(textPosition);
   }, []);
 
   useEffect(() => {
