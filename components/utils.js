@@ -151,3 +151,21 @@ export const onImagesLoaded = (images) => {
     });
   });
 };
+
+export const onVideoLoaded = (video, callback, stage = 2) => {
+  if (video.readyState >= stage) {
+    callback();
+
+    return;
+  }
+
+  function onVideoLoaded(e) {
+    if (video.readyState >= stage) {
+      video.removeEventListener("loadeddata", onVideoLoaded);
+
+      callback();
+    }
+  }
+
+  video.addEventListener("loadeddata", onVideoLoaded);
+};
