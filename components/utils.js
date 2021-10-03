@@ -130,7 +130,7 @@ export function onImagesLoaded(images) {
 
     let loadedCount = 0;
 
-    function onComplete(e) {
+    function onComplete() {
       ++loadedCount;
 
       if (loadedCount === images.length) {
@@ -145,8 +145,8 @@ export function onImagesLoaded(images) {
       if (img.complete) {
         onComplete.call(img);
       } else {
-        img.addEventListener("load", onComplete());
-        img.addEventListener("error", onComplete());
+        img.addEventListener("load", onComplete);
+        img.addEventListener("error", onComplete);
       }
     });
   });
