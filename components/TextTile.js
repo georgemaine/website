@@ -23,12 +23,12 @@ export const TextWithTransition = ({ children }) => {
       const endValue = Math.floor(height - screenHeight * 0.7);
 
       if (onScreen) {
-        // const yProgress = modulate(
-        //   value,
-        //   [startValue, endValue],
-        //   [50, 0],
-        //   true
-        // );
+        const yProgress = modulate(
+          value,
+          [startValue, endValue],
+          [50, 0],
+          true
+        );
         // const opacityProgress = modulate(
         //   value,
         //   [startValue, endValue],
