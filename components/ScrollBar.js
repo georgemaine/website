@@ -9,7 +9,6 @@ const ScrollTrack = () => {
       const scrollPosition = ref.scrollTop;
       const height = ref.scrollHeight - ref.clientHeight;
       const scrolled = scrollPosition / height;
-
       setProgress(scrolled);
     };
 
