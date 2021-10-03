@@ -12,10 +12,9 @@ export const TextWithTransition = ({ children }) => {
   useEffect(() => {
     const media = document.querySelectorAll("video");
     const images = document.querySelectorAll("img");
-    const imgList = Array.from(images);
 
-    if (imgList.length > 0) {
-      onImagesLoaded(imgList).then(() => {
+    if (images.length > 0) {
+      onImagesLoaded(images).then(function () {
         const windowHeight = window.innerHeight;
         const textPosition = textRef.current.getBoundingClientRect().top;
         setScreenHeight(windowHeight);
